@@ -310,44 +310,42 @@ export default function Expertise() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="expertise" ref={ref} className="relative overflow-hidden bg-[#FAFAFA] py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
-      {/* Background Glow Blobs */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-0 left-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-400/[0.07] blur-[100px]" />
-        <div className="absolute bottom-0 right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-400/[0.05] blur-[100px]" />
-      </div>
+    <section id="expertise" ref={ref} className="relative bg-slate-950 py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
 
       <div className="mx-auto max-w-[1280px] w-full space-y-14">
 
-        {/* ── Section Header ──────────────────────────────────────── */}
-        <div className="text-center space-y-4">
-          <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-[#16A34A]"
-          >
-            <span className="h-2 w-2 rounded-full bg-[#16A34A] animate-pulse" />
-            MY EXPERTISE
-          </motion.div>
+        {/* ── Section Header: editorial ───────────────── */}
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-end">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-3 mb-5"
+            >
+              <span className="h-px w-8 bg-emerald-500" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500">Skills & Expertise</span>
+            </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 18 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, delay: 0.1 }}
-            className="text-[38px] sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
-          >
-            Skills That{' '}
-            <span className="text-[#16A34A]">Drive Results</span>
-          </motion.h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 22 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-extrabold tracking-tight text-white leading-[1.1]"
+              style={{ fontSize: 'clamp(32px, 3.5vw, 52px)' }}
+            >
+              The tools I use<br />
+              <span className="text-emerald-400 italic">to ship great work.</span>
+            </motion.h2>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[17px] text-[#6B7280] font-normal max-w-lg mx-auto leading-[1.7]"
+            className="text-[17px] text-slate-400 font-medium leading-[1.7] lg:self-end lg:pb-1"
           >
-            I combine creativity with technology to build exceptional digital experiences.
+            From backend APIs to frontend interfaces — I combine the right tools with disciplined engineering.
           </motion.p>
         </div>
 
@@ -361,16 +359,16 @@ export default function Expertise() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.25 + i * 0.08 }}
-                className="group flex flex-col rounded-[20px] border border-[#E5E7EB] bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-300"
+                className="group flex flex-col rounded-[20px] border border-white/10 bg-white/5 p-6 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300"
               >
                 {/* Icon box */}
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-[#E5E7EB] bg-[#F3FAF5] text-[#16A34A] group-hover:bg-[#16A34A] group-hover:text-white group-hover:border-[#16A34A] transition-colors duration-300">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-500 transition-colors duration-300">
                   <Icon className="h-5 w-5" />
                 </div>
 
                 {/* Text */}
-                <h3 className="text-[15px] font-bold text-[#111827] leading-tight mb-2">{card.title}</h3>
-                <p className="text-[12px] text-[#6B7280] leading-relaxed flex-1">{card.desc}</p>
+                <h3 className="text-[15px] font-bold text-white leading-tight mb-2">{card.title}</h3>
+                <p className="text-[12px] text-slate-400 leading-relaxed flex-1">{card.desc}</p>
 
                 {/* Animated progress bar */}
                 <ProgressBar pct={card.pct} />
@@ -387,16 +385,16 @@ export default function Expertise() {
           className="grid gap-6 lg:grid-cols-2"
         >
           {/* TECH STACK */}
-          <div className="rounded-[20px] border border-[#E5E7EB] bg-white p-7 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+          <div className="rounded-[20px] border border-white/10 bg-white/5 p-7">
             <div className="flex items-center justify-between mb-7">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E5E7EB] bg-[#F3FAF5] text-[#16A34A]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-emerald-500/10 text-emerald-400">
                   <Code2 className="h-4 w-4" />
                 </div>
-                <span className="text-[13px] font-extrabold text-[#111827] uppercase tracking-wider">TECH STACK</span>
+                <span className="text-[13px] font-extrabold text-white uppercase tracking-wider">TECH STACK</span>
               </div>
-              <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#16A34A]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A] animate-pulse" />
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Always Learning
               </div>
             </div>
@@ -410,26 +408,26 @@ export default function Expertise() {
                   transition={{ duration: 0.35, delay: 0.5 + i * 0.04 }}
                   className="flex flex-col items-center gap-2 group"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#E5E7EB] bg-[#FAFAFA] p-2 shadow-sm group-hover:shadow-md group-hover:border-[#D1FAE5] group-hover:-translate-y-1 transition-all duration-200">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2 group-hover:border-emerald-500/40 group-hover:-translate-y-1 transition-all duration-200">
                     {tech.icon}
                   </div>
-                  <span className="text-[10px] font-semibold text-[#6B7280] text-center leading-tight">{tech.name}</span>
+                  <span className="text-[10px] font-semibold text-slate-400 text-center leading-tight">{tech.name}</span>
                 </motion.div>
               ))}
             </div>
           </div>
 
           {/* DESIGN & TOOLS */}
-          <div className="rounded-[20px] border border-[#E5E7EB] bg-white p-7 shadow-[0_4px_20px_rgba(0,0,0,0.04)]">
+          <div className="rounded-[20px] border border-white/10 bg-white/5 p-7">
             <div className="flex items-center justify-between mb-7">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-[#E5E7EB] bg-[#F3FAF5] text-[#16A34A]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-emerald-500/10 text-emerald-400">
                   <Pencil className="h-4 w-4" />
                 </div>
-                <span className="text-[13px] font-extrabold text-[#111827] uppercase tracking-wider">DESIGN & TOOLS</span>
+                <span className="text-[13px] font-extrabold text-white uppercase tracking-wider">DESIGN & TOOLS</span>
               </div>
-              <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#16A34A]">
-                <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A] animate-pulse" />
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 Tools I Love
               </div>
             </div>
@@ -443,10 +441,10 @@ export default function Expertise() {
                   transition={{ duration: 0.35, delay: 0.5 + i * 0.04 }}
                   className="flex flex-col items-center gap-2 group"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#E5E7EB] bg-[#FAFAFA] p-2 shadow-sm group-hover:shadow-md group-hover:border-[#D1FAE5] group-hover:-translate-y-1 transition-all duration-200">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2 group-hover:border-emerald-500/40 group-hover:-translate-y-1 transition-all duration-200">
                     {tool.icon}
                   </div>
-                  <span className="text-[10px] font-semibold text-[#6B7280] text-center leading-tight">{tool.name}</span>
+                  <span className="text-[10px] font-semibold text-slate-400 text-center leading-tight">{tool.name}</span>
                 </motion.div>
               ))}
             </div>
@@ -458,16 +456,16 @@ export default function Expertise() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, delay: 0.55 }}
-          className="rounded-[20px] border border-[#E5E7EB] bg-white px-8 py-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] flex flex-col md:flex-row items-center gap-6 md:gap-0"
+          className="rounded-[20px] border border-white/10 bg-white/5 px-8 py-6 flex flex-col md:flex-row items-center gap-6 md:gap-0"
         >
-          {/* Left: Trophy quote */}
-          <div className="flex items-center gap-4 md:w-[260px] shrink-0 md:border-r md:border-[#E5E7EB] md:pr-8">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-[#D1FAE5] bg-[#F3FAF5] text-[#16A34A]">
+          {/* Left: quote */}
+          <div className="flex items-center gap-4 md:w-[260px] shrink-0 md:border-r md:border-white/10 md:pr-8">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-7 w-7">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
               </svg>
             </div>
-            <p className="text-[13px] font-semibold text-[#374151] leading-snug">
+            <p className="text-[13px] font-semibold text-slate-300 leading-snug">
               Committed to excellence and always delivering my best.
             </p>
           </div>
@@ -483,12 +481,12 @@ export default function Expertise() {
               ];
               return (
                 <div key={i} className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
                     {icons[i]}
                   </div>
                   <div>
-                    <p className="text-[28px] font-extrabold text-[#16A34A] leading-none">{stat.value}</p>
-                    <p className="text-[11px] text-[#6B7280] font-medium mt-1 leading-tight">{stat.label}</p>
+                    <p className="text-[28px] font-extrabold text-emerald-400 leading-none">{stat.value}</p>
+                    <p className="text-[11px] text-slate-400 font-medium mt-1 leading-tight">{stat.label}</p>
                   </div>
                 </div>
               );

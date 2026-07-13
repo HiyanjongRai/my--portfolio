@@ -17,9 +17,10 @@ export function Header() {
   const links = [
     { label: 'Home', href: 'hero' },
     { label: 'About', href: 'about' },
-    { label: 'Skills', href: 'expertise' },
-    { label: 'Experience', href: 'experience' },
     { label: 'Projects', href: 'projects' },
+    { label: 'Experience', href: 'experience' },
+    { label: 'Skills', href: 'expertise' },
+    { label: 'Education', href: 'education' },
     { label: 'Contact', href: 'contact' },
   ];
 
@@ -35,7 +36,7 @@ export function Header() {
       { threshold: 0.25, rootMargin: '-20% 0px -40% 0px' }
     );
 
-    const sectionIds = ['hero', 'about', 'expertise', 'experience', 'projects', 'contact'];
+    const sectionIds = ['hero', 'about', 'projects', 'experience', 'expertise', 'education', 'contact'];
     sectionIds.forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
@@ -77,7 +78,7 @@ export function Header() {
           onClick={() => scrollToSection('hero')}
           className="font-black text-2xl tracking-tight text-slate-900 flex items-center gap-1.5 cursor-pointer hover:opacity-85 transition-opacity"
         >
-          Hiyan jong Rai<span className="text-emerald-500">.</span>
+          Hiyan Jong Rai<span className="text-emerald-500">.</span>
         </button>
 
         {/* Center Links */}

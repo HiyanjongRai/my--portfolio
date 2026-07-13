@@ -42,6 +42,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        {/* Pinterest domain verification */}
+        <meta name="p:domain_verify" content="f38c642430bc7f307780f539033e3f8e" />
       </head>
       <body className="antialiased min-h-full bg-white font-sans">{children}</body>
     </html>

@@ -1,280 +1,176 @@
 'use client';
 
 import { motion, useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
-import {
-  Target,
-  Sparkles,
-  Heart,
-  TrendingUp,
-  Briefcase,
-  Users,
-  Trophy,
-  Quote,
-  Download
-} from 'lucide-react';
+import { ArrowRight, Download, MapPin, GraduationCap, Briefcase, Code2 } from 'lucide-react';
 import { personalInfo } from '@/data/portfolio';
-
-/* ─── Animated Counter ─────────────────────────────────────────── */
-function AnimatedCounter({ to, suffix = '' }: { to: number; suffix?: string }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const [count, setCount] = useState(0);
-  const inView = useRef(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !inView.current) {
-          inView.current = true;
-          let start = 0;
-          const step = Math.ceil(to / 40);
-          const timer = setInterval(() => {
-            start = Math.min(start + step, to);
-            setCount(start);
-            if (start >= to) clearInterval(timer);
-          }, 35);
-        }
-      },
-      { threshold: 0.5 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [to]);
-
-  return (
-    <span ref={ref}>
-      {count}
-      {suffix}
-    </span>
-  );
-}
-
-/* ─── Highlights Data ──────────────────────────────────────────── */
-const highlights = [
-  {
-    icon: Target,
-    title: 'My Focus',
-    desc: 'Building clean, user-friendly, and high-performance digital solutions.'
-  },
-  {
-    icon: Sparkles,
-    title: 'My Approach',
-    desc: 'I combine design thinking with modern technologies.'
-  },
-  {
-    icon: Heart,
-    title: 'My Passion',
-    desc: 'Creating meaningful experiences that solve real problems.'
-  },
-  {
-    icon: TrendingUp,
-    title: 'My Goal',
-    desc: 'Deliver exceptional results and help clients grow.'
-  }
-];
-
-/* ─── Metrics Data ─────────────────────────────────────────────── */
-const aboutMetrics = [
-  { icon: Heart, value: 2, suffix: '+', label: 'Years Experience' },
-  { icon: Briefcase, value: 20, suffix: '+', label: 'Projects Completed' },
-  { icon: Users, value: 10, suffix: '+', label: 'Happy Clients' },
-  { icon: Trophy, value: 5, suffix: '', label: 'Awards Won' }
-];
+import { scrollToSection } from '@/lib/utils';
 
 export default function AboutIntro() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="about" ref={ref} className="relative overflow-hidden bg-[#FAFAFA] py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
-      {/* Background Soft Glows */}
-      <div className="pointer-events-none absolute inset-0 -z-20">
-        <div className="absolute top-[20%] right-[-10%] w-[45%] h-[45%] rounded-full bg-emerald-50/40 blur-[130px]" />
-        <div className="absolute bottom-[10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-50/35 blur-[120px]" />
-      </div>
-
+    <section id="about" ref={ref} className="relative bg-[#F8FAFC] py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-[1280px] w-full">
-        <div className="grid gap-16 lg:grid-cols-[1.15fr_0.85fr] items-center">
-          
-          {/* ── Left Column: Bio, Focus Grid & Metrics ── */}
-          <div className="space-y-8">
-            {/* Get To Know Me Badge */}
+        <div className="grid gap-16 lg:grid-cols-[1fr_1fr] items-start">
+
+          {/* ── Left: Photo + Quick Facts ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="lg:sticky lg:top-32 space-y-6"
+          >
+            {/* Image Frame */}
+            <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-[0_24px_60px_-12px_rgba(0,0,0,0.12)] border border-slate-100">
+              <Image
+                src={personalInfo.image}
+                alt={personalInfo.name}
+                fill
+                style={{ objectFit: 'cover', objectPosition: 'top' }}
+                sizes="(max-width: 1024px) 100vw, 420px"
+                priority
+              />
+              {/* Subtle colour wash overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent" />
+              {/* Name tag */}
+              <div className="absolute bottom-5 left-5 right-5">
+                <p className="text-white font-bold text-[15px] leading-none">{personalInfo.name}</p>
+                <p className="text-white/70 text-[12px] font-medium mt-1">{personalInfo.title} · {personalInfo.location}</p>
+              </div>
+            </div>
+
+            {/* Quick Facts sidebar */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { icon: MapPin, label: 'Based in', value: 'Kathmandu, Nepal' },
+                { icon: GraduationCap, label: 'Degree', value: 'BCA (Ongoing)' },
+                { icon: Briefcase, label: 'Experience', value: '2+ Years' },
+                { icon: Code2, label: 'Status', value: 'Open to work' },
+              ].map((fact, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.45, delay: 0.3 + i * 0.07 }}
+                  className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm"
+                >
+                  <fact.icon className="h-4 w-4 text-emerald-600 mt-0.5 shrink-0" />
+                  <div>
+                    <p className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider leading-none">{fact.label}</p>
+                    <p className="text-[13px] font-bold text-slate-800 mt-1 leading-tight">{fact.value}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Download CTA */}
+            <a
+              href={personalInfo.resume}
+              target="_blank"
+              rel="noreferrer"
+              className="group inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-[13px] font-bold text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 shadow-sm"
+            >
+              <Download className="h-4 w-4 text-slate-400 group-hover:translate-y-0.5 transition-transform duration-200" />
+              Download Resume
+            </a>
+          </motion.div>
+
+          {/* ── Right: Editorial Bio ── */}
+          <div className="space-y-12">
+            {/* Section Label */}
             <motion.div
-              initial={{ opacity: 0, y: -12 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-[#F3FAF5] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-[#16A34A] shadow-sm"
+              className="flex items-center gap-3"
             >
-              <span className="h-2 w-2 rounded-full bg-[#16A34A] animate-pulse" />
-              GET TO KNOW ME
+              <span className="h-px w-8 bg-emerald-500" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-600">About Me</span>
             </motion.div>
 
-            {/* Title & Introduction */}
-            <div className="space-y-5">
-              <motion.h2
-                initial={{ opacity: 0, y: 18 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.55, delay: 0.1 }}
-                className="text-[38px] sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
-              >
-                I'm <span className="text-[#16A34A]">{personalInfo.name}</span>,<br />
-                a {personalInfo.title}.
-              </motion.h2>
+            {/* Headline */}
+            <motion.h2
+              initial={{ opacity: 0, y: 22 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-extrabold tracking-tight text-slate-900 leading-[1.1]"
+              style={{ fontSize: 'clamp(32px, 3.5vw, 48px)' }}
+            >
+              From Udayapur to building<br />
+              <span className="text-emerald-600 italic">enterprise backends.</span>
+            </motion.h2>
 
-              <motion.div
+            {/* Pull Quote */}
+            <motion.blockquote
+              initial={{ opacity: 0, x: 16 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.55, delay: 0.2 }}
+              className="border-l-2 border-emerald-400 pl-6 py-1"
+            >
+              <p className="text-[18px] font-semibold text-slate-700 leading-relaxed italic">
+                &ldquo;Good software isn&apos;t just code that works — it&apos;s code that can grow, adapt, and be trusted.&rdquo;
+              </p>
+            </motion.blockquote>
+
+            {/* Story paragraphs */}
+            {[
+              "I'm Hiyan Jong Rai, a Backend Developer from Udayapur, Bagaha, currently based in Kathmandu where I'm pursuing my BCA at Tribhuvan University. I spend my days writing Spring Boot services, designing database schemas, and shipping software that actually scales.",
+              "My career path has been driven by genuine curiosity. Starting with freelance SEO work taught me to think about how systems connect — from search algorithms to user intent. That curiosity led me to backend engineering, where I interned at KritimMind Technology building REST APIs and authentication systems in production.",
+              "I've shipped e-commerce platforms, real-time emergency dispatch systems, parcel tracking dashboards, and more. Each project taught me something different about building software that is not just functional, but reliable, maintainable, and purposeful.",
+            ].map((para, i) => (
+              <motion.p
+                key={i}
                 initial={{ opacity: 0, y: 14 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-[15.5px] text-[#6B7280] font-normal leading-relaxed max-w-2xl space-y-3"
+                transition={{ duration: 0.55, delay: 0.25 + i * 0.08 }}
+                className="text-[16px] text-slate-600 leading-[1.85] font-medium"
               >
-                <p>Hi, I'm <strong>{personalInfo.name}</strong>, originally from Udayapur, Bagaha, and currently based in Kathmandu, where I am pursuing my BCA bachelor's degree at Tribhuvan University.</p>
-                <p>I'm a developer who enjoys turning ideas into clean, working software. I previously worked remotely as an SEO Executive at Mirai Design & Print, DelhitoKathmandu, and HimalayanHub, and have completed my internship at KritimMind Technology as a Backend Developer.</p>
-                <p>I've built e-commerce platforms, emergency-service apps, event managers, parcel systems, and task boards. I enjoy working across the stack — Spring Boot, PostgreSQL/MySQL, and HTML/CSS.</p>
-              </motion.div>
-            </div>
+                {para}
+              </motion.p>
+            ))}
 
-            {/* Grid of clean list items (Highlights) */}
+            {/* Philosophy Row */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 pt-2"
+              transition={{ duration: 0.55, delay: 0.5 }}
+              className="pt-4 border-t border-slate-100"
             >
-              {highlights.map((item, idx) => {
-                const IconComponent = item.icon;
-                return (
-                  <div key={idx} className="flex gap-4">
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A] border border-[#D1FAE5]/60 shadow-sm shadow-[#E8F8EE]">
-                      <IconComponent className="h-5 w-5" />
-                    </div>
-                    <div className="space-y-1">
-                      <h4 className="text-sm font-extrabold text-[#111827] leading-tight">{item.title}</h4>
-                      <p className="text-xs text-[#6B7280] font-medium leading-relaxed">{item.desc}</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400 mb-5">My Mindset</p>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { label: 'Scalability first', sub: 'Code that survives growth' },
+                  { label: 'Security minded', sub: 'Auth, JWT, and validation' },
+                  { label: 'Clean architecture', sub: 'MVC, layered, readable' },
+                  { label: 'Always learning', sub: 'New tech, better patterns' },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-2.5">
+                    <span className="mt-[5px] h-1.5 w-1.5 rounded-full bg-emerald-500 shrink-0" />
+                    <div>
+                      <p className="text-[13px] font-bold text-slate-800 leading-tight">{item.label}</p>
+                      <p className="text-[11px] text-slate-500 font-medium mt-0.5">{item.sub}</p>
                     </div>
                   </div>
-                );
-              })}
-            </motion.div>
-
-            {/* Horizontal Metrics Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="rounded-[24px] border border-[#E5E7EB] bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-[#E5E7EB] gap-6 sm:gap-0"
-            >
-              {aboutMetrics.map((m, idx) => {
-                const MIcon = m.icon;
-                return (
-                  <div key={idx} className="flex-1 flex flex-col items-center sm:items-start px-6 first:pl-0 last:pr-0">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A] mb-3">
-                      <MIcon className="h-4.5 w-4.5" />
-                    </div>
-                    <p className="text-[28px] font-extrabold text-[#16A34A] tracking-tight leading-none">
-                      <AnimatedCounter to={m.value} suffix={m.suffix} />
-                    </p>
-                    <p className="text-[10px] text-[#6B7280] font-bold uppercase tracking-wider mt-2.5">{m.label}</p>
-                  </div>
-                );
-              })}
-            </motion.div>
-
-            {/* Bottom Quote Banner */}
-            <motion.div
-              initial={{ opacity: 0, y: 15 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              className="rounded-[18px] border border-[#D1FAE5] bg-[#F4FAF6]/60 p-4.5 flex items-start gap-4 shadow-sm"
-            >
-              <div className="text-[#16A34A] shrink-0 transform rotate-180">
-                <Quote className="h-5.5 w-5.5" />
+                ))}
               </div>
-              <p className="text-[13px] font-semibold text-[#374151] leading-relaxed italic">
-                I believe in writing clean code, designing with purpose, and delivering solutions that not only meet expectations but exceed them.
-              </p>
             </motion.div>
 
-          </div>
-
-          {/* ── Right Column: Visual Portrait Panel ── */}
-          <div className="relative flex items-center justify-center lg:justify-end">
-            {/* Background elements */}
-            <div className="absolute -left-6 -top-6 -z-10 text-slate-200 pointer-events-none opacity-80">
-              <svg width="100" height="100" fill="currentColor">
-                <pattern id="dot-pattern" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
-                  <circle cx="2" cy="2" r="1.5" />
-                </pattern>
-                <rect width="100" height="100" fill="url(#dot-pattern)" />
-              </svg>
-            </div>
-
-            <div className="absolute -right-8 -top-8 -z-10 w-44 h-44 text-emerald-100 opacity-60 pointer-events-none">
-              <svg className="w-full h-full" viewBox="0 0 100 100" fill="none" stroke="currentColor">
-                <circle cx="80" cy="20" r="40" strokeWidth="0.5" />
-                <circle cx="80" cy="20" r="28" strokeWidth="0.5" strokeDasharray="3 3" />
-              </svg>
-            </div>
-
-            {/* Profile Image Frame */}
+            {/* CTA */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="relative w-full max-w-[420px] aspect-[4/5] bg-white border border-[#E5E7EB] shadow-[0_20px_50px_-15px_rgba(0,0,0,0.06)] rounded-[3rem] p-4 z-10"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.65 }}
             >
-              <div className="relative w-full h-full overflow-hidden rounded-[2.4rem] bg-slate-50">
-                <Image
-                  src={personalInfo.image}
-                  alt={personalInfo.name}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 400px"
-                  priority
-                />
-              </div>
-
-              {/* Overlap Card 1: What Drives Me */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut' }}
-                className="absolute -right-8 top-[28%] w-[210px] rounded-2xl border border-white/50 bg-white/70 p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20 space-y-2.5"
+              <button
+                onClick={() => scrollToSection('projects')}
+                className="group inline-flex items-center gap-2 text-[14px] font-bold text-slate-900 hover:text-emerald-600 transition-colors duration-200"
               >
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50/80 text-emerald-600">
-                  <Quote className="h-3.5 w-3.5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 leading-tight">What Drives Me</h4>
-                  <p className="mt-1 text-[10px] font-semibold text-slate-500 leading-normal">
-                    Solving problems, learning continuously, and turning ideas into impactful digital products.
-                  </p>
-                </div>
-                
-                {/* Signature path */}
-                <div className="pt-1.5 flex justify-end">
-                  <svg className="h-8 w-24 text-emerald-600/90" viewBox="0 0 100 35" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M10 25c5-2 12-15 15-18 2-2 4 5 1 8s-6 5-5-2c1-6 8-10 10-1 1 5 1 10-2 8s-4-6-2-8c4-4 8-1 9 4 1 3 0 6-2 5-3-2-2-7 2-9 4-2 9 3 9 7 0 2-2 4-4 3-3-2 0-7 3-8 4-2 7 3 7 6" />
-                  </svg>
-                </div>
-              </motion.div>
-
-              {/* Overlap Card 2: Download My Resume */}
-              <a
-                href={personalInfo.resume}
-                target="_blank"
-                rel="noreferrer"
-                className="absolute -right-8 bottom-[10%] w-[230px] rounded-2xl border border-white/50 bg-white/80 p-3.5 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20 flex items-center gap-3.5 cursor-pointer hover:border-[#D1FAE5] transition-all duration-300 group"
-              >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50/90 text-emerald-600 group-hover:bg-[#16A34A] group-hover:text-white transition-colors duration-300">
-                  <Download className="h-5 w-5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 leading-tight">Download My Resume</h4>
-                  <p className="mt-0.5 text-[9px] font-semibold text-slate-500 leading-normal">
-                    Get a detailed overview of my experience and skills.
-                  </p>
-                </div>
-              </a>
+                See my work
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
+              </button>
             </motion.div>
           </div>
 

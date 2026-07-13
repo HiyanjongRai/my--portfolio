@@ -146,60 +146,61 @@ export function HeroSection() {
       </div>
 
       <div className="container-custom relative z-10 mx-auto px-6 md:px-8 max-w-7xl">
-        <div className="grid gap-16 lg:grid-cols-[1.1fr_0.9fr] items-center">
+        <div className="grid gap-12 lg:gap-20 lg:grid-cols-[1.15fr_0.85fr] items-center">
 
           {/* ── Left Column ─────────────────────────────────────── */}
           <div className="space-y-8 md:space-y-10">
-            {/* Availability Badge */}
+            {/* Status Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 rounded-full border border-emerald-100/80 bg-emerald-50/80 px-4 py-1.5 text-xs sm:text-sm font-semibold text-emerald-700 shadow-sm"
+              transition={{ duration: 0.45 }}
+              className="inline-flex items-center gap-2.5"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
               </span>
-              Available for Freelance
+              <span className="text-[13px] font-semibold text-slate-500 tracking-wide">Available for freelance work</span>
+              <span className="text-slate-300">·</span>
+              <span className="text-[13px] font-semibold text-slate-400">{personalInfo.location}</span>
             </motion.div>
 
-            {/* Heading */}
-            <div className="space-y-4">
+            {/* Main Heading */}
+            <div className="space-y-5">
               <motion.h1
-                initial={{ opacity: 0, y: 25 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="text-[42px] sm:text-5xl md:text-6xl lg:text-[68px] font-extrabold tracking-tight text-slate-900 leading-[1.1]"
+                transition={{ duration: 0.65, delay: 0.1 }}
+                className="font-extrabold tracking-[-0.03em] text-slate-900 leading-[1.05]"
+                style={{ fontSize: 'clamp(44px, 6vw, 76px)' }}
               >
-                Building<br />
-                <span className="bg-gradient-to-r from-emerald-700 via-emerald-500 to-emerald-400 bg-clip-text text-transparent">
-                  Digital Products
-                </span><br />
-                That People Love
-                <span className="text-emerald-600">.</span>
+                Backend Dev<br />
+                crafting{' '}
+                <span className="italic text-emerald-600 font-black">scalable</span><br />
+                software<span className="text-emerald-500">.</span>
               </motion.h1>
 
               <motion.p
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="max-w-xl text-base text-slate-500 md:text-[17px] leading-[1.8] font-semibold"
+                transition={{ duration: 0.6, delay: 0.28 }}
+                className="text-[17px] text-slate-500 leading-[1.8] max-w-[440px] font-medium"
               >
-                {personalInfo.description}
+                I build robust APIs, secure backends, and clean databases with Java, Spring Boot, MySQL &amp; PostgreSQL.
               </motion.p>
             </div>
 
-            {/* CTAs */}
+            {/* CTA Row */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap gap-4"
+              transition={{ duration: 0.55, delay: 0.38 }}
+              className="flex flex-wrap items-center gap-4"
             >
               <button
                 onClick={() => scrollToSection('projects')}
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-emerald-200/60 hover:bg-emerald-700 hover:shadow-emerald-300/60 hover:-translate-y-0.5 active:scale-95 transition-all duration-200 cursor-pointer"
+                className="group inline-flex items-center gap-2 rounded-full bg-slate-900 px-7 py-3.5 text-[14px] font-bold text-white hover:bg-slate-800 hover:-translate-y-0.5 active:scale-95 transition-all duration-200 cursor-pointer shadow-md"
               >
                 View My Work
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
@@ -208,47 +209,38 @@ export function HeroSection() {
                 href={personalInfo.resume}
                 target="_blank"
                 rel="noreferrer"
-                className="group inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-8 py-3.5 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 hover:border-slate-400 hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
+                className="group inline-flex items-center gap-2 text-[14px] font-semibold text-slate-600 underline underline-offset-4 decoration-slate-300 hover:text-slate-900 hover:decoration-slate-500 transition-all duration-200"
               >
-                Download Resume
-                <FileDown className="h-4 w-4 text-slate-500 group-hover:translate-y-0.5 transition-transform duration-200" />
+                Download CV
+                <FileDown className="h-4 w-4 text-slate-400 group-hover:translate-y-0.5 transition-transform duration-200" />
               </a>
             </motion.div>
 
-            {/* Animated Metrics Grid */}
+            {/* Inline Stats Strip */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="grid grid-cols-2 gap-4 sm:grid-cols-4"
+              className="flex items-center gap-8 pt-2 border-t border-slate-100"
             >
-              {metrics.map((metric, index) => {
-                const Icon = metric.icon;
-                return (
-                  <div
-                    key={index}
-                    className="group rounded-3xl border border-slate-100 bg-white/95 p-5 shadow-sm shadow-slate-100 hover:border-emerald-100 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
-                  >
-                    <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50/70 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-3xl font-extrabold text-slate-900 tracking-tight mt-4">
-                        <AnimatedCounter to={metric.value} suffix={metric.suffix} />
-                      </p>
-                      <p className="mt-1 text-xs text-slate-500 font-semibold leading-tight">{metric.label}</p>
-                    </div>
-                  </div>
-                );
-              })}
+              {[
+                { value: '2+', label: 'Yrs Experience' },
+                { value: '20+', label: 'Projects' },
+                { value: '3', label: 'Jobs & Internships' },
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <p className="text-[26px] font-black text-slate-900 leading-none tracking-tight">{stat.value}</p>
+                  <p className="text-[11px] text-slate-400 font-semibold mt-1 leading-tight uppercase tracking-wider">{stat.label}</p>
+                </div>
+              ))}
             </motion.div>
 
-            {/* Social links */}
+            {/* Social Links */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex items-center gap-3.5 pt-2"
+              className="flex items-center gap-3"
             >
               {socials.map((social) => {
                 const Icon = social.icon;
@@ -258,10 +250,10 @@ export function HeroSection() {
                     href={social.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 hover:border-emerald-500 hover:bg-emerald-50 hover:text-emerald-600 hover:-translate-y-0.5 transition-all duration-200 shadow-sm"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 hover:border-emerald-400 hover:text-emerald-600 hover:bg-emerald-50 hover:-translate-y-0.5 transition-all duration-200"
                     aria-label={social.name}
                   >
-                    <Icon className="h-5 w-5" />
+                    <Icon className="h-4 w-4" />
                   </a>
                 );
               })}
@@ -304,7 +296,7 @@ export function HeroSection() {
                   src={personalInfo.image}
                   alt={personalInfo.name}
                   fill
-                  className="object-cover"
+                  style={{ objectFit: 'cover' }}
                   sizes="(max-width: 1024px) 100vw, 400px"
                   priority
                 />
@@ -314,13 +306,13 @@ export function HeroSection() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ repeat: Infinity, duration: 4.2, ease: 'easeInOut' }}
-                className="absolute -left-12 top-[12%] w-[190px] rounded-2xl border border-white/50 bg-white/70 p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
+                className="absolute -left-4 sm:-left-12 lg:-left-20 xl:-left-24 top-[12%] w-[150px] sm:w-[170px] lg:w-[185px] rounded-2xl border border-white/50 bg-white/70 p-3 sm:p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600 mb-2">
+                <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600 mb-2">
                   <Server className="h-4 w-4" />
                 </div>
-                <h3 className="text-xs font-semibold text-slate-900 leading-tight">Backend Development</h3>
-                <div className="mt-2 space-y-0.5 text-[10px] font-medium text-slate-500">
+                <h3 className="text-[10px] sm:text-xs font-semibold text-slate-900 leading-tight">Backend Development</h3>
+                <div className="mt-1.5 sm:mt-2 space-y-0.5 text-[9px] sm:text-[10px] font-medium text-slate-500">
                   <p>Spring Boot</p><p>Java</p><p>REST APIs</p>
                 </div>
               </motion.div>
@@ -329,13 +321,13 @@ export function HeroSection() {
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ repeat: Infinity, duration: 4.8, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute -left-8 bottom-[18%] w-[190px] rounded-2xl border border-white/50 bg-white/70 p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
+                className="absolute -left-3 sm:-left-8 lg:-left-16 xl:-left-20 bottom-[18%] w-[150px] sm:w-[170px] lg:w-[185px] rounded-2xl border border-white/50 bg-white/70 p-3 sm:p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
               >
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600 mb-2">
+                <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600 mb-2">
                   <Database className="h-4 w-4" />
                 </div>
-                <h3 className="text-xs font-semibold text-slate-900 leading-tight">Database &amp; Cloud</h3>
-                <div className="mt-2 space-y-0.5 text-[10px] font-medium text-slate-500">
+                <h3 className="text-[10px] sm:text-xs font-semibold text-slate-900 leading-tight">Database &amp; Cloud</h3>
+                <div className="mt-1.5 sm:mt-2 space-y-0.5 text-[9px] sm:text-[10px] font-medium text-slate-500">
                   <p>MySQL</p><p>PostgreSQL</p><p>Schema Design</p>
                 </div>
               </motion.div>
@@ -344,14 +336,14 @@ export function HeroSection() {
               <motion.div
                 animate={{ y: [0, -6, 0] }}
                 transition={{ repeat: Infinity, duration: 3.8, ease: 'easeInOut', delay: 0.2 }}
-                className="absolute -right-12 top-[22%] w-[185px] rounded-2xl border border-white/50 bg-white/70 p-3.5 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20 flex items-center gap-3"
+                className="absolute -right-4 sm:-right-12 lg:-right-20 xl:-right-24 top-[22%] w-[140px] sm:w-[155px] lg:w-[175px] rounded-2xl border border-white/50 bg-white/70 p-2.5 sm:p-3.5 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20 flex items-center gap-2 sm:gap-3"
               >
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600">
+                <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600">
                   <Folder className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider leading-none">Projects Completed</p>
-                  <p className="mt-1 text-lg font-bold text-slate-900 leading-none">20+</p>
+                  <p className="text-[8px] sm:text-[9px] font-semibold text-slate-400 uppercase tracking-wider leading-none">Projects Completed</p>
+                  <p className="mt-0.5 sm:mt-1 text-base sm:text-lg font-bold text-slate-900 leading-none">20+</p>
                 </div>
               </motion.div>
 
@@ -359,38 +351,38 @@ export function HeroSection() {
               <motion.div
                 animate={{ y: [0, -9, 0] }}
                 transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut', delay: 0.7 }}
-                className="absolute -right-8 bottom-[35%] w-[185px] rounded-2xl border border-white/50 bg-white/70 p-3.5 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
+                className="absolute -right-3 sm:-right-8 lg:-right-16 xl:-right-20 bottom-[35%] w-[140px] sm:w-[155px] lg:w-[175px] rounded-2xl border border-white/50 bg-white/70 p-2.5 sm:p-3.5 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
               >
-                <div className="flex items-center gap-3">
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600">
                     <Star className="h-4 w-4 fill-emerald-500 text-emerald-500" />
                   </div>
                   <div>
-                    <p className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider leading-none">Client Rating</p>
-                    <div className="flex gap-0.5 mt-1">
+                    <p className="text-[8px] sm:text-[9px] font-semibold text-slate-400 uppercase tracking-wider leading-none">Client Rating</p>
+                    <div className="flex gap-0.5 mt-0.5 sm:mt-1">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-2 w-2 fill-emerald-500 text-emerald-500" />
+                        <Star key={i} className="h-1.5 w-1.5 sm:h-2 sm:w-2 fill-emerald-500 text-emerald-500" />
                       ))}
                     </div>
                   </div>
                 </div>
-                <p className="mt-2 text-base font-extrabold text-slate-900 leading-none">4.9 / 5</p>
+                <p className="mt-1.5 sm:mt-2 text-sm sm:text-base font-extrabold text-slate-900 leading-none">4.9 / 5</p>
               </motion.div>
 
               {/* Card E: Open for work */}
               <motion.div
                 animate={{ y: [0, -7, 0] }}
                 transition={{ repeat: Infinity, duration: 4.0, ease: 'easeInOut', delay: 0.4 }}
-                className="absolute -right-10 bottom-[8%] w-[185px] rounded-2xl border border-white/50 bg-white/70 p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
+                className="absolute -right-3 sm:-right-10 lg:-right-18 xl:-right-22 bottom-[8%] w-[140px] sm:w-[155px] lg:w-[175px] rounded-2xl border border-white/50 bg-white/70 p-3 sm:p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
               >
-                <div className="flex items-center gap-2">
-                  <span className="relative flex h-2 w-2">
+                <div className="flex items-center gap-1.5 sm:gap-2">
+                  <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-emerald-500" />
                   </span>
-                  <span className="text-[9px] font-semibold text-slate-400 uppercase tracking-wider leading-none">Available Now</span>
+                  <span className="text-[8px] sm:text-[9px] font-semibold text-slate-400 uppercase tracking-wider leading-none">Available Now</span>
                 </div>
-                <p className="text-base font-extrabold text-slate-950 mt-1.5 leading-none">Open for Work</p>
+                <p className="text-sm sm:text-base font-extrabold text-slate-950 mt-1 sm:mt-1.5 leading-none">Open for Work</p>
               </motion.div>
             </motion.div>
           </div>

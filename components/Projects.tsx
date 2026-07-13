@@ -256,12 +256,7 @@ export default function Projects() {
       : allProjects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="projects" ref={ref} className="relative overflow-hidden bg-[#FAFAFA] py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
-      {/* Background Glows */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-[-5%] right-[-8%] w-[40%] h-[40%] rounded-full bg-emerald-400/[0.06] blur-[100px]" />
-        <div className="absolute bottom-[-5%] left-[-8%] w-[35%] h-[35%] rounded-full bg-emerald-400/[0.04] blur-[100px]" />
-      </div>
+    <section id="projects" ref={ref} className="relative bg-white py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-slate-100">
 
       <div className="mx-auto max-w-[1280px] w-full space-y-12">
 
@@ -269,13 +264,13 @@ export default function Projects() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
           <div className="space-y-4 max-w-xl">
             <motion.div
-              initial={{ opacity: 0, y: -12 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-[#16A34A]"
+              className="flex items-center gap-3"
             >
-              <span className="h-2 w-2 rounded-full bg-[#16A34A] animate-pulse" />
-              MY PROJECTS
+              <span className="h-px w-8 bg-emerald-500" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-600">My Projects</span>
             </motion.div>
 
             <motion.h2

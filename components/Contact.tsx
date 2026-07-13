@@ -103,12 +103,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={ref} className="relative overflow-hidden bg-[#FAFAFA] py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-[#E5E7EB]">
-      {/* Background Soft Glows */}
-      <div className="pointer-events-none absolute inset-0 -z-20">
-        <div className="absolute top-[20%] right-[-10%] w-[45%] h-[45%] rounded-full bg-emerald-400/[0.05] blur-[130px]" />
-        <div className="absolute bottom-[10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-400/[0.04] blur-[120px]" />
-      </div>
+    <section id="contact" ref={ref} className="relative bg-[#F8FAFC] py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-slate-100">
 
       <div className="mx-auto max-w-[1280px] w-full space-y-16">
         
@@ -119,13 +114,13 @@ export default function Contact() {
           <div className="space-y-10">
             {/* Badge */}
             <motion.div
-              initial={{ opacity: 0, y: -12 }}
+              initial={{ opacity: 0, y: -10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-[#F3FAF5] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-[#16A34A] shadow-sm"
+              className="flex items-center gap-3"
             >
-              <span className="h-2 w-2 rounded-full bg-[#16A34A] animate-pulse" />
-              GET IN TOUCH
+              <span className="h-px w-8 bg-emerald-500" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-600">Get In Touch</span>
             </motion.div>
 
             {/* Heading & Paragraph */}

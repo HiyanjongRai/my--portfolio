@@ -42,42 +42,40 @@ export default function Testimonials() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-white py-20 lg:py-28">
-      {/* Background glows */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-[-10%] left-[-5%] h-[400px] w-[400px] rounded-full bg-emerald-50/50 blur-[100px]" />
-        <div className="absolute bottom-[-10%] right-[-5%] h-[400px] w-[400px] rounded-full bg-slate-50/80 blur-[100px]" />
-      </div>
+    <section ref={ref} className="relative bg-[#F8FAFC] py-24 lg:py-32 border-t border-slate-100">
+      <div className="container-custom mx-auto px-6 md:px-8 max-w-[1280px]">
+        {/* Header: editorial left-aligned */}
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-end mb-16">
+          <div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-3 mb-5"
+            >
+              <span className="h-px w-8 bg-emerald-500" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-600">Testimonials</span>
+            </motion.div>
 
-      <div className="container-custom mx-auto px-6 md:px-8 max-w-7xl">
-        {/* Header */}
-        <div className="mb-14 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-emerald-700 mb-5 shadow-sm"
-          >
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            Testimonials
-          </motion.div>
-
-          <motion.h2
-            initial={{ opacity: 0, y: 18 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900"
-          >
-            What People <span className="text-emerald-600">Say About Me</span>
-          </motion.h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 22 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="font-extrabold tracking-tight text-slate-900 leading-[1.1]"
+              style={{ fontSize: 'clamp(28px, 3vw, 44px)' }}
+            >
+              What people say<br />
+              <span className="text-emerald-600 italic">about working with me.</span>
+            </motion.h2>
+          </div>
 
           <motion.p
             initial={{ opacity: 0, y: 14 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="mt-4 text-base text-slate-500 font-semibold max-w-xl mx-auto leading-relaxed"
+            className="text-[16px] text-slate-500 font-medium leading-relaxed lg:self-end lg:pb-1"
           >
-            Real feedback from clients and colleagues I've had the privilege of working with.
+            Real feedback from clients and colleagues I&apos;ve had the privilege of working with.
           </motion.p>
         </div>
 

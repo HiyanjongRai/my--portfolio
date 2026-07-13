@@ -243,7 +243,7 @@ export default function About() {
                   src={personalInfo.image}
                   alt={personalInfo.name}
                   fill
-                  className="object-cover"
+                  style={{ objectFit: 'cover' }}
                   sizes="(max-width: 1024px) 100vw, 400px"
                   priority
                 />
@@ -253,21 +253,21 @@ export default function About() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut' }}
-                className="absolute -right-8 top-[28%] w-[210px] rounded-2xl border border-white/50 bg-white/70 p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20 space-y-2.5"
+                className="absolute -right-3 sm:-right-8 lg:-right-16 xl:-right-20 top-[28%] w-[170px] sm:w-[195px] lg:w-[210px] rounded-2xl border border-white/50 bg-white/70 p-3 sm:p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20 space-y-2"
               >
-                <div className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50/80 text-emerald-600">
-                  <Quote className="h-3.5 w-3.5" />
+                <div className="flex h-6 w-6 sm:h-7 sm:w-7 items-center justify-center rounded-full bg-emerald-50/80 text-emerald-600">
+                  <Quote className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900 leading-tight">What Drives Me</h4>
-                  <p className="mt-1 text-[10px] font-semibold text-slate-500 leading-normal">
+                  <h4 className="text-[10px] sm:text-xs font-bold text-slate-900 leading-tight">What Drives Me</h4>
+                  <p className="mt-1 text-[9px] sm:text-[10px] font-semibold text-slate-500 leading-normal">
                     Solving problems, learning continuously, and turning ideas into impactful digital products.
                   </p>
                 </div>
                 
                 {/* Handwritten signature */}
-                <div className="pt-1.5 flex justify-end">
-                  <svg className="h-8 w-24 text-emerald-600/90" viewBox="0 0 100 35" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <div className="pt-1 flex justify-end">
+                  <svg className="h-6 w-18 sm:h-8 sm:w-24 text-emerald-600/90" viewBox="0 0 100 35" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M10 25c5-2 12-15 15-18 2-2 4 5 1 8s-6 5-5-2c1-6 8-10 10-1 1 5 1 10-2 8s-4-6-2-8c4-4 8-1 9 4 1 3 0 6-2 5-3-2-2-7 2-9 4-2 9 3 9 7 0 2-2 4-4 3-3-2 0-7 3-8 4-2 7 3 7 6" />
                   </svg>
                 </div>
@@ -278,14 +278,14 @@ export default function About() {
                 href={personalInfo.resume}
                 target="_blank"
                 rel="noreferrer"
-                className="absolute -right-8 bottom-[10%] w-[230px] rounded-2xl border border-white/50 bg-white/80 p-3.5 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20 flex items-center gap-3.5 cursor-pointer hover:border-emerald-200 transition-all duration-300 group"
+                className="absolute -right-3 sm:-right-8 lg:-right-16 xl:-right-20 bottom-[10%] w-[180px] sm:w-[205px] lg:w-[220px] rounded-2xl border border-white/50 bg-white/80 p-2.5 sm:p-3.5 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20 flex items-center gap-2.5 sm:gap-3.5 cursor-pointer hover:border-emerald-200 transition-all duration-300 group"
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50/90 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
-                  <Download className="h-5 w-5" />
+                <div className="flex h-9 w-9 sm:h-11 sm:w-11 shrink-0 items-center justify-center rounded-xl bg-emerald-50/90 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">
+                  <Download className="h-4 w-4 sm:h-5 sm:w-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900 leading-tight">Download My Resume</h4>
-                  <p className="mt-0.5 text-[9px] font-semibold text-slate-500 leading-normal">
+                  <h4 className="text-[10px] sm:text-xs font-bold text-slate-900 leading-tight">Download My Resume</h4>
+                  <p className="mt-0.5 text-[8px] sm:text-[9px] font-semibold text-slate-500 leading-normal">
                     Get a detailed overview of my experience and skills.
                   </p>
                 </div>
