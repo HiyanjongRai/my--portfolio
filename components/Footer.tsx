@@ -74,7 +74,7 @@ export default function Footer() {
               onClick={() => scrollToSection('hero')}
               className="text-white text-2xl font-black tracking-tight hover:text-emerald-400 transition-colors duration-200 cursor-pointer"
             >
-              Hiyan JonG Rai<span className="text-emerald-500">.</span>
+              Hiyan Jong Rai<span className="text-emerald-500">.</span>
             </button>
 
             <p className="text-[14px] leading-[1.75] max-w-[300px] text-slate-400">
@@ -165,7 +165,6 @@ export default function Footer() {
         <div className="border-t border-slate-800/60">
           <div className="mx-auto max-w-[1280px] px-6 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] text-slate-600">
             <p>© {new Date().getFullYear()} Hiyan Jong Rai. All rights reserved.</p>
-            <p className="font-medium">Designed & built with care in Kathmandu, Nepal</p>
           </div>
         </div>
       </footer>
