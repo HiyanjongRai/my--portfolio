@@ -7,8 +7,8 @@ import { Briefcase, Calendar, MapPin, ArrowUpRight, CheckCircle2, Shield, Heart 
 /* ─── Experience Data ──────────────────────────────────────────── */
 const experiences = [
   {
-    period: 'Jan 2024 – Mar 2024',
-    duration: '3 Months',
+    period: '2024',
+    duration: 'Internship',
     title: 'Backend Developer Intern',
     company: 'KritimMind Technology',
     location: 'Kathmandu, Nepal',
@@ -19,9 +19,9 @@ const experiences = [
     description:
       'Worked on backend development building web applications and REST APIs using Spring Boot and MySQL. Implemented Spring Security for authentication, designed relational database schemas, and integrated APIs with frontend clients.',
     highlights: [
-      'Built 3 robust REST APIs consumed by React client apps',
+      'Built robust REST APIs consumed by React client apps',
       'Implemented secure JWT-based Spring Security auth filters',
-      'Optimized MySQL relational queries, reducing load times by 40%',
+      'Optimized MySQL relational queries to reduce server response load times',
     ],
     tags: ['Spring Boot', 'Java', 'MySQL', 'Spring Security', 'REST API'],
     link: 'https://www.kritimmind.com/developers',
@@ -37,11 +37,11 @@ const experiences = [
     statusColor: 'bg-[#F3FAF5] text-[#16A34A] border-emerald-100',
     dotColor: 'bg-emerald-600',
     description:
-      'Helped improve search visibility and content structure for a U.S.-based sign printing company. Conducted keyword research, optimized on-page metadata, and built content strategies that improved organic rankings.',
+      'Worked on their website, maintained SEO rankings, wrote blog articles, and created targeted content to improve organic search visibility for a sign printing services company.',
     highlights: [
-      'Researched and mapped 200+ high-traffic target keywords',
-      'Improved page load score from 58 to 91+ (Google Lighthouse)',
-      'Structured technical content strategy across 15 landing pages',
+      'Conducted in-depth keyword research for printing services search terms',
+      'Improved page load speeds and overall SEO structure (Google Lighthouse)',
+      'Structured technical content strategy across search-friendly landing pages',
     ],
     tags: ['Keyword Research', 'On-Page SEO', 'Google Analytics', 'Content Strategy'],
     link: 'https://miraisigns.com/',
@@ -57,13 +57,13 @@ const experiences = [
     statusColor: 'bg-[#F3FAF5] text-[#16A34A] border-emerald-100',
     dotColor: 'bg-emerald-600',
     description:
-      'Managed SEO strategy and content optimization for two tourism & travel portals. Focused on improving local search presence, on-page structure, and driving organic traffic for Nepal-based hospitality brands.',
+      'Managed SEO strategy, blog posts, content creation, social media handling, and analytics reporting for restaurant and bar brands. Focused on improving local search presence, on-page structure, and driving organic traffic.',
     highlights: [
-      'Increased organic traffic by 35% over a 3-month cycle',
-      'Optimized 30+ travel blog posts for target search keywords',
-      'Managed Google Search Console & Analytics performance reports',
+      'Wrote keyword-rich blog posts to boost restaurant search rankings',
+      'Managed content creation, social media handling, and page analytics reports',
+      'Monitored Google Search Console & Analytics performance reports to drive engagement',
     ],
-    tags: ['SEO', 'Travel Content', 'Search Console', 'Analytics'],
+    tags: ['SEO', 'Content Creation', 'Social Media', 'Analytics'],
     link: '#',
   },
 ];

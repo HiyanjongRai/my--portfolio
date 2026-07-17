@@ -26,7 +26,7 @@ export default function AboutIntro() {
             {/* Image Frame */}
             <div className="relative w-full max-w-[420px] aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-[0_24px_60px_-12px_rgba(0,0,0,0.12)] border border-slate-100">
               <Image
-                src={personalInfo.image}
+                src="/images/profile1.jpg"
                 alt={personalInfo.name}
                 fill
                 style={{ objectFit: 'cover', objectPosition: 'top' }}
@@ -107,25 +107,25 @@ export default function AboutIntro() {
             <motion.blockquote
               initial={{ opacity: 0, x: 16 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.2 }}
+              transition={{ duration: 0.55, delay: 0.25 }}
               className="border-l-2 border-emerald-400 pl-6 py-1"
             >
               <p className="text-[18px] font-semibold text-slate-700 leading-relaxed italic">
-                &ldquo;Good software isn&apos;t just code that works — it&apos;s code that can grow, adapt, and be trusted.&rdquo;
+                &ldquo;I like to travel, explore new places, and create memories. In the same way, I want to explore a system—how it works, and what it does.&rdquo;
               </p>
             </motion.blockquote>
 
             {/* Story paragraphs */}
             {[
-              "I'm Hiyan Jong Rai, a Backend Developer from Udayapur, Bagaha, currently based in Kathmandu where I'm pursuing my BCA at Tribhuvan University. I spend my days writing Spring Boot services, designing database schemas, and shipping software that actually scales.",
-              "My career path has been driven by genuine curiosity. Starting with freelance SEO work taught me to think about how systems connect — from search algorithms to user intent. That curiosity led me to backend engineering, where I interned at KritimMind Technology building REST APIs and authentication systems in production.",
-              "I've shipped e-commerce platforms, real-time emergency dispatch systems, parcel tracking dashboards, and more. Each project taught me something different about building software that is not just functional, but reliable, maintainable, and purposeful.",
+              "I'm Hiyan Jong Rai, a Backend Developer from Udayapur, Bagaha, currently based in Kathmandu where I'm pursuing my BCA at Tribhuvan University. I specialize in building robust Spring Boot services, designing scalable database schemas, and optimizing site architectures.",
+              "Beyond core development, I have extensive experience in digital presence and Search Engine Optimization (SEO). I work with brands like Delito Kathmandu and Himalayan Hub—popular local restaurants and bars—creating compelling content, managing their social media channels, and writing targeted blog posts rich with optimized keyword tags to boost search visibility.",
+              "I have also worked with Mirai Design, a professional printing services company. I developed and maintained their website, handled their on-page and off-page SEO, wrote informative blogs, and curated targeted content to attract customers and drive organic search performance.",
             ].map((para, i) => (
               <motion.p
                 key={i}
                 initial={{ opacity: 0, y: 14 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.55, delay: 0.25 + i * 0.08 }}
+                transition={{ duration: 0.55, delay: 0.3 + i * 0.08 }}
                 className="text-[16px] text-slate-600 leading-[1.85] font-medium"
               >
                 {para}

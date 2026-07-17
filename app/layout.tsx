@@ -4,7 +4,21 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Hiyan Jong Rai - Backend Developer",
   description: "Backend Developer from Nepal specializing in Spring Boot, REST APIs, MySQL, and PostgreSQL. Building reliable web applications.",
-  keywords: ["Hiyan Jong Rai", "Backend Developer", "Spring Boot", "Java Developer", "REST API", "PostgreSQL", "MySQL", "Nepal Developer"],
+  keywords: [
+    "Hiyan Jong Rai", 
+    "Backend Developer", 
+    "Spring Boot", 
+    "Java Developer", 
+    "REST API", 
+    "PostgreSQL", 
+    "MySQL", 
+    "Nepal Developer", 
+    "Delito Kathmandu", 
+    "Himalayan Hub", 
+    "Mirai Design", 
+    "SEO Specialist Nepal", 
+    "Content Creator Nepal"
+  ],
   authors: [{ name: "Hiyan Jong Rai" }],
   openGraph: {
     type: "website",

@@ -12,7 +12,7 @@ export const personalInfo = {
   phone: "+977 976-500-6485",
   availability: "Open to work",
   resume: "/files/HiyanJongRaiCV.pdf",
-  image: "/images/profile1.jpg",
+  image: "/images/me.jpg",
   degree: "BCA (Ongoing)",
   experience: "2+ Years"
 };
@@ -28,7 +28,7 @@ export const socialLinks = {
 
 export const metrics = [
   { value: "2+", label: "Years Experience" },
-  { value: "20+", label: "Projects Completed" },
+  { value: "4", label: "Projects Completed" },
   { value: "10+", label: "Happy Clients" },
   { value: "5", label: "Awards" }
 ];
@@ -42,13 +42,12 @@ export const skills = [
 
 export const techStack = [
   { icon: "leaf", name: "Spring Boot" },
-  { icon: "coffee", name: "Java" },
-  { icon: "database", name: "MySQL" },
-  { icon: "database", name: "PostgreSQL" },
+  { icon: "code", name: "HTML" },
+  { icon: "code", name: "CSS" },
   { icon: "code", name: "JavaScript" },
-  { icon: "code", name: "HTML/CSS" },
-  { icon: "git-branch", name: "Git" },
-  { icon: "search", name: "SEO" }
+  { icon: "code", name: "React" },
+  { icon: "database", name: "PostgreSQL" },
+  { icon: "database", name: "MySQL" }
 ];
 
 export const expertise = [

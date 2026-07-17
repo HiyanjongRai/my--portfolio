@@ -305,7 +305,7 @@ export default function Projects() {
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
                   <Layers className="h-4.5 w-4.5" />
                 </div>
-                <p className="text-[34px] font-extrabold text-[#111827] leading-none tracking-tight">20+</p>
+                <p className="text-[34px] font-extrabold text-[#111827] leading-none tracking-tight">4</p>
               </div>
               <p className="text-[10px] text-[#9CA3AF] font-bold uppercase tracking-wider">Projects Completed</p>
             </div>

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUp, Mail, MapPin, ExternalLink } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { scrollToSection } from '@/lib/utils';
-import { personalInfo } from '@/data/portfolio';
+import { personalInfo, socialLinks } from '@/data/portfolio';
 
 const navLinks = [
   { href: 'hero', label: 'Home' },
@@ -15,7 +15,7 @@ const navLinks = [
   { href: 'contact', label: 'Contact' },
 ];
 
-/* Inline SVG social icons — lucide-react doesn't include Github/Linkedin in this version */
+/* Inline SVG social icons — lucide-react doesn't include Github/Linkedin/Pinterest/Facebook in this version */
 const GithubIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
     <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
@@ -28,9 +28,23 @@ const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
+const PinterestIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.41 7.61 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.965 1.406-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.293 1.195-.334 1.363-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.62 0 11.988-5.367 11.988-11.987C24.005 5.367 18.636 0 12.017 0z"/>
+  </svg>
+);
+
+const FacebookIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+  </svg>
+);
+
 const socials = [
-  { name: 'GitHub', href: 'https://github.com/HiyanjongRai', icon: GithubIcon },
-  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/hiyanjongrai', icon: LinkedinIcon },
+  { name: 'GitHub', href: socialLinks.github, icon: GithubIcon },
+  { name: 'LinkedIn', href: socialLinks.linkedin, icon: LinkedinIcon },
+  { name: 'Pinterest', href: socialLinks.pinterest, icon: PinterestIcon },
+  { name: 'Facebook', href: socialLinks.facebook, icon: FacebookIcon },
 ];
 
 export default function Footer() {
@@ -151,7 +165,7 @@ export default function Footer() {
             <div>
               <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-500 mb-4">Stack</h4>
               <div className="flex flex-wrap gap-1.5">
-                {['Java', 'Spring Boot', 'MySQL', 'React', 'Next.js'].map((t) => (
+                {['Spring Boot', 'React', 'MySQL', 'PostgreSQL', 'Vercel', 'Render'].map((t) => (
                   <span key={t} className="rounded-full bg-slate-800 border border-slate-700 px-3 py-1 text-[11px] font-semibold text-slate-400">
                     {t}
                   </span>

@@ -17,9 +17,8 @@ import {
   Database,
   Server
 } from 'lucide-react';
-import { personalInfo } from '@/data/portfolio';
+import { personalInfo, socialLinks } from '@/data/portfolio';
 import { scrollToSection } from '@/lib/utils';
-import { LogoCloud } from '@/components/ui/logo-cloud';
 
 /* ─── Animated Counter ─────────────────────────────────────────── */
 function AnimatedCounter({ to, suffix = '' }: { to: number; suffix?: string }) {
@@ -58,7 +57,7 @@ function AnimatedCounter({ to, suffix = '' }: { to: number; suffix?: string }) {
 /* ─── Metrics data ─────────────────────────────────────────────── */
 const metrics = [
   { icon: Briefcase, value: 2, suffix: '+', label: 'Years Experience' },
-  { icon: Layers, value: 20, suffix: '+', label: 'Projects Completed' },
+  { icon: Layers, value: 4, suffix: '', label: 'Projects Completed' },
   { icon: Users, value: 10, suffix: '+', label: 'Happy Clients' },
   { icon: Trophy, value: 5, suffix: '', label: 'Awards' },
 ];
@@ -67,7 +66,7 @@ const metrics = [
 const socials = [
   {
     name: 'GitHub',
-    url: 'https://github.com/HiyanjongRai',
+    url: socialLinks.github,
     icon: (props: React.SVGProps<SVGSVGElement>) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.579.688.481C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
@@ -76,7 +75,7 @@ const socials = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/hiyanjongrai',
+    url: socialLinks.linkedin,
     icon: (props: React.SVGProps<SVGSVGElement>) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
         <path fillRule="evenodd" clipRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
@@ -84,32 +83,23 @@ const socials = [
     ),
   },
   {
-    name: 'Dribbble',
-    url: 'https://dribbble.com/HiyanjongRai',
+    name: 'Pinterest',
+    url: socialLinks.pinterest,
     icon: (props: React.SVGProps<SVGSVGElement>) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-        <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z" />
+        <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.41 7.61 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.965 1.406-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.293 1.195-.334 1.363-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.62 0 11.988-5.367 11.988-11.987C24.005 5.367 18.636 0 12.017 0z"/>
       </svg>
     ),
   },
   {
-    name: 'Behance',
-    url: 'https://www.behance.net/HiyanjongRai',
+    name: 'Facebook',
+    url: socialLinks.facebook,
     icon: (props: React.SVGProps<SVGSVGElement>) => (
       <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-        <path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 3.211 3.483 3.312 4.588 2.029H23.726zm-7.726-3h3.457c-.073-1.64-1.222-2.272-1.767-2.272-.603 0-1.595.382-1.69 2.272zM7.737 9.433c0-1.906-1.336-2.397-2.995-2.397H1v9.928h4.063c1.469 0 3.19-.574 3.19-2.762 0-1.017-.493-1.932-1.516-2.309v-.028c.836-.407 1-.989 1-1.432zm-4.48.973H4.24c.763 0 1.33.239 1.33.955 0 .716-.567.955-1.33.955H3.257V10.406zm0 3.987H4.43c.876 0 1.487.262 1.487 1.078 0 .816-.611 1.078-1.487 1.078H3.257v-2.156z" />
+        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
       </svg>
     ),
-  },
-  {
-    name: 'X',
-    url: 'https://twitter.com/HiyanjongRai',
-    icon: (props: React.SVGProps<SVGSVGElement>) => (
-      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-      </svg>
-    ),
-  },
+  }
 ];
 
 /* ─── Hero Section ─────────────────────────────────────────────── */
@@ -225,7 +215,7 @@ export function HeroSection() {
             >
               {[
                 { value: '2+', label: 'Yrs Experience' },
-                { value: '20+', label: 'Projects' },
+                { value: '4', label: 'Projects' },
                 { value: '3', label: 'Jobs & Internships' },
               ].map((stat, i) => (
                 <div key={i} className="text-center">
@@ -296,41 +286,13 @@ export function HeroSection() {
                   src={personalInfo.image}
                   alt={personalInfo.name}
                   fill
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: 'cover', objectPosition: 'bottom center' }}
                   sizes="(max-width: 1024px) 100vw, 400px"
                   priority
                 />
               </div>
 
-              {/* Card A: Backend Development */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ repeat: Infinity, duration: 4.2, ease: 'easeInOut' }}
-                className="absolute -left-4 sm:-left-12 lg:-left-20 xl:-left-24 top-[12%] w-[150px] sm:w-[170px] lg:w-[185px] rounded-2xl border border-white/50 bg-white/70 p-3 sm:p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
-              >
-                <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600 mb-2">
-                  <Server className="h-4 w-4" />
-                </div>
-                <h3 className="text-[10px] sm:text-xs font-semibold text-slate-900 leading-tight">Backend Development</h3>
-                <div className="mt-1.5 sm:mt-2 space-y-0.5 text-[9px] sm:text-[10px] font-medium text-slate-500">
-                  <p>Spring Boot</p><p>Java</p><p>REST APIs</p>
-                </div>
-              </motion.div>
 
-              {/* Card B: Database & Cloud */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ repeat: Infinity, duration: 4.8, ease: 'easeInOut', delay: 0.5 }}
-                className="absolute -left-3 sm:-left-8 lg:-left-16 xl:-left-20 bottom-[18%] w-[150px] sm:w-[170px] lg:w-[185px] rounded-2xl border border-white/50 bg-white/70 p-3 sm:p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
-              >
-                <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600 mb-2">
-                  <Database className="h-4 w-4" />
-                </div>
-                <h3 className="text-[10px] sm:text-xs font-semibold text-slate-900 leading-tight">Database &amp; Cloud</h3>
-                <div className="mt-1.5 sm:mt-2 space-y-0.5 text-[9px] sm:text-[10px] font-medium text-slate-500">
-                  <p>MySQL</p><p>PostgreSQL</p><p>Schema Design</p>
-                </div>
-              </motion.div>
 
               {/* Card C: Projects counter */}
               <motion.div
@@ -343,47 +305,13 @@ export function HeroSection() {
                 </div>
                 <div>
                   <p className="text-[8px] sm:text-[9px] font-semibold text-slate-400 uppercase tracking-wider leading-none">Projects Completed</p>
-                  <p className="mt-0.5 sm:mt-1 text-base sm:text-lg font-bold text-slate-900 leading-none">20+</p>
+                  <p className="mt-0.5 sm:mt-1 text-base sm:text-lg font-bold text-slate-900 leading-none">4</p>
                 </div>
               </motion.div>
 
-              {/* Card D: Client Rating */}
-              <motion.div
-                animate={{ y: [0, -9, 0] }}
-                transition={{ repeat: Infinity, duration: 4.5, ease: 'easeInOut', delay: 0.7 }}
-                className="absolute -right-3 sm:-right-8 lg:-right-16 xl:-right-20 bottom-[35%] w-[140px] sm:w-[155px] lg:w-[175px] rounded-2xl border border-white/50 bg-white/70 p-2.5 sm:p-3.5 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
-              >
-                <div className="flex items-center gap-2 sm:gap-3">
-                  <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50/80 text-emerald-600">
-                    <Star className="h-4 w-4 fill-emerald-500 text-emerald-500" />
-                  </div>
-                  <div>
-                    <p className="text-[8px] sm:text-[9px] font-semibold text-slate-400 uppercase tracking-wider leading-none">Client Rating</p>
-                    <div className="flex gap-0.5 mt-0.5 sm:mt-1">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-1.5 w-1.5 sm:h-2 sm:w-2 fill-emerald-500 text-emerald-500" />
-                      ))}
-                    </div>
-                  </div>
-                </div>
-                <p className="mt-1.5 sm:mt-2 text-sm sm:text-base font-extrabold text-slate-900 leading-none">4.9 / 5</p>
-              </motion.div>
 
-              {/* Card E: Open for work */}
-              <motion.div
-                animate={{ y: [0, -7, 0] }}
-                transition={{ repeat: Infinity, duration: 4.0, ease: 'easeInOut', delay: 0.4 }}
-                className="absolute -right-3 sm:-right-10 lg:-right-18 xl:-right-22 bottom-[8%] w-[140px] sm:w-[155px] lg:w-[175px] rounded-2xl border border-white/50 bg-white/70 p-3 sm:p-4 shadow-lg shadow-slate-100/50 backdrop-blur-md z-20"
-              >
-                <div className="flex items-center gap-1.5 sm:gap-2">
-                  <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-emerald-500" />
-                  </span>
-                  <span className="text-[8px] sm:text-[9px] font-semibold text-slate-400 uppercase tracking-wider leading-none">Available Now</span>
-                </div>
-                <p className="text-sm sm:text-base font-extrabold text-slate-950 mt-1 sm:mt-1.5 leading-none">Open for Work</p>
-              </motion.div>
+
+
             </motion.div>
           </div>
 
@@ -402,69 +330,59 @@ export function LogosSection() {
         {/* Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50/60 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700 shadow-sm">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-          Trusted by Clients Worldwide
+          Clients & Brands I've Worked With
         </div>
 
         {/* Heading & Subtitle */}
         <div className="space-y-2 max-w-2xl mx-auto">
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-            Delivering Results That Matter
+            Real Work. Real Impact.
           </h2>
           <p className="text-sm text-slate-500 font-semibold leading-relaxed">
-            I've had the privilege of working with amazing companies and startups to bring their ideas to life.
+            From restaurant brands to design studios — I've helped businesses grow their digital presence through SEO, content, and web development.
           </p>
         </div>
 
         {/* Static Logos Row */}
-        <div className="pt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-6 md:gap-x-12 max-w-5xl mx-auto text-slate-400 font-semibold">
-          <div className="flex items-center gap-2 text-xl select-none hover:text-slate-800 transition duration-300">
-            <svg className="w-6 h-6 text-slate-800" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12.24 10.285V13.4h6.887c-.275 1.565-1.88 4.604-6.887 4.604-4.33 0-7.866-3.577-7.866-8s3.536-8 7.866-8c2.46 0 4.105 1.025 5.047 1.926l2.427-2.334C17.955 2.192 15.34 1 12.24 1 5.48 1 0 6.48 0 13s5.48 12 12.24 12c7.05 0 11.75-4.96 11.75-11.96 0-.81-.09-1.425-.2-1.755H12.24z" />
-            </svg>
-            <span className="font-extrabold text-slate-800">Google</span>
+        <div className="pt-8 flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-14 max-w-5xl mx-auto text-slate-400 font-semibold">
+
+          {/* Delito Kathmandu */}
+          <div className="flex flex-col items-center gap-1.5 select-none group cursor-default">
+            <div className="flex items-center gap-2 hover:text-slate-800 transition duration-300">
+              <svg className="w-5 h-5 text-amber-500" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+              </svg>
+              <span className="font-extrabold text-slate-800 text-base tracking-tight">Delito Kathmandu</span>
+            </div>
+            <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Restaurant & Bar · SEO · Content</span>
           </div>
 
-          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
+          <div className="h-10 w-px bg-slate-200 hidden sm:block" />
 
-          <div className="flex items-center gap-2 text-xl select-none hover:text-slate-800 transition duration-300">
-            <svg className="w-5 h-5 text-slate-800" viewBox="0 0 23 23" fill="currentColor">
-              <path d="M0 0h11v11H0z" />
-              <path d="M12 0h11v11H12z" />
-              <path d="M0 12h11v11H0z" />
-              <path d="M12 12h11v11H12z" />
-            </svg>
-            <span className="font-extrabold text-slate-800">Microsoft</span>
+          {/* Himalayan Hub */}
+          <div className="flex flex-col items-center gap-1.5 select-none group cursor-default">
+            <div className="flex items-center gap-2 hover:text-slate-800 transition duration-300">
+              <svg className="w-5 h-5 text-emerald-600" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M14 6l-1-2H5v17h2v-7h5l1 2h7V6h-6zm4 8h-4l-1-2H7V6h5l1 2h5v6z"/>
+              </svg>
+              <span className="font-extrabold text-slate-800 text-base tracking-tight">Himalayan Hub</span>
+            </div>
+            <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Restaurant & Bar · SEO · Social Media</span>
           </div>
 
-          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
+          <div className="h-10 w-px bg-slate-200 hidden sm:block" />
 
-          <div className="flex items-center gap-1.5 text-xl select-none hover:text-slate-800 transition duration-300">
-            <span className="font-black text-slate-800 lowercase tracking-tighter">webflow</span>
+          {/* Mirai Design */}
+          <div className="flex flex-col items-center gap-1.5 select-none group cursor-default">
+            <div className="flex items-center gap-2 hover:text-slate-800 transition duration-300">
+              <svg className="w-5 h-5 text-violet-500" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+              <span className="font-extrabold text-slate-800 text-base tracking-tight">Mirai Design</span>
+            </div>
+            <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">Printing Services · SEO · Blog</span>
           </div>
 
-          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
-
-          <div className="flex items-center gap-2 text-xl select-none hover:text-slate-800 transition duration-300">
-            <svg className="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M24 22.525H0l12-21.05 12 21.05z" />
-            </svg>
-            <span className="font-black text-slate-900 tracking-tight">vercel</span>
-          </div>
-
-          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
-
-          <div className="flex items-center gap-1.5 text-xl select-none hover:text-slate-800 transition duration-300">
-            <span className="font-black text-slate-800 lowercase tracking-tight">stripe</span>
-          </div>
-
-          <div className="h-6 w-px bg-slate-200 hidden sm:block" />
-
-          <div className="flex items-center gap-2 text-xl select-none hover:text-slate-800 transition duration-300">
-            <svg className="w-5 h-5 text-slate-800" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 0L0 12h12v12l12-12H12z" />
-            </svg>
-            <span className="font-bold text-slate-800">Framer</span>
-          </div>
         </div>
 
       </div>
