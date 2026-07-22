@@ -1,9 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CldImage } from 'next-cloudinary';
-import { Maximize2, Download, Copy, Check, Film, Image as ImageIcon, Sparkles } from 'lucide-react';
+import { Maximize2, Download, Copy, Check, Film, Image as ImageIcon, Camera } from 'lucide-react';
 import { CloudinaryAsset } from '@/types/upload';
 
 interface PinterestGridProps {
@@ -13,26 +13,210 @@ interface PinterestGridProps {
   onCopy: (text: string, label: string) => void;
 }
 
-export function PinterestGrid({ assets, loading = false, onPreview, onCopy }: PinterestGridProps) {
-  const [copiedId, setCopiedId] = useState<string | null>(null);
-  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+function getDisplayName(asset: CloudinaryAsset): string {
+  const raw = asset.filename || asset.original_filename || asset.public_id?.split('/').pop() || '';
+  const withoutExt = raw.replace(/\.[^.]+$/, '');
+  const spaced = withoutExt.replace(/[-_.]+/g, ' ');
+  const isHash = /^[a-z0-9]{10,}$/.test(spaced.trim());
+  if (isHash) return 'Captured Moment';
+  return spaced.replace(/\b\w/g, (c) => c.toUpperCase()).trim() || 'Captured Moment';
+}
 
-  const handleCopyUrl = (e: React.MouseEvent, url: string, id: string) => {
+/* ── Skeleton Card ────────────────────────────────────── */
+const skeletonHeights = [220, 310, 260, 380, 200, 290, 340, 230, 270, 320, 190, 280];
+
+function SkeletonCard({ h }: { h: number }) {
+  return (
+    <div
+      className="break-inside-avoid rounded-2xl bg-slate-200 animate-pulse mb-3"
+      style={{ height: `${h}px` }}
+    />
+  );
+}
+
+/* ── Video Card ───────────────────────────────────────── */
+function VideoCard({
+  asset,
+  onPreview,
+  onCopy,
+  idx,
+}: {
+  asset: CloudinaryAsset;
+  onPreview: (a: CloudinaryAsset) => void;
+  onCopy: (t: string, l: string) => void;
+  idx: number;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [copied, setCopied] = useState(false);
+  const name = getDisplayName(asset);
+
+  const handleCopy = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onCopy(url, 'Image URL');
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 2000);
+    onCopy(asset.secure_url || asset.url, 'URL');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.35, delay: Math.min(idx * 0.04, 0.4) }}
+      onClick={() => onPreview(asset)}
+      onMouseEnter={() => videoRef.current?.play()}
+      onMouseLeave={() => { videoRef.current?.pause(); if (videoRef.current) videoRef.current.currentTime = 0; }}
+      className="break-inside-avoid mb-3 group relative overflow-hidden rounded-2xl bg-slate-950 cursor-pointer shadow-sm hover:shadow-xl transition-shadow duration-300"
+    >
+      {/* Aspect ratio wrapper — videos always 16:9 */}
+      <div className="relative aspect-video w-full overflow-hidden">
+        <video
+          ref={videoRef}
+          src={asset.secure_url || asset.url}
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
+
+        {/* Video badge */}
+        <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 rounded-full bg-black/60 backdrop-blur-md px-2.5 py-1 text-[10px] font-bold text-white">
+          <Film className="h-3 w-3 text-emerald-400" />
+          VIDEO
+        </div>
+      </div>
+
+      {/* Hover overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-3 pointer-events-none group-hover:pointer-events-auto">
+        <div className="flex justify-end gap-2">
+          <button
+            onClick={handleCopy}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 backdrop-blur-md text-white hover:bg-emerald-500 transition-colors"
+          >
+            {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+          </button>
+          <a
+            href={asset.secure_url || asset.url}
+            download
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 backdrop-blur-md text-white hover:bg-emerald-500 transition-colors"
+          >
+            <Download className="h-3.5 w-3.5" />
+          </a>
+        </div>
+        <div className="space-y-0.5">
+          <p className="text-xs font-bold text-white truncate">{name}</p>
+          <p className="flex items-center gap-1 text-[10px] text-emerald-400 font-semibold">
+            <Maximize2 className="h-2.5 w-2.5" /> Tap to expand
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Image Card ───────────────────────────────────────── */
+function ImageCard({
+  asset,
+  onPreview,
+  onCopy,
+  idx,
+}: {
+  asset: CloudinaryAsset;
+  onPreview: (a: CloudinaryAsset) => void;
+  onCopy: (t: string, l: string) => void;
+  idx: number;
+}) {
+  const [copied, setCopied] = useState(false);
+  const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+  const name = getDisplayName(asset);
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onCopy(asset.secure_url || asset.url, 'URL');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.35, delay: Math.min(idx * 0.04, 0.4) }}
+      onClick={() => onPreview(asset)}
+      className="break-inside-avoid mb-3 group relative overflow-hidden rounded-2xl bg-slate-100 cursor-pointer shadow-sm hover:shadow-xl transition-shadow duration-300"
+    >
+      {/* Image — natural aspect ratio for Pinterest effect */}
+      <div className="relative w-full overflow-hidden">
+        {cloudName && asset.public_id ? (
+          <CldImage
+            src={asset.public_id}
+            alt={name}
+            width={asset.width || 600}
+            height={asset.height || 800}
+            sizes="(max-width: 390px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 block"
+          />
+        ) : (
+          <img
+            src={asset.secure_url || asset.url}
+            alt={name}
+            className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105 block"
+            loading="lazy"
+          />
+        )}
+
+        {/* Format badge */}
+        <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 rounded-full bg-black/50 backdrop-blur-md px-2.5 py-1 text-[10px] font-bold text-white">
+          <ImageIcon className="h-3 w-3 text-emerald-400" />
+          {(asset.format || 'IMG').toUpperCase()}
+        </div>
+      </div>
+
+      {/* Hover overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-3 pointer-events-none group-hover:pointer-events-auto">
+        <div className="flex justify-end gap-2">
+          <button
+            onClick={handleCopy}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 backdrop-blur-md text-white hover:bg-emerald-500 transition-colors"
+          >
+            {copied ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+          </button>
+          <a
+            href={asset.secure_url || asset.url}
+            download
+            target="_blank"
+            rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 backdrop-blur-md text-white hover:bg-emerald-500 transition-colors"
+          >
+            <Download className="h-3.5 w-3.5" />
+          </a>
+        </div>
+        <div className="space-y-0.5">
+          <p className="text-xs font-bold text-white truncate">{name}</p>
+          <p className="flex items-center gap-1 text-[10px] text-emerald-400 font-semibold">
+            <Maximize2 className="h-2.5 w-2.5" /> Tap to expand
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ── Main Grid ────────────────────────────────────────── */
+export function PinterestGrid({ assets, loading = false, onPreview, onCopy }: PinterestGridProps) {
   if (loading) {
     return (
-      <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
-        {[180, 260, 220, 320, 190, 280, 240, 200].map((h, i) => (
-          <div
-            key={i}
-            style={{ height: `${h}px` }}
-            className="break-inside-avoid rounded-3xl bg-slate-200/80 animate-pulse border border-slate-200"
-          />
+      <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-3">
+        {skeletonHeights.map((h, i) => (
+          <SkeletonCard key={i} h={h} />
         ))}
       </div>
     );
@@ -43,122 +227,42 @@ export function PinterestGrid({ assets, loading = false, onPreview, onCopy }: Pi
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-3xl border border-dashed border-slate-300 bg-white/70 backdrop-blur-md p-16 text-center my-8 max-w-lg mx-auto"
+        className="rounded-3xl border border-dashed border-slate-300 bg-white/70 p-16 text-center my-8 max-w-sm mx-auto"
       >
         <div className="flex justify-center mb-4">
-          <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-emerald-50 text-emerald-600 border border-emerald-200">
-            <Sparkles className="h-10 w-10" />
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200">
+            <Camera className="h-8 w-8" />
           </div>
         </div>
-
-        <h3 className="text-xl font-extrabold text-slate-900 tracking-tight">
-          No moments captured yet
-        </h3>
+        <h3 className="text-lg font-extrabold text-slate-900 tracking-tight">No moments yet</h3>
         <p className="text-sm font-medium text-slate-500 mt-1">
-          Upload photos or videos in the Upload Center to build your Pinterest-style moments gallery.
+          Upload photos or videos to start your gallery.
         </p>
       </motion.div>
     );
   }
 
   return (
-    <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+    /*
+      Breakpoints:
+      - Mobile (≤390px / iPhone 12 Pro): 2 columns
+      - sm (640px+): 2 columns
+      - md (768px+): 3 columns
+      - lg (1024px+): 4 columns
+    */
+    <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-3">
       <AnimatePresence mode="popLayout">
         {assets.map((asset, idx) => {
-          const isVideo = asset.resource_type === 'video' || asset.format === 'mp4' || asset.format === 'webm';
-          const filename = asset.filename || asset.original_filename || asset.public_id.split('/').pop() || 'Moment';
+          const isVideo =
+            asset.resource_type === 'video' ||
+            asset.format === 'mp4' ||
+            asset.format === 'webm' ||
+            asset.format === 'mov';
 
-          return (
-            <motion.div
-              key={asset.public_id || asset.secure_url}
-              layout
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3, delay: Math.min(idx * 0.03, 0.3) }}
-              onClick={() => onPreview(asset)}
-              className="group relative break-inside-avoid overflow-hidden rounded-3xl bg-slate-900 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-2xl transition-all duration-300 cursor-pointer border border-slate-200/80 hover:border-emerald-500/40"
-            >
-              {/* Media Display */}
-              {isVideo ? (
-                <div className="relative aspect-video w-full overflow-hidden bg-slate-950">
-                  <video
-                    src={asset.secure_url || asset.url}
-                    className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    muted
-                    loop
-                    playsInline
-                  />
-                  <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-xl bg-slate-900/80 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-white shadow-md border border-white/10">
-                    <Film className="h-3.5 w-3.5 text-emerald-400" />
-                    <span>VIDEO</span>
-                  </div>
-                </div>
-              ) : cloudName && asset.public_id ? (
-                <div className="relative w-full overflow-hidden">
-                  <CldImage
-                    src={asset.public_id}
-                    alt={filename}
-                    width={asset.width || 600}
-                    height={asset.height || 800}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-3 left-3 flex items-center gap-1.5 rounded-xl bg-slate-900/80 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-white shadow-md border border-white/10">
-                    <ImageIcon className="h-3.5 w-3.5 text-emerald-400" />
-                    <span className="uppercase">{asset.format || 'PHOTO'}</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="relative w-full overflow-hidden">
-                  <img
-                    src={asset.secure_url || asset.url}
-                    alt={filename}
-                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-              )}
-
-              {/* Hover Glassmorphism Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-between p-4 text-white">
-                <div className="flex justify-end gap-2">
-                  <button
-                    onClick={(e) => handleCopyUrl(e, asset.secure_url || asset.url, asset.public_id)}
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900/80 backdrop-blur-md text-white hover:bg-emerald-600 transition-colors shadow-md border border-white/10"
-                    title="Copy URL"
-                  >
-                    {copiedId === asset.public_id ? (
-                      <Check className="h-4 w-4 text-emerald-400" />
-                    ) : (
-                      <Copy className="h-4 w-4" />
-                    )}
-                  </button>
-                  <a
-                    href={asset.secure_url || asset.url}
-                    download
-                    target="_blank"
-                    rel="noreferrer"
-                    onClick={(e) => e.stopPropagation()}
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900/80 backdrop-blur-md text-white hover:bg-emerald-600 transition-colors shadow-md border border-white/10"
-                    title="Download"
-                  >
-                    <Download className="h-4 w-4" />
-                  </a>
-                </div>
-
-                <div className="space-y-1">
-                  <h4 className="text-sm font-bold text-white truncate" title={filename}>
-                    {filename}
-                  </h4>
-                  <div className="flex items-center justify-between text-[11px] text-slate-300 font-mono">
-                    <span>{asset.width && asset.height ? `${asset.width}×${asset.height}px` : asset.format}</span>
-                    <span className="flex items-center gap-1 font-sans font-bold text-emerald-400">
-                      <Maximize2 className="h-3 w-3" /> Expand
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+          return isVideo ? (
+            <VideoCard key={asset.public_id || asset.secure_url} asset={asset} onPreview={onPreview} onCopy={onCopy} idx={idx} />
+          ) : (
+            <ImageCard key={asset.public_id || asset.secure_url} asset={asset} onPreview={onPreview} onCopy={onCopy} idx={idx} />
           );
         })}
       </AnimatePresence>

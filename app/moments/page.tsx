@@ -62,7 +62,7 @@ export default function MomentsPage() {
       <ScrollProgress />
       <Header />
 
-      <main className="mx-auto max-w-7xl px-6 md:px-8 py-12 space-y-8">
+      <main className="mx-auto max-w-7xl px-3 sm:px-6 md:px-8 py-10 space-y-8">
         {/* Page Header */}
         <div className="text-center max-w-2xl mx-auto pt-4 space-y-3">
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
