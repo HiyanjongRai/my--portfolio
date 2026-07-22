@@ -152,35 +152,36 @@ function ProjectCard({
   isInView,
   onCaseStudy,
 }: {
-  project: typeof allProjects[0];
+  project: (typeof allProjects)[0];
   index: number;
   isInView: boolean;
-  onCaseStudy: (p: typeof allProjects[0]) => void;
+  onCaseStudy: (p: (typeof allProjects)[0]) => void;
 }) {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, y: 28 }}
-      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
-      transition={{ duration: 0.45, delay: 0.1 + index * 0.1 }}
-      className="group flex flex-col rounded-[20px] border border-[#E5E7EB] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.1)] hover:-translate-y-1.5 transition-all duration-300 overflow-hidden"
+      initial={{ opacity: 0, y: 24 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.5, delay: Math.min(index * 0.08, 0.4) }}
+      className="group relative flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E5E7EB] bg-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
-      {/* ── Project Preview ── */}
+      {/* ── Visual Banner ── */}
       <div
-        className="relative h-[220px] flex items-center justify-center overflow-hidden"
+        className="relative h-[130px] sm:h-[220px] flex items-center justify-center overflow-hidden"
         style={{ background: `linear-gradient(135deg, ${project.gradientFrom}, ${project.gradientTo})` }}
       >
         {/* Browser chrome top bar */}
-        <div className="absolute top-0 inset-x-0 flex items-center justify-between px-4 py-2.5 bg-black/20 backdrop-blur-sm">
-          <div className="flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
+        <div className="absolute top-0 inset-x-0 flex items-center justify-between px-2.5 sm:px-4 py-1.5 sm:py-2.5 bg-black/20 backdrop-blur-sm">
+          <div className="flex items-center gap-1">
+            <span className="h-1.5 sm:h-2.5 w-1.5 sm:w-2.5 rounded-full bg-red-400/80" />
+            <span className="h-1.5 sm:h-2.5 w-1.5 sm:w-2.5 rounded-full bg-amber-400/80" />
+            <span className="h-1.5 sm:h-2.5 w-1.5 sm:w-2.5 rounded-full bg-emerald-400/80" />
           </div>
-          <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-wider ${project.badgeColor}`}>
+          <span className={`inline-flex items-center rounded-full border px-1.5 sm:px-2.5 py-0.5 text-[8px] sm:text-[9px] font-bold uppercase tracking-wider ${project.badgeColor}`}>
             {project.badge}
           </span>
-          <div className="w-12" />
+          <div className="w-6 sm:w-12" />
         </div>
 
         {/* Subtle grid bg */}
@@ -192,7 +193,7 @@ function ProjectCard({
         />
 
         {/* SVG Mockup */}
-        <div className="relative z-10 flex items-center justify-center mt-6">
+        <div className="relative z-10 flex items-center justify-center mt-3 sm:mt-6 scale-75 sm:scale-100">
           {project.previewIcon}
         </div>
 
@@ -201,29 +202,29 @@ function ProjectCard({
       </div>
 
       {/* ── Card Body ── */}
-      <div className="flex flex-1 flex-col p-6 gap-4">
+      <div className="flex flex-1 flex-col p-3 sm:p-6 gap-2 sm:gap-4">
         {/* Title + Description */}
-        <div className="space-y-2">
-          <h3 className="text-[15px] font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-200 leading-tight">
+        <div className="space-y-1 sm:space-y-2">
+          <h3 className="text-[12px] sm:text-[15px] font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-200 leading-snug line-clamp-2">
             {project.title}
           </h3>
-          <p className="text-[12.5px] text-[#6B7280] leading-relaxed">
+          <p className="text-[10px] sm:text-[12.5px] text-[#6B7280] leading-relaxed line-clamp-3">
             {project.description}
           </p>
         </div>
 
         {/* Tech tag row */}
-        <div className="flex flex-wrap gap-1.5 mt-auto">
+        <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-auto">
           {project.tags.map((tag) => (
             <TagDot key={tag} tag={tag} />
           ))}
         </div>
 
         {/* Divider + Actions */}
-        <div className="flex items-center justify-between border-t border-[#F3F4F6] pt-4">
+        <div className="flex items-center justify-between border-t border-[#F3F4F6] pt-2.5 sm:pt-4">
           <button
             onClick={() => onCaseStudy(project)}
-            className="text-[11px] font-bold text-[#374151] hover:text-[#16A34A] transition-colors duration-200 cursor-pointer"
+            className="text-[10px] sm:text-[11px] font-bold text-[#374151] hover:text-[#16A34A] transition-colors duration-200 cursor-pointer"
           >
             Case Study
           </button>
@@ -233,9 +234,9 @@ function ProjectCard({
             target="_blank"
             rel="noreferrer"
             aria-label="View on GitHub"
-            className="flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-[#F9FAFB] text-[#374151] hover:bg-[#16A34A] hover:border-[#16A34A] hover:text-white transition-all duration-200"
+            className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-[#F9FAFB] text-[#374151] hover:bg-[#16A34A] hover:border-[#16A34A] hover:text-white transition-all duration-200"
           >
-            <ArrowRight className="h-3.5 w-3.5" />
+            <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
           </a>
         </div>
       </div>
@@ -370,8 +371,8 @@ export default function Projects() {
           </div>
         </motion.div>
 
-        {/* ── Project Cards ── */}
-        <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {/* ── Project Cards (2x2 Grid on Mobile, 3-Col on Desktop) ── */}
+        <motion.div layout className="grid gap-3.5 sm:gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, index) => (
               <ProjectCard

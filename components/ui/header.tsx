@@ -210,7 +210,13 @@ function MobileMenu({
   className,
   ...props
 }: MobileMenuProps) {
-  if (!open || typeof window === 'undefined') return null;
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!open || !mounted) return null;
 
   return createPortal(
     <div

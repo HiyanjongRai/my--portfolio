@@ -94,12 +94,12 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={ref} className="relative bg-[#F8FAFC] py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-slate-100">
+    <section id="contact" ref={ref} className="relative bg-[#F8FAFC] py-16 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-slate-100">
 
       <div className="mx-auto max-w-[1280px] w-full space-y-16">
         
         {/* ── Two Column Content Grid ── */}
-        <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] items-start">
+        <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] items-start">
           
           {/* LEFT COLUMN: Header, Grid & Action Card */}
           <div className="space-y-10">
@@ -120,9 +120,9 @@ export default function Contact() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: 0.1 }}
-                className="text-[38px] sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
+                className="text-[28px] sm:text-[38px] lg:text-[54px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
               >
-                Let's Build Something<br />
+                Let&apos;s Build Something<br />
                 <span className="text-[#16A34A]">Amazing</span> Together<span className="text-[#16A34A]">.</span>
               </motion.h2>
               <motion.p
@@ -140,7 +140,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-6"
+              className="grid grid-cols-2 gap-4 sm:gap-6"
             >
               {[
                 { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
@@ -150,7 +150,7 @@ export default function Contact() {
               ].map((item, idx) => {
                 const ItemIcon = item.icon;
                 return (
-                  <div key={idx} className="space-y-3">
+                  <div key={idx} className="space-y-2">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A] border border-[#D1FAE5]/60 shadow-sm shadow-[#E8F8EE]">
                       <ItemIcon className="h-4.5 w-4.5" />
                     </div>
@@ -174,7 +174,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="rounded-[28px] border border-[#E5E7EB] bg-[#F6FBF8]/80 p-6 flex flex-col sm:flex-row items-center gap-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
+              className="rounded-[24px] border border-[#E5E7EB] bg-[#F6FBF8]/80 p-5 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
             >
               {/* Mail envelope inline mockup */}
               <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-2xl bg-white border border-[#E5E7EB] flex items-center justify-center shadow-sm">
@@ -213,7 +213,7 @@ export default function Contact() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="rounded-[32px] border border-[#E5E7EB] bg-white p-8 shadow-[0_4px_25px_rgba(0,0,0,0.03)]"
+            className="rounded-[24px] border border-[#E5E7EB] bg-white p-5 sm:p-8 shadow-[0_4px_25px_rgba(0,0,0,0.03)]"
           >
             <div>
               {/* Form Title Header */}
@@ -323,45 +323,45 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="rounded-[24px] border border-[#E5E7EB] bg-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-[#E5E7EB] gap-6 md:gap-0 items-center"
+          className="rounded-[24px] border border-[#E5E7EB] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] grid grid-cols-2 lg:grid-cols-4 divide-x divide-y divide-[#E5E7EB] overflow-hidden"
         >
           {/* Quick Response */}
-          <div className="flex-1 flex items-center gap-3.5 px-6 py-4 md:py-0 w-full justify-center md:justify-start">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
-              <MessageSquare className="h-5 w-5" />
+          <div className="flex items-start gap-2.5 p-4 sm:p-5">
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
+              <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-[#111827] leading-tight">Quick Response</h4>
-              <p className="mt-1 text-[10px] font-semibold text-[#6B7280] leading-none">I usually reply within 24 hours.</p>
+              <h4 className="text-[11px] sm:text-xs font-bold text-[#111827] leading-tight">Quick Response</h4>
+              <p className="mt-1 text-[9px] sm:text-[10px] font-semibold text-[#6B7280] leading-snug">I usually reply within 24 hours.</p>
             </div>
           </div>
 
           {/* Let's Collaborate */}
-          <div className="flex-1 flex items-center gap-3.5 px-6 py-4 md:py-0 w-full justify-center md:justify-start">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
-              <HeartHandshake className="h-5 w-5" />
+          <div className="flex items-start gap-2.5 p-4 sm:p-5">
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
+              <HeartHandshake className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-[#111827] leading-tight">Let's Collaborate</h4>
-              <p className="mt-1 text-[10px] font-semibold text-[#6B7280] leading-none">I'm open to exciting projects and partnerships.</p>
+              <h4 className="text-[11px] sm:text-xs font-bold text-[#111827] leading-tight">Let&apos;s Collaborate</h4>
+              <p className="mt-1 text-[9px] sm:text-[10px] font-semibold text-[#6B7280] leading-snug">Open to exciting projects.</p>
             </div>
           </div>
 
           {/* Privacy Guaranteed */}
-          <div className="flex-1 flex items-center gap-3.5 px-6 py-4 md:py-0 w-full justify-center md:justify-start">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
-              <ShieldCheck className="h-5 w-5" />
+          <div className="flex items-start gap-2.5 p-4 sm:p-5">
+            <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
+              <ShieldCheck className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-[#111827] leading-tight">Privacy Guaranteed</h4>
-              <p className="mt-1 text-[10px] font-semibold text-[#6B7280] leading-none">Your information is 100% secure with me.</p>
+              <h4 className="text-[11px] sm:text-xs font-bold text-[#111827] leading-tight">Privacy Guaranteed</h4>
+              <p className="mt-1 text-[9px] sm:text-[10px] font-semibold text-[#6B7280] leading-snug">Your info is 100% secure.</p>
             </div>
           </div>
 
           {/* Connect with me */}
-          <div className="flex-1 flex flex-col sm:flex-row items-center justify-center md:justify-end gap-3 px-6 py-4 md:py-0 w-full">
-            <span className="text-[10px] font-bold text-[#9CA3AF] tracking-wider uppercase">Connect with me</span>
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col items-start gap-2 p-4 sm:p-5">
+            <span className="text-[9px] sm:text-[10px] font-bold text-[#9CA3AF] tracking-wider uppercase">Connect</span>
+            <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               {socials.map((social) => {
                 const Icon = social.icon;
                 return (
@@ -370,10 +370,10 @@ export default function Contact() {
                     href={social.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-8.5 w-8.5 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#6B7280] hover:border-[#16A34A] hover:bg-[#F3FAF5] hover:text-[#16A34A] transition shadow-sm"
+                    className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#6B7280] hover:border-[#16A34A] hover:bg-[#F3FAF5] hover:text-[#16A34A] transition shadow-sm"
                     aria-label={social.name}
                   >
-                    <Icon className="h-4.5 w-4.5" />
+                    <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </a>
                 );
               })}

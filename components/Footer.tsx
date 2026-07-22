@@ -63,26 +63,26 @@ export default function Footer() {
       <footer className="bg-slate-950 text-slate-400">
         {/* Top CTA Banner */}
         <div className="border-b border-slate-800/60">
-          <div className="mx-auto max-w-[1280px] px-6 md:px-8 py-16 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div className="mx-auto max-w-[1280px] px-4 sm:px-8 py-10 sm:py-16 flex flex-col items-start gap-6 md:gap-8">
             <div className="space-y-2">
               <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500">Open to opportunities</p>
-              <h2 className="text-[28px] md:text-[36px] font-extrabold text-white tracking-tight leading-tight">
-                Let&apos;s build something<br className="hidden md:block" /> <span className="text-emerald-400 italic">meaningful together.</span>
+              <h2 className="text-[22px] sm:text-[28px] md:text-[36px] font-extrabold text-white tracking-tight leading-tight">
+                Let&apos;s build something<br className="hidden sm:block" /> <span className="text-emerald-400 italic">meaningful together.</span>
               </h2>
             </div>
             <a
               href={`mailto:${personalInfo.email}`}
-              className="group shrink-0 inline-flex items-center gap-2 rounded-full bg-emerald-500 px-7 py-3.5 text-[14px] font-bold text-white hover:bg-emerald-400 hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-emerald-500/20"
+              className="group w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 rounded-full bg-emerald-500 px-6 py-3.5 text-[13px] font-bold text-white hover:bg-emerald-400 hover:-translate-y-0.5 transition-all duration-200 shadow-lg shadow-emerald-500/20"
             >
-              <Mail className="h-4 w-4" />
-              {personalInfo.email}
-              <ExternalLink className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+              <Mail className="h-4 w-4 shrink-0" />
+              <span className="truncate">{personalInfo.email}</span>
+              <ExternalLink className="h-3.5 w-3.5 opacity-60 group-hover:opacity-100 transition-opacity shrink-0" />
             </a>
           </div>
         </div>
 
         {/* Main footer body */}
-        <div className="mx-auto max-w-[1280px] px-6 md:px-8 py-14 grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
+        <div className="mx-auto max-w-[1280px] px-4 sm:px-8 py-10 sm:py-14 grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.5fr_1fr_1fr]">
 
           {/* Brand column */}
           <div className="space-y-6">
@@ -189,7 +189,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-slate-800/60">
-          <div className="mx-auto max-w-[1280px] px-6 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-[12px] text-slate-600">
+          <div className="mx-auto max-w-[1280px] px-4 sm:px-8 py-4 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[12px] text-slate-600">
             <p>© {new Date().getFullYear()} Hiyan Jong Rai. All rights reserved.</p>
           </div>
         </div>
