@@ -20,36 +20,6 @@ import {
   UploadStatsData,
 } from '@/types/upload';
 
-// Initial sample assets for elegant demo display if localStorage is empty
-const INITIAL_DEMO_ASSETS: CloudinaryAsset[] = [
-  {
-    public_id: 'cld-sample-5',
-    secure_url: 'https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg',
-    url: 'http://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg',
-    format: 'jpg',
-    resource_type: 'image',
-    bytes: 145020,
-    width: 864,
-    height: 576,
-    created_at: new Date(Date.now() - 3600000 * 2).toISOString(),
-    asset_id: 'ast_demo_001',
-    filename: 'flower_sample.jpg',
-  },
-  {
-    public_id: 'cld-sample-video',
-    secure_url: 'https://res.cloudinary.com/demo/video/upload/v1689874830/dog.mp4',
-    url: 'http://res.cloudinary.com/demo/video/upload/v1689874830/dog.mp4',
-    format: 'mp4',
-    resource_type: 'video',
-    bytes: 2450890,
-    width: 1280,
-    height: 720,
-    created_at: new Date(Date.now() - 3600000 * 24).toISOString(),
-    asset_id: 'ast_demo_002',
-    filename: 'playful_dog_clip.mp4',
-  },
-];
-
 export default function UploadPage() {
   const [assets, setAssets] = useState<CloudinaryAsset[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -68,10 +38,10 @@ export default function UploadPage() {
       if (saved) {
         setAssets(JSON.parse(saved));
       } else {
-        setAssets(INITIAL_DEMO_ASSETS);
+        setAssets([]);
       }
     } catch {
-      setAssets(INITIAL_DEMO_ASSETS);
+      setAssets([]);
     }
     setIsLoaded(true);
   }, []);
