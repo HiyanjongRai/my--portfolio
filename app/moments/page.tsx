@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/ui/header';
 import Footer from '@/components/Footer';
-import CustomCursor from '@/components/CustomCursor';
 import ScrollProgress from '@/components/ScrollProgress';
 
 import { PinterestGrid } from '@/components/moments/PinterestGrid';
@@ -59,9 +58,8 @@ export default function MomentsPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-50/60 cursor-none antialiased text-slate-900 font-sans">
+    <div className="relative min-h-screen bg-slate-50/60 antialiased text-slate-900 font-sans">
       <ScrollProgress />
-      <CustomCursor />
       <Header />
 
       <main className="mx-auto max-w-7xl px-6 md:px-8 py-12 space-y-8">

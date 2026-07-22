@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Header } from '@/components/ui/header';
 import Footer from '@/components/Footer';
-import CustomCursor from '@/components/CustomCursor';
 import ScrollProgress from '@/components/ScrollProgress';
 
 import { Stats } from '@/components/upload/Stats';
@@ -197,9 +196,8 @@ export default function UploadPage() {
   }, [assets, category, searchQuery, sortBy]);
 
   return (
-    <div className="relative min-h-screen bg-slate-50/50 cursor-none antialiased text-slate-900 font-sans">
+    <div className="relative min-h-screen bg-slate-50/50 antialiased text-slate-900 font-sans">
       <ScrollProgress />
-      <CustomCursor />
       <Header />
 
       <main className="mx-auto max-w-7xl px-6 md:px-8 py-12 space-y-10">

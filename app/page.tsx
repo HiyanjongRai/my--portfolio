@@ -8,13 +8,11 @@ import Projects from '@/components/Projects';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
-import CustomCursor from '@/components/CustomCursor';
 
 export default function Home() {
   return (
-    <main className="relative bg-white cursor-none">
+    <main className="relative bg-white">
       <ScrollProgress />
-      <CustomCursor />
       <Header />
       <HeroSection />
       <AboutIntro />

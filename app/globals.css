@@ -225,12 +225,7 @@
   outline-offset: 2px;
 }
 
-/* Custom cursor classes */
-@media (min-width: 768px) {
-  a, button, [role="button"], input, textarea, select {
-    cursor: none !important;
-  }
-}
+
 
 /* Remove animations for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
