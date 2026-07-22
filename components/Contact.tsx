@@ -73,10 +73,10 @@ export default function Contact() {
 
     try {
       await emailjs.sendForm(
-        'service_7b9pvt2',
-        'template_1udgx0v',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
         formRef.current,
-        'XnRlZuWzp9T1p1js6'
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
       
       setShowSuccess(true);
