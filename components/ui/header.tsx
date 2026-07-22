@@ -1,30 +1,36 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import { MenuToggleIcon } from '@/components/ui/menu-toggle-icon';
 import { useScroll } from '@/components/ui/use-scroll';
 import { createPortal } from 'react-dom';
 import { scrollToSection } from '@/lib/utils';
-import { ArrowRight, FileText, Terminal } from 'lucide-react';
+import { ArrowRight, FileText, Camera } from 'lucide-react';
 import { personalInfo } from '@/data/portfolio';
 
 export function Header() {
   const [open, setOpen] = React.useState(false);
   const scrolled = useScroll(10);
   const [activeSection, setActiveSection] = React.useState('hero');
+  const pathname = usePathname();
+  const router = useRouter();
 
   const links = [
-    { label: 'Home', href: 'hero' },
-    { label: 'About', href: 'about' },
-    { label: 'Projects', href: 'projects' },
-    { label: 'Experience', href: 'experience' },
-    { label: 'Skills', href: 'expertise' },
-    { label: 'Education', href: 'education' },
-    { label: 'Contact', href: 'contact' },
+    { label: 'Home', href: 'hero', isRoute: false },
+    { label: 'About', href: 'about', isRoute: false },
+    { label: 'Projects', href: 'projects', isRoute: false },
+    { label: 'Experience', href: 'experience', isRoute: false },
+    { label: 'Skills', href: 'expertise', isRoute: false },
+    { label: 'Moments', href: '/moments', isRoute: true },
+    { label: 'Contact', href: 'contact', isRoute: false },
   ];
 
   React.useEffect(() => {
+    if (pathname !== '/') return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -48,7 +54,7 @@ export function Header() {
         if (el) observer.unobserve(el);
       });
     };
-  }, []);
+  }, [pathname]);
 
   React.useEffect(() => {
     if (open) {
@@ -61,9 +67,19 @@ export function Header() {
     };
   }, [open]);
 
-  const handleLinkClick = (href: string) => {
-    scrollToSection(href);
+  const handleLinkClick = (href: string, isRoute: boolean) => {
     setOpen(false);
+
+    if (isRoute) {
+      router.push(href);
+      return;
+    }
+
+    if (pathname !== '/') {
+      router.push(`/#${href}`);
+    } else {
+      scrollToSection(href);
+    }
   };
 
   return (
@@ -75,25 +91,29 @@ export function Header() {
     >
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 md:px-8">
         <button
-          onClick={() => scrollToSection('hero')}
+          onClick={() => handleLinkClick('hero', false)}
           className="font-black text-2xl tracking-tight text-slate-900 flex items-center gap-1.5 cursor-pointer hover:opacity-85 transition-opacity"
         >
           Hiyan Jong Rai<span className="text-emerald-500">.</span>
         </button>
 
         {/* Center Links */}
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-7 md:flex">
           {links.map((link) => {
-            const isActive = activeSection === link.href;
+            const isActive = link.isRoute
+              ? pathname === link.href
+              : pathname === '/' && activeSection === link.href;
+
             return (
               <button
                 key={link.label}
                 className={cn(
-                  'relative py-1 text-sm font-semibold transition-all duration-200 cursor-pointer px-2 text-slate-500 hover:text-slate-900',
+                  'relative py-1 text-sm font-semibold transition-all duration-200 cursor-pointer px-2 text-slate-500 hover:text-slate-900 flex items-center gap-1',
                   isActive && 'text-slate-950 font-bold'
                 )}
-                onClick={() => handleLinkClick(link.href)}
+                onClick={() => handleLinkClick(link.href, link.isRoute)}
               >
+                {link.isRoute && <Camera className="h-3.5 w-3.5 text-emerald-500" />}
                 {link.label}
                 {isActive && (
                   <span className="absolute -bottom-1 left-2 right-2 h-0.5 rounded-full bg-emerald-500" />
@@ -115,7 +135,7 @@ export function Header() {
             Resume
           </a>
           <button
-            onClick={() => handleLinkClick('contact')}
+            onClick={() => handleLinkClick('contact', false)}
             className="group inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-5 py-2 text-sm font-bold text-white shadow-md shadow-emerald-600/10 hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-600/20 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 cursor-pointer"
           >
             Let's Talk
@@ -137,16 +157,20 @@ export function Header() {
       <MobileMenu open={open} className="flex flex-col justify-between gap-6">
         <div className="grid gap-y-2 pt-4">
           {links.map((link) => {
-            const isActive = activeSection === link.href;
+            const isActive = link.isRoute
+              ? pathname === link.href
+              : pathname === '/' && activeSection === link.href;
+
             return (
               <button
                 key={link.label}
                 className={cn(
-                  'justify-start text-left py-2.5 px-4 rounded-xl text-sm font-bold transition-all duration-200',
+                  'justify-start text-left py-2.5 px-4 rounded-xl text-sm font-bold transition-all duration-200 flex items-center gap-2',
                   isActive ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                 )}
-                onClick={() => handleLinkClick(link.href)}
+                onClick={() => handleLinkClick(link.href, link.isRoute)}
               >
+                {link.isRoute && <Camera className="h-4 w-4 text-emerald-500" />}
                 {link.label}
               </button>
             );
@@ -164,7 +188,7 @@ export function Header() {
             Resume
           </a>
           <button
-            onClick={() => handleLinkClick('contact')}
+            onClick={() => handleLinkClick('contact', false)}
             className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 w-full py-3 text-sm font-bold text-white shadow-md hover:bg-emerald-700 transition"
           >
             Let's Talk

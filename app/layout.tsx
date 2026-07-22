@@ -59,7 +59,7 @@ export default function RootLayout({
         {/* Pinterest domain verification */}
         <meta name="p:domain_verify" content="f38c642430bc7f307780f539033e3f8e" />
       </head>
-      <body className="antialiased min-h-full bg-white font-sans">{children}</body>
+      <body className="antialiased min-h-full bg-white font-sans" suppressHydrationWarning>{children}</body>
     </html>
   );
 }

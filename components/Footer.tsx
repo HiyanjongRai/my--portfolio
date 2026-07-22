@@ -1,18 +1,20 @@
 'use client';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUp, Mail, MapPin, ExternalLink } from 'lucide-react';
+import { ArrowUp, Mail, MapPin, ExternalLink, Camera } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { scrollToSection } from '@/lib/utils';
 import { personalInfo, socialLinks } from '@/data/portfolio';
 
 const navLinks = [
-  { href: 'hero', label: 'Home' },
-  { href: 'about', label: 'About' },
-  { href: 'expertise', label: 'Skills' },
-  { href: 'experience', label: 'Experience' },
-  { href: 'projects', label: 'Projects' },
-  { href: 'contact', label: 'Contact' },
+  { href: 'hero', label: 'Home', isRoute: false },
+  { href: 'about', label: 'About', isRoute: false },
+  { href: 'expertise', label: 'Skills', isRoute: false },
+  { href: 'experience', label: 'Experience', isRoute: false },
+  { href: 'projects', label: 'Projects', isRoute: false },
+  { href: '/moments', label: '✨ Capturing Moments', isRoute: true },
+  { href: 'contact', label: 'Contact', isRoute: false },
 ];
 
 /* Inline SVG social icons — lucide-react doesn't include Github/Linkedin/Pinterest/Facebook in this version */
@@ -128,13 +130,23 @@ export default function Footer() {
             <h4 className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-500 mb-5">Navigation</h4>
             <nav className="flex flex-col gap-3">
               {navLinks.map((link) => (
-                <button
-                  key={link.href}
-                  onClick={() => scrollToSection(link.href)}
-                  className="text-[14px] font-semibold text-slate-400 hover:text-white text-left transition-colors duration-200 cursor-pointer w-fit"
-                >
-                  {link.label}
-                </button>
+                link.isRoute ? (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-[14px] font-semibold text-slate-400 hover:text-emerald-400 text-left transition-colors duration-200 cursor-pointer w-fit"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={link.href}
+                    onClick={() => scrollToSection(link.href)}
+                    className="text-[14px] font-semibold text-slate-400 hover:text-white text-left transition-colors duration-200 cursor-pointer w-fit"
+                  >
+                    {link.label}
+                  </button>
+                )
               ))}
             </nav>
           </div>
