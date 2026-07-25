@@ -164,11 +164,11 @@ function ProjectCard({
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.5, delay: Math.min(index * 0.08, 0.4) }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-[#E5E7EB] bg-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+      className="group relative flex flex-col overflow-hidden rounded-[22px] sm:rounded-3xl border border-[#E5E7EB] bg-white shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
     >
       {/* ── Visual Banner ── */}
       <div
-        className="relative h-[130px] sm:h-[220px] flex items-center justify-center overflow-hidden"
+        className="relative h-[168px] sm:h-[220px] flex items-center justify-center overflow-hidden"
         style={{ background: `linear-gradient(135deg, ${project.gradientFrom}, ${project.gradientTo})` }}
       >
         {/* Browser chrome top bar */}
@@ -202,13 +202,13 @@ function ProjectCard({
       </div>
 
       {/* ── Card Body ── */}
-      <div className="flex flex-1 flex-col p-3 sm:p-6 gap-2 sm:gap-4">
+      <div className="flex flex-1 flex-col p-5 sm:p-6 gap-3 sm:gap-4">
         {/* Title + Description */}
         <div className="space-y-1 sm:space-y-2">
-          <h3 className="text-[12px] sm:text-[15px] font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-200 leading-snug line-clamp-2">
+          <h3 className="text-[17px] sm:text-[15px] font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-200 leading-snug line-clamp-2">
             {project.title}
           </h3>
-          <p className="text-[10px] sm:text-[12.5px] text-[#6B7280] leading-relaxed line-clamp-3">
+          <p className="text-[14px] sm:text-[12.5px] text-[#6B7280] leading-relaxed line-clamp-3">
             {project.description}
           </p>
         </div>
@@ -224,7 +224,7 @@ function ProjectCard({
         <div className="flex items-center justify-between border-t border-[#F3F4F6] pt-2.5 sm:pt-4">
           <button
             onClick={() => onCaseStudy(project)}
-            className="text-[10px] sm:text-[11px] font-bold text-[#374151] hover:text-[#16A34A] transition-colors duration-200 cursor-pointer"
+            className="min-h-11 rounded-full pr-3 text-[13px] sm:text-[11px] font-bold text-[#374151] hover:text-[#16A34A] transition-colors duration-200 cursor-pointer"
           >
             Case Study
           </button>
@@ -234,7 +234,7 @@ function ProjectCard({
             target="_blank"
             rel="noreferrer"
             aria-label="View on GitHub"
-            className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-[#F9FAFB] text-[#374151] hover:bg-[#16A34A] hover:border-[#16A34A] hover:text-white transition-all duration-200"
+            className="flex h-11 w-11 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-[#F9FAFB] text-[#374151] hover:bg-[#16A34A] hover:border-[#16A34A] hover:text-white transition-all duration-200"
           >
             <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
           </a>
@@ -257,9 +257,9 @@ export default function Projects() {
       : allProjects.filter((p) => p.category === activeCategory);
 
   return (
-    <section id="projects" ref={ref} className="relative bg-white py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-slate-100">
+    <section id="projects" ref={ref} className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-32 px-5 max-[360px]:px-4 sm:px-6 lg:px-8 border-t border-slate-100">
 
-      <div className="mx-auto max-w-[1280px] w-full space-y-12">
+      <div className="mx-auto max-w-[1280px] w-full space-y-10 sm:space-y-12">
 
         {/* ── Section Header ── */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
@@ -278,9 +278,9 @@ export default function Projects() {
               initial={{ opacity: 0, y: 18 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.55, delay: 0.1 }}
-              className="text-[38px] sm:text-5xl lg:text-[52px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
+              className="text-[32px] min-[390px]:text-[36px] sm:text-5xl lg:text-[52px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
             >
-              Work That Speaks<br />
+              Work That Speaks<br className="hidden min-[390px]:block" />
               for <span className="text-[#16A34A]">Itself.</span>
             </motion.h2>
 
@@ -299,7 +299,7 @@ export default function Projects() {
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="flex gap-8 shrink-0 items-center"
+            className="grid w-full grid-cols-2 gap-4 sm:flex sm:w-auto sm:gap-8 shrink-0 items-center"
           >
             <div className="text-center">
               <div className="flex items-center gap-2.5 mb-1.5">
@@ -311,7 +311,7 @@ export default function Projects() {
               <p className="text-[10px] text-[#9CA3AF] font-bold uppercase tracking-wider">Projects Completed</p>
             </div>
 
-            <div className="w-px h-12 bg-[#E5E7EB]" />
+            <div className="hidden sm:block w-px h-12 bg-[#E5E7EB]" />
 
             <div className="text-center">
               <div className="flex items-center gap-2.5 mb-1.5">
@@ -332,12 +332,12 @@ export default function Projects() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
         >
-          <div className="flex flex-wrap gap-2">
+          <div className="grid w-full grid-cols-1 min-[390px]:grid-cols-3 gap-2 sm:flex sm:w-auto sm:flex-wrap">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`inline-flex items-center gap-1.5 rounded-[10px] border px-4 py-2 text-[12px] font-bold transition-all duration-200 cursor-pointer ${
+                className={`inline-flex min-h-11 items-center justify-center gap-1.5 rounded-[12px] border px-4 py-2 text-[12px] font-bold transition-all duration-200 cursor-pointer ${
                   activeCategory === cat
                     ? 'bg-[#111827] border-[#111827] text-white shadow-sm'
                     : 'bg-white border-[#E5E7EB] text-[#374151] hover:border-[#D1FAE5] hover:bg-[#F3FAF5]'
@@ -363,7 +363,7 @@ export default function Projects() {
             ))}
           </div>
 
-          <div className="inline-flex items-center gap-2 rounded-[10px] border border-[#E5E7EB] bg-white px-4 py-2 text-[12px] font-bold text-[#374151] shadow-sm cursor-default select-none">
+          <div className="inline-flex min-h-11 w-full sm:w-auto items-center justify-center gap-2 rounded-[12px] border border-[#E5E7EB] bg-white px-4 py-2 text-[12px] font-bold text-[#374151] shadow-sm cursor-default select-none">
             Sort by: Latest
             <svg className="h-3.5 w-3.5 text-[#9CA3AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -372,7 +372,7 @@ export default function Projects() {
         </motion.div>
 
         {/* ── Project Cards (2x2 Grid on Mobile, 3-Col on Desktop) ── */}
-        <motion.div layout className="grid gap-3.5 sm:gap-6 grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+        <motion.div layout className="grid gap-5 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, index) => (
               <ProjectCard
@@ -397,7 +397,7 @@ export default function Projects() {
             href="https://github.com/HiyanjongRai"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2.5 rounded-full border border-[#E5E7EB] bg-white px-7 py-3.5 text-[13px] font-bold text-[#374151] shadow-sm hover:bg-[#F9FAFB] hover:border-[#D1D5DB] hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
+            className="inline-flex min-h-12 w-full min-[390px]:w-auto items-center justify-center gap-2.5 rounded-full border border-[#E5E7EB] bg-white px-7 py-3.5 text-[13px] font-bold text-[#374151] shadow-sm hover:bg-[#F9FAFB] hover:border-[#D1D5DB] hover:-translate-y-0.5 active:scale-95 transition-all duration-200"
           >
             View More on GitHub
             <ExternalLink className="h-3.5 w-3.5 text-[#9CA3AF]" />
@@ -421,12 +421,12 @@ export default function Projects() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 16 }}
               transition={{ type: 'spring', duration: 0.35 }}
-              className="relative w-full max-w-lg rounded-[24px] border border-[#E5E7EB] bg-white shadow-2xl p-7 overflow-hidden max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-lg rounded-[24px] border border-[#E5E7EB] bg-white shadow-2xl p-5 sm:p-7 overflow-hidden max-h-[90vh] flex flex-col"
             >
               {/* Close */}
               <button
                 onClick={() => setSelectedCaseStudy(null)}
-                className="absolute top-5 right-5 flex h-8 w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-[#F9FAFB] text-[#6B7280] hover:text-[#111827] hover:bg-[#F3F4F6] transition-colors cursor-pointer"
+                className="absolute top-4 right-4 sm:top-5 sm:right-5 flex h-11 w-11 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-[#F9FAFB] text-[#6B7280] hover:text-[#111827] hover:bg-[#F3F4F6] transition-colors cursor-pointer"
               >
                 <X className="h-4 w-4" />
               </button>

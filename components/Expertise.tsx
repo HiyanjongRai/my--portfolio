@@ -193,9 +193,9 @@ export default function Expertise() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="expertise" ref={ref} className="relative bg-slate-950 py-24 lg:py-32 px-4 sm:px-6 lg:px-8">
+    <section id="expertise" ref={ref} className="relative bg-slate-950 py-16 sm:py-20 lg:py-32 px-5 max-[360px]:px-4 sm:px-6 lg:px-8">
 
-      <div className="mx-auto max-w-[1280px] w-full space-y-14">
+      <div className="mx-auto max-w-[1280px] w-full space-y-10 sm:space-y-14">
 
         {/* ── Section Header: editorial ───────────────── */}
         <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-end">
@@ -217,7 +217,7 @@ export default function Expertise() {
               className="font-extrabold tracking-tight text-white leading-[1.1]"
               style={{ fontSize: 'clamp(32px, 3.5vw, 52px)' }}
             >
-              The tools I use<br />
+              The tools I use<br className="hidden min-[390px]:block" />
               <span className="text-emerald-400 italic">to ship great work.</span>
             </motion.h2>
           </div>
@@ -226,7 +226,7 @@ export default function Expertise() {
             initial={{ opacity: 0, y: 14 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[17px] text-slate-400 font-medium leading-[1.7] lg:self-end lg:pb-1"
+            className="text-[16px] sm:text-[17px] text-slate-400 font-medium leading-[1.7] lg:self-end lg:pb-1"
           >
             From backend APIs to frontend interfaces — I combine the right tools with disciplined engineering.
           </motion.p>
@@ -242,7 +242,7 @@ export default function Expertise() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.25 + i * 0.08 }}
-                className="group flex flex-col rounded-[20px] border border-white/10 bg-white/5 p-6 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300"
+                className="group flex flex-col rounded-[20px] border border-white/10 bg-white/5 p-5 sm:p-6 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300"
               >
                 {/* Icon box */}
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-500 transition-colors duration-300">
@@ -250,8 +250,8 @@ export default function Expertise() {
                 </div>
 
                 {/* Text */}
-                <h3 className="text-[15px] font-bold text-white leading-tight mb-2">{card.title}</h3>
-                <p className="text-[12px] text-slate-400 leading-relaxed flex-1">{card.desc}</p>
+                <h3 className="text-[16px] sm:text-[15px] font-bold text-white leading-tight mb-2">{card.title}</h3>
+                <p className="text-[14px] sm:text-[12px] text-slate-400 leading-relaxed flex-1">{card.desc}</p>
 
                 {/* Animated progress bar */}
                 <ProgressBar pct={card.pct} />
@@ -268,8 +268,8 @@ export default function Expertise() {
           className="grid gap-6 lg:grid-cols-2"
         >
           {/* TECH STACK */}
-          <div className="rounded-[20px] border border-white/10 bg-white/5 p-7">
-            <div className="flex items-center justify-between mb-7">
+          <div className="rounded-[20px] border border-white/10 bg-white/5 p-5 sm:p-7">
+            <div className="flex flex-col min-[390px]:flex-row min-[390px]:items-center justify-between gap-3 mb-7">
               <div className="flex items-center gap-2.5">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-emerald-500/10 text-emerald-400">
                   <Code2 className="h-4 w-4" />
@@ -282,7 +282,7 @@ export default function Expertise() {
               </div>
             </div>
 
-            <div className="grid grid-cols-4 sm:grid-cols-6 gap-x-5 gap-y-6">
+            <div className="grid grid-cols-3 min-[390px]:grid-cols-4 sm:grid-cols-6 gap-x-4 gap-y-6">
               {techStack.map((tech, i) => (
                 <motion.div
                   key={tech.name}
@@ -294,15 +294,15 @@ export default function Expertise() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2 group-hover:border-emerald-500/40 group-hover:-translate-y-1 transition-all duration-200">
                     {tech.icon}
                   </div>
-                  <span className="text-[10px] font-semibold text-slate-400 text-center leading-tight">{tech.name}</span>
+                  <span className="text-[11px] sm:text-[10px] font-semibold text-slate-400 text-center leading-tight">{tech.name}</span>
                 </motion.div>
               ))}
             </div>
           </div>
 
           {/* DESIGN & TOOLS */}
-          <div className="rounded-[20px] border border-white/10 bg-white/5 p-7">
-            <div className="flex items-center justify-between mb-7">
+          <div className="rounded-[20px] border border-white/10 bg-white/5 p-5 sm:p-7">
+            <div className="flex flex-col min-[390px]:flex-row min-[390px]:items-center justify-between gap-3 mb-7">
               <div className="flex items-center gap-2.5">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-emerald-500/10 text-emerald-400">
                   <Pencil className="h-4 w-4" />
@@ -315,7 +315,7 @@ export default function Expertise() {
               </div>
             </div>
 
-            <div className="grid grid-cols-4 sm:grid-cols-6 gap-x-5 gap-y-6">
+            <div className="grid grid-cols-3 min-[390px]:grid-cols-4 sm:grid-cols-6 gap-x-4 gap-y-6">
               {designTools.map((tool, i) => (
                 <motion.div
                   key={tool.name}
@@ -327,7 +327,7 @@ export default function Expertise() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2 group-hover:border-emerald-500/40 group-hover:-translate-y-1 transition-all duration-200">
                     {tool.icon}
                   </div>
-                  <span className="text-[10px] font-semibold text-slate-400 text-center leading-tight">{tool.name}</span>
+                  <span className="text-[11px] sm:text-[10px] font-semibold text-slate-400 text-center leading-tight">{tool.name}</span>
                 </motion.div>
               ))}
             </div>
@@ -339,7 +339,7 @@ export default function Expertise() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, delay: 0.55 }}
-          className="rounded-[20px] border border-white/10 bg-white/5 px-8 py-6 flex flex-col md:flex-row items-center gap-6 md:gap-0"
+          className="rounded-[20px] border border-white/10 bg-white/5 px-5 sm:px-8 py-6 flex flex-col md:flex-row items-start sm:items-center gap-6 md:gap-0"
         >
           {/* Left: quote */}
           <div className="flex items-center gap-4 md:w-[260px] shrink-0 md:border-r md:border-white/10 md:pr-8">
@@ -354,7 +354,7 @@ export default function Expertise() {
           </div>
 
           {/* Right: Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 md:pl-8 flex-1 w-full">
+          <div className="grid grid-cols-1 min-[390px]:grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6 md:pl-8 flex-1 w-full">
             {statsFooter.map((stat, i) => {
               const icons = [
                 <svg key="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,

@@ -135,7 +135,7 @@ export default function Experience() {
     <section 
       id="experience" 
       ref={containerRef} 
-      className="relative overflow-hidden bg-[#FAFAFA] py-16 lg:py-20 px-4 sm:px-6 lg:px-8 border-t border-[#E5E7EB]"
+      className="relative overflow-hidden bg-[#FAFAFA] py-16 sm:py-20 lg:py-24 px-5 max-[360px]:px-4 sm:px-6 lg:px-8 border-t border-[#E5E7EB]"
     >
       {/* Background Soft Glows */}
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -143,7 +143,7 @@ export default function Experience() {
         <div className="absolute bottom-0 left-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-400/[0.04] blur-[110px]" />
       </div>
 
-      <div className="mx-auto max-w-[1280px] w-full space-y-16">
+      <div className="mx-auto max-w-[1280px] w-full space-y-12 sm:space-y-16">
 
         {/* ── Section Header ── */}
         <div className="text-center space-y-4">
@@ -161,7 +161,7 @@ export default function Experience() {
             variants={titleVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="text-[38px] sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
+            className="text-[32px] min-[390px]:text-[36px] sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
           >
             Professional <span className="text-[#16A34A]">Experience</span>
           </motion.h2>
@@ -170,7 +170,7 @@ export default function Experience() {
             variants={subtitleVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="text-[17px] text-[#6B7280] font-normal max-w-lg mx-auto leading-[1.7]"
+            className="text-[16px] sm:text-[17px] text-[#6B7280] font-normal max-w-lg mx-auto leading-[1.7]"
           >
             A timeline of my professional roles, internships, and remote collaborations.
           </motion.p>
@@ -186,12 +186,12 @@ export default function Experience() {
               variants={lineVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
-              className="absolute left-6 top-3 bottom-3 w-[2px] bg-gradient-to-b from-[#16A34A] via-[#86EFAC] to-[#F3F4F6] origin-top"
+            className="absolute left-3 sm:left-6 top-3 bottom-3 w-[2px] bg-gradient-to-b from-[#16A34A] via-[#86EFAC] to-[#F3F4F6] origin-top"
             />
 
-            <div className="space-y-10">
+            <div className="space-y-8 sm:space-y-10">
               {experiences.map((exp, idx) => (
-                <div key={idx} className="relative flex gap-8 pl-12 sm:pl-16">
+                <div key={idx} className="relative flex gap-4 sm:gap-8 pl-8 sm:pl-16">
                   
                   {/* Glowing Node Dot */}
                   <motion.div
@@ -199,7 +199,7 @@ export default function Experience() {
                     variants={nodeVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
-                    className="absolute left-6 -translate-x-[9px] top-4 z-10 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-white border-2 border-[#16A34A] shadow-[0_0_12px_rgba(22,163,74,0.35)]"
+                    className="absolute left-3 sm:left-6 -translate-x-[9px] top-4 z-10 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-white border-2 border-[#16A34A] shadow-[0_0_12px_rgba(22,163,74,0.35)]"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" />
                   </motion.div>
@@ -210,7 +210,7 @@ export default function Experience() {
                     variants={cardVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
-                    className="group flex-1 rounded-[28px] border border-[#E5E7EB] bg-white p-6 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300"
+                    className="group flex-1 rounded-[22px] sm:rounded-[28px] border border-[#E5E7EB] bg-white p-5 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300"
                   >
                     {/* Header Row */}
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
@@ -225,7 +225,7 @@ export default function Experience() {
                           </span>
                         </div>
                         
-                        <h3 className="text-xl font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-300 leading-tight">
+                        <h3 className="text-[18px] sm:text-xl font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-300 leading-tight">
                           {exp.title}
                         </h3>
                         <p className="text-sm font-bold text-slate-500">{exp.company}</p>
@@ -245,14 +245,14 @@ export default function Experience() {
                     </div>
 
                     {/* Paragraph description */}
-                    <p className="text-[13.5px] text-[#6B7280] font-normal leading-relaxed mb-5">
+                    <p className="text-[14px] text-[#6B7280] font-normal leading-relaxed mb-5">
                       {exp.description}
                     </p>
 
                     {/* Core highlights */}
                     <ul className="space-y-2.5 mb-6">
                       {exp.highlights.map((highlight, hIdx) => (
-                        <li key={hIdx} className="flex items-start gap-3 text-[12.5px] text-[#374151] font-medium leading-relaxed">
+                        <li key={hIdx} className="flex items-start gap-3 text-[13px] text-[#374151] font-medium leading-relaxed">
                           <span className="mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-[#F3FAF5] text-[#16A34A]">
                             <CheckCircle2 className="h-3.5 w-3.5" />
                           </span>
@@ -279,7 +279,7 @@ export default function Experience() {
                           href={exp.link}
                           target="_blank"
                           rel="noreferrer"
-                          className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-white px-3.5 py-1.5 text-[11px] font-bold text-[#374151] hover:bg-[#F3FAF5] hover:border-[#D1FAE5] hover:text-[#16A34A] transition-all duration-200"
+                          className="mt-2 sm:mt-0 sm:ml-auto inline-flex min-h-11 items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-white px-3.5 py-1.5 text-[11px] font-bold text-[#374151] hover:bg-[#F3FAF5] hover:border-[#D1FAE5] hover:text-[#16A34A] transition-all duration-200"
                         >
                           Visit Page
                           <ArrowUpRight className="h-3 w-3" />
@@ -301,7 +301,7 @@ export default function Experience() {
             className="space-y-6 lg:sticky lg:top-[90px]"
           >
             {/* Overview / Philosophy Card */}
-            <div className="rounded-[32px] border border-[#E5E7EB] bg-white p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-6">
+            <div className="rounded-[24px] sm:rounded-[32px] border border-[#E5E7EB] bg-white p-5 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-6">
               
               {/* Card Header */}
               <div className="flex items-center gap-3.5 pb-2">
@@ -342,7 +342,7 @@ export default function Experience() {
             </div>
 
             {/* Availability status badge */}
-            <div className="rounded-[28px] border border-[#D1FAE5] bg-gradient-to-br from-[#F4FAF6] to-white p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex items-start gap-4">
+            <div className="rounded-[24px] sm:rounded-[28px] border border-[#D1FAE5] bg-gradient-to-br from-[#F4FAF6] to-white p-5 sm:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex items-start gap-4">
               <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-100 text-[#16A34A]">
                 <Briefcase className="h-5.5 w-5.5" />
               </div>

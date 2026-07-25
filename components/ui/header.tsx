@@ -89,12 +89,12 @@ export function Header() {
         scrolled && 'bg-white/85 border-slate-100/80 shadow-[0_2px_15px_-8px_rgba(0,0,0,0.03)] py-3'
       )}
     >
-      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 md:px-8">
+      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 max-[360px]:px-4 md:px-8">
         <button
           onClick={() => handleLinkClick('hero', false)}
-          className="font-black text-2xl tracking-tight text-slate-900 flex items-center gap-1.5 cursor-pointer hover:opacity-85 transition-opacity"
+          className="min-h-11 min-w-0 font-black text-xl sm:text-2xl tracking-tight text-slate-900 flex items-center gap-1.5 cursor-pointer hover:opacity-85 transition-opacity"
         >
-          Hiyan Jong Rai<span className="text-emerald-500">.</span>
+          <span className="truncate">Hiyan Jong Rai</span><span className="text-emerald-500">.</span>
         </button>
 
         {/* Center Links */}
@@ -145,7 +145,7 @@ export function Header() {
 
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 active:scale-95 transition-all duration-150"
+          className="md:hidden flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 active:scale-95 transition-all duration-150"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label="Toggle menu"
@@ -221,7 +221,7 @@ function MobileMenu({
   return createPortal(
     <div
       id="mobile-menu"
-      className="bg-white fixed top-[64px] right-0 bottom-0 left-0 z-40 flex flex-col overflow-hidden border-t border-slate-100 md:hidden px-6"
+      className="bg-white fixed top-[64px] right-0 bottom-0 left-0 z-40 flex flex-col overflow-hidden border-t border-slate-100 md:hidden px-5 max-[360px]:px-4"
     >
       <div
         data-slot={open ? 'open' : 'closed'}

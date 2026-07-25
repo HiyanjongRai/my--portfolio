@@ -74,7 +74,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-[#FBFDFB] pt-4 pb-12 sm:pt-8 sm:pb-16 md:pt-12 md:pb-20"
+      className="relative overflow-hidden bg-[#FBFDFB] pt-6 pb-16 sm:pt-8 sm:pb-16 md:pt-12 md:pb-20"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -84,8 +84,8 @@ export function HeroSection() {
         <div className="absolute bottom-[-15%] right-[-10%] w-[60%] h-[60%] rounded-full bg-emerald-50/50 blur-[120px]" />
       </div>
 
-      <div className="container-custom relative z-10 mx-auto px-4 sm:px-6 md:px-8 max-w-7xl">
-        <div className="flex flex-col lg:grid lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-16 items-center">
+      <div className="container-custom relative z-10 mx-auto max-w-7xl">
+        <div className="flex flex-col lg:grid lg:grid-cols-[1.15fr_0.85fr] gap-8 sm:gap-10 lg:gap-16 items-center">
 
           {/* ── Image Card (Shows FIRST / Above text on small devices, RIGHT column on desktop) ─── */}
           <div className="order-1 lg:order-2 w-full flex items-center justify-center">
@@ -94,7 +94,7 @@ export function HeroSection() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.1 }}
               style={{ rotateX, rotateY, transformPerspective: 800 }}
-              className="relative w-full max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] aspect-[1/1] sm:aspect-[4/4.5] bg-white border border-slate-100/90 shadow-[0_15px_45px_-12px_rgba(0,0,0,0.06)] rounded-[2.2rem] sm:rounded-[3rem] p-3 sm:p-4 z-10"
+              className="relative w-full max-w-[300px] min-[390px]:max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] aspect-[1/1] sm:aspect-[4/4.5] bg-white border border-slate-100/90 shadow-[0_15px_45px_-12px_rgba(0,0,0,0.06)] rounded-[2rem] sm:rounded-[3rem] p-3 sm:p-4 z-10"
             >
               {/* Profile Image container */}
               <div className="relative w-full h-full overflow-hidden rounded-[1.8rem] sm:rounded-[2.4rem] bg-slate-50">
@@ -118,7 +118,7 @@ export function HeroSection() {
               <motion.div
                 animate={{ y: [0, -5, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-                className="absolute top-4 -right-2 sm:top-6 sm:-right-6 rounded-2xl border border-white/80 bg-white/90 p-2.5 sm:p-3 shadow-lg shadow-slate-200/50 backdrop-blur-md z-20 flex items-center gap-2.5"
+                className="absolute top-4 right-2 sm:top-6 sm:-right-6 rounded-2xl border border-white/80 bg-white/90 p-2.5 sm:p-3 shadow-lg shadow-slate-200/50 backdrop-blur-md z-20 flex items-center gap-2.5"
               >
                 <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
                   <Folder className="h-4 w-4" />
@@ -132,13 +132,13 @@ export function HeroSection() {
           </div>
 
           {/* ── Text Content (Shows SECOND / Below image on small devices, LEFT column on desktop) ─── */}
-          <div className="order-2 lg:order-1 w-full space-y-6 sm:space-y-8 text-left">
+          <div className="order-2 lg:order-1 w-full space-y-6 sm:space-y-8 text-center sm:text-left">
             {/* Status Badge */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45 }}
-              className="inline-flex flex-wrap items-center gap-2 text-xs sm:text-[13px] font-semibold text-slate-500"
+              className="inline-flex flex-wrap items-center justify-center sm:justify-start gap-2 text-[13px] font-semibold text-slate-500"
             >
               <span className="relative flex h-2.5 w-2.5 shrink-0">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -155,7 +155,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-extrabold tracking-[-0.03em] text-slate-900 leading-[1.08] text-[36px] sm:text-[48px] md:text-[60px] lg:text-[72px]"
+                className="font-extrabold tracking-tight text-slate-900 leading-[1.08] text-[34px] max-[360px]:text-[31px] sm:text-[48px] md:text-[60px] lg:text-[72px]"
               >
                 Backend Dev<br />
                 crafting{' '}
@@ -167,7 +167,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.2 }}
-                className="text-[15px] sm:text-[17px] text-slate-500 leading-[1.75] max-w-[460px] font-medium"
+                className="mx-auto sm:mx-0 text-[16px] sm:text-[17px] text-slate-500 leading-[1.75] max-w-[460px] font-medium"
               >
                 I build robust APIs, secure backends, and clean databases with Java, Spring Boot, MySQL &amp; PostgreSQL.
               </motion.p>
@@ -182,7 +182,7 @@ export function HeroSection() {
             >
               <button
                 onClick={() => scrollToSection('projects')}
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 px-7 py-3.5 text-[15px] font-bold text-white shadow-md shadow-emerald-600/20 active:scale-[0.98] transition-all duration-200 cursor-pointer"
+                className="min-h-12 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 hover:bg-emerald-700 px-7 py-3.5 text-[15px] font-bold text-white shadow-md shadow-emerald-600/20 active:scale-[0.98] transition-all duration-200 cursor-pointer"
               >
                 View My Work
                 <ArrowRight className="h-4 w-4" />
@@ -192,7 +192,7 @@ export function HeroSection() {
                 href={personalInfo.resume}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 px-7 py-3.5 text-[15px] font-bold text-slate-800 shadow-sm active:scale-[0.98] transition-all duration-200"
+                className="min-h-12 w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-white border border-slate-200 hover:border-slate-300 hover:bg-slate-50 px-7 py-3.5 text-[15px] font-bold text-slate-800 shadow-sm active:scale-[0.98] transition-all duration-200"
               >
                 <FileText className="h-4 w-4 text-emerald-600" />
                 Download CV

@@ -77,9 +77,9 @@ export default function Education() {
     <section
       id="education"
       ref={containerRef}
-      className="relative bg-white py-24 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-slate-100"
+      className="relative bg-white py-16 sm:py-20 lg:py-32 px-5 max-[360px]:px-4 sm:px-6 lg:px-8 border-t border-slate-100"
     >
-      <div className="mx-auto max-w-[1280px] w-full space-y-20">
+      <div className="mx-auto max-w-[1280px] w-full space-y-12 sm:space-y-20">
 
         {/* ── Header: Left-aligned editorial ── */}
         <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-end">
@@ -101,7 +101,7 @@ export default function Education() {
               className="font-extrabold tracking-tight text-slate-900 leading-[1.1]"
               style={{ fontSize: 'clamp(32px, 3.5vw, 52px)' }}
             >
-              Where I learned<br />
+              Where I learned<br className="hidden min-[390px]:block" />
               <span className="text-emerald-600 italic">to build things.</span>
             </motion.h2>
           </div>
@@ -110,20 +110,20 @@ export default function Education() {
             initial={{ opacity: 0, y: 14 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.2 }}
-            className="text-[17px] text-slate-500 leading-[1.8] font-medium lg:self-end lg:pb-1"
+            className="text-[16px] sm:text-[17px] text-slate-500 leading-[1.75] sm:leading-[1.8] font-medium lg:self-end lg:pb-1"
           >
             A strong academic foundation — shaped by formal degrees, self-study, and a relentless curiosity for technology.
           </motion.p>
         </div>
 
         {/* ── Timeline ── */}
-        <div className="relative pl-6 sm:pl-10 space-y-10">
+        <div className="relative pl-8 sm:pl-10 space-y-8 sm:space-y-10">
           {/* Vertical line */}
           <motion.div
             initial={{ scaleY: 0 }}
             animate={isInView ? { scaleY: 1 } : {}}
             transition={{ duration: 1.2, delay: 0.3 }}
-            className="absolute left-0 sm:left-[11px] top-3 bottom-3 w-[2px] bg-gradient-to-b from-emerald-500 via-emerald-300 to-slate-100 origin-top"
+            className="absolute left-1 sm:left-[11px] top-3 bottom-3 w-[2px] bg-gradient-to-b from-emerald-500 via-emerald-300 to-slate-100 origin-top"
           />
 
           {educationTimeline.map((item, idx) => (
@@ -133,7 +133,7 @@ export default function Education() {
                 initial={{ scale: 0, opacity: 0 }}
                 animate={isInView ? { scale: 1, opacity: 1 } : {}}
                 transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.4 + idx * 0.15 }}
-                className="absolute -left-6 sm:-left-[34px] top-6 h-5 w-5 rounded-full bg-white border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.35)] z-10 flex items-center justify-center"
+                className="absolute -left-[34px] sm:-left-[34px] top-6 h-5 w-5 rounded-full bg-white border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.35)] z-10 flex items-center justify-center"
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </motion.div>
@@ -143,16 +143,16 @@ export default function Education() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: 0.4 + idx * 0.12 }}
-                className="group rounded-3xl border border-slate-100 bg-white p-7 hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300"
+                className="group rounded-[22px] sm:rounded-3xl border border-slate-100 bg-white p-5 sm:p-7 hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-3 sm:gap-4">
                     {/* Icon */}
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100 transition-colors duration-200">
                       <item.icon className="h-5 w-5" />
                     </div>
-                    <div>
-                      <h3 className="text-[17px] font-extrabold text-slate-900 leading-tight">{item.title}</h3>
+                    <div className="min-w-0">
+                      <h3 className="text-[17px] sm:text-[17px] font-extrabold text-slate-900 leading-tight">{item.title}</h3>
                       <p className="text-[13px] font-semibold text-emerald-600 mt-0.5">{item.institution}</p>
                     </div>
                   </div>
@@ -170,11 +170,11 @@ export default function Education() {
                   </div>
                 </div>
 
-                <p className="mt-4 text-[14px] text-slate-500 leading-relaxed font-medium">{item.desc}</p>
+                <p className="mt-4 text-[15px] sm:text-[14px] text-slate-500 leading-relaxed font-medium">{item.desc}</p>
 
                 <div className="mt-4 flex flex-wrap gap-2">
                   {item.highlights.map((hl, hi) => (
-                    <span key={hi} className="rounded-full bg-slate-50 border border-slate-100 px-3 py-1 text-[11px] font-semibold text-slate-600">
+                    <span key={hi} className="rounded-full bg-slate-50 border border-slate-100 px-3 py-1.5 text-[12px] sm:text-[11px] font-semibold text-slate-600">
                       {hl}
                     </span>
                   ))}
@@ -189,10 +189,10 @@ export default function Education() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-100 border border-slate-100 rounded-3xl overflow-hidden"
+          className="grid grid-cols-1 min-[390px]:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-100 border border-slate-100 rounded-[22px] sm:rounded-3xl overflow-hidden"
         >
           {stats.map((stat, i) => (
-            <div key={i} className="bg-white px-8 py-7 text-center">
+            <div key={i} className="bg-white px-6 sm:px-8 py-6 sm:py-7 text-center">
               <p className="text-[38px] font-black text-emerald-600 leading-none tracking-tight">
                 <AnimatedCounter to={stat.value} suffix={stat.suffix} />
               </p>
@@ -206,7 +206,7 @@ export default function Education() {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.55, delay: 0.85 }}
-          className="flex items-start gap-5 rounded-3xl bg-emerald-50 border border-emerald-100 p-7"
+          className="flex flex-col min-[390px]:flex-row items-start gap-4 sm:gap-5 rounded-[22px] sm:rounded-3xl bg-emerald-50 border border-emerald-100 p-5 sm:p-7"
         >
           <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white border border-emerald-100 text-emerald-600">
             <BookMarked className="h-5 w-5" />

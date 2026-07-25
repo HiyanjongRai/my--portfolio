@@ -94,15 +94,15 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" ref={ref} className="relative bg-[#F8FAFC] py-16 lg:py-32 px-4 sm:px-6 lg:px-8 border-t border-slate-100">
+    <section id="contact" ref={ref} className="relative bg-[#F8FAFC] py-16 sm:py-20 lg:py-32 px-5 max-[360px]:px-4 sm:px-6 lg:px-8 border-t border-slate-100">
 
-      <div className="mx-auto max-w-[1280px] w-full space-y-16">
+      <div className="mx-auto max-w-[1280px] w-full space-y-12 sm:space-y-16">
         
         {/* ── Two Column Content Grid ── */}
         <div className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] items-start">
           
           {/* LEFT COLUMN: Header, Grid & Action Card */}
-          <div className="space-y-10">
+          <div className="space-y-8 sm:space-y-10">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
@@ -120,16 +120,16 @@ export default function Contact() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: 0.1 }}
-                className="text-[28px] sm:text-[38px] lg:text-[54px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
+                className="text-[32px] min-[390px]:text-[36px] sm:text-[38px] lg:text-[54px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
               >
-                Let&apos;s Build Something<br />
+                Let&apos;s Build Something<br className="hidden min-[390px]:block" />
                 <span className="text-[#16A34A]">Amazing</span> Together<span className="text-[#16A34A]">.</span>
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-[15.5px] text-[#6B7280] font-normal leading-relaxed max-w-xl"
+                className="text-[16px] text-[#6B7280] font-normal leading-relaxed max-w-xl"
               >
                 Have a project in mind or want to discuss an idea? I'd love to hear from you. Let's create something great!
               </motion.p>
@@ -140,7 +140,7 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid grid-cols-2 gap-4 sm:gap-6"
+              className="grid grid-cols-1 min-[390px]:grid-cols-2 gap-5 sm:gap-6"
             >
               {[
                 { icon: Mail, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}` },
@@ -150,14 +150,14 @@ export default function Contact() {
               ].map((item, idx) => {
                 const ItemIcon = item.icon;
                 return (
-                  <div key={idx} className="space-y-2">
+                  <div key={idx} className="space-y-2 rounded-2xl border border-slate-100 bg-white/60 p-4 min-[390px]:border-0 min-[390px]:bg-transparent min-[390px]:p-0">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A] border border-[#D1FAE5]/60 shadow-sm shadow-[#E8F8EE]">
                       <ItemIcon className="h-4.5 w-4.5" />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <p className="text-[10px] text-[#9CA3AF] font-bold uppercase tracking-wider leading-none mb-1.5">{item.label}</p>
                       {item.href ? (
-                        <a href={item.href} className="text-[#374151] hover:text-[#16A34A] text-[13px] font-bold transition-colors break-all leading-normal">
+                        <a href={item.href} className="inline-flex min-h-11 items-center text-[#374151] hover:text-[#16A34A] text-[13px] font-bold transition-colors break-all leading-normal">
                           {item.value}
                         </a>
                       ) : (
@@ -198,7 +198,7 @@ export default function Contact() {
                 </p>
                 <button
                   onClick={() => window.open(`mailto:${personalInfo.email}`)}
-                  className="mt-2.5 inline-flex items-center gap-2 rounded-xl border border-[#E5E7EB] bg-white px-5 py-2.5 text-xs font-bold text-[#374151] shadow-sm hover:bg-[#FAFAFA] hover:border-[#D1FAE5] hover:text-[#16A34A] transition duration-200 cursor-pointer"
+                  className="mt-2.5 inline-flex min-h-11 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white px-5 py-2.5 text-xs font-bold text-[#374151] shadow-sm hover:bg-[#FAFAFA] hover:border-[#D1FAE5] hover:text-[#16A34A] transition duration-200 cursor-pointer"
                 >
                   <Calendar className="h-4 w-4 text-slate-500" />
                   Schedule a Call
@@ -217,13 +217,13 @@ export default function Contact() {
           >
             <div>
               {/* Form Title Header */}
-              <div className="flex gap-4 items-center mb-6 pb-6 border-b border-[#F3F4F6]">
+              <div className="flex gap-3 sm:gap-4 items-center mb-6 pb-6 border-b border-[#F3F4F6]">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#F3FAF5] text-[#16A34A]">
                   <Send className="h-5 w-5 rotate-[-45deg] translate-x-[2px]" />
                 </div>
                 <div>
                   <h3 className="text-[16px] font-bold text-[#111827] leading-none">Send Me a Message</h3>
-                  <p className="text-[11px] text-[#9CA3AF] font-bold mt-2 leading-none">
+                  <p className="text-[12px] sm:text-[11px] text-[#9CA3AF] font-bold mt-2 leading-snug sm:leading-none">
                     Fill out the form below and I'll get back to you as soon as possible.
                   </p>
                 </div>
@@ -242,7 +242,7 @@ export default function Contact() {
                       name="from_name"
                       required
                       placeholder="Enter your name"
-                      className="w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
+                      className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
                     />
                   </div>
                   <div>
@@ -255,7 +255,7 @@ export default function Contact() {
                       name="from_email"
                       required
                       placeholder="Enter your email"
-                      className="w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
+                      className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
                     />
                   </div>
                 </div>
@@ -270,7 +270,7 @@ export default function Contact() {
                     name="subject"
                     required
                     placeholder="What's this about?"
-                    className="w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
+                    className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
                   />
                 </div>
 
@@ -284,7 +284,7 @@ export default function Contact() {
                     required
                     rows={4}
                     placeholder="Tell me about your project or idea..."
-                    className="w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200 resize-none"
+                    className="w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200 resize-none"
                   />
                 </div>
 
@@ -292,7 +292,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full flex justify-center items-center gap-2 rounded-2xl bg-[#16A34A] py-3.5 text-sm font-bold text-white shadow-md shadow-[#D1FAE5]/40 hover:bg-[#15803D] disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 cursor-pointer"
+                  className="min-h-12 w-full flex justify-center items-center gap-2 rounded-2xl bg-[#16A34A] py-3.5 text-sm font-bold text-white shadow-md shadow-[#D1FAE5]/40 hover:bg-[#15803D] disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
@@ -308,7 +308,7 @@ export default function Contact() {
                 </button>
 
                 {/* Privacy disclaimer */}
-                <div className="flex gap-2 items-center justify-center pt-1 text-[#9CA3AF] text-[10px] font-bold">
+                <div className="flex gap-2 items-start justify-center pt-1 text-[#9CA3AF] text-[11px] sm:text-[10px] font-bold leading-snug text-center">
                   <Lock className="h-3.5 w-3.5" />
                   <span>Your information is safe with me. I don't share your data.</span>
                 </div>
@@ -323,38 +323,38 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="rounded-[24px] border border-[#E5E7EB] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] grid grid-cols-2 lg:grid-cols-4 divide-x divide-y divide-[#E5E7EB] overflow-hidden"
+          className="rounded-[24px] border border-[#E5E7EB] bg-white shadow-[0_4px_20px_rgba(0,0,0,0.03)] grid grid-cols-1 min-[390px]:grid-cols-2 lg:grid-cols-4 divide-y min-[390px]:divide-x divide-[#E5E7EB] overflow-hidden"
         >
           {/* Quick Response */}
-          <div className="flex items-start gap-2.5 p-4 sm:p-5">
+          <div className="flex items-start gap-3 p-4 sm:p-5">
             <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
               <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
               <h4 className="text-[11px] sm:text-xs font-bold text-[#111827] leading-tight">Quick Response</h4>
-              <p className="mt-1 text-[9px] sm:text-[10px] font-semibold text-[#6B7280] leading-snug">I usually reply within 24 hours.</p>
+              <p className="mt-1 text-[12px] sm:text-[10px] font-semibold text-[#6B7280] leading-snug">I usually reply within 24 hours.</p>
             </div>
           </div>
 
           {/* Let's Collaborate */}
-          <div className="flex items-start gap-2.5 p-4 sm:p-5">
+          <div className="flex items-start gap-3 p-4 sm:p-5">
             <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
               <HeartHandshake className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
               <h4 className="text-[11px] sm:text-xs font-bold text-[#111827] leading-tight">Let&apos;s Collaborate</h4>
-              <p className="mt-1 text-[9px] sm:text-[10px] font-semibold text-[#6B7280] leading-snug">Open to exciting projects.</p>
+              <p className="mt-1 text-[12px] sm:text-[10px] font-semibold text-[#6B7280] leading-snug">Open to exciting projects.</p>
             </div>
           </div>
 
           {/* Privacy Guaranteed */}
-          <div className="flex items-start gap-2.5 p-4 sm:p-5">
+          <div className="flex items-start gap-3 p-4 sm:p-5">
             <div className="flex h-8 w-8 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
               <ShieldCheck className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
             <div>
               <h4 className="text-[11px] sm:text-xs font-bold text-[#111827] leading-tight">Privacy Guaranteed</h4>
-              <p className="mt-1 text-[9px] sm:text-[10px] font-semibold text-[#6B7280] leading-snug">Your info is 100% secure.</p>
+              <p className="mt-1 text-[12px] sm:text-[10px] font-semibold text-[#6B7280] leading-snug">Your info is 100% secure.</p>
             </div>
           </div>
 
@@ -370,7 +370,7 @@ export default function Contact() {
                     href={social.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#6B7280] hover:border-[#16A34A] hover:bg-[#F3FAF5] hover:text-[#16A34A] transition shadow-sm"
+                    className="flex h-11 w-11 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-white text-[#6B7280] hover:border-[#16A34A] hover:bg-[#F3FAF5] hover:text-[#16A34A] transition shadow-sm"
                     aria-label={social.name}
                   >
                     <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
@@ -390,7 +390,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
-          className="fixed bottom-8 right-8 z-50 rounded-2xl border border-emerald-100 bg-white p-5 max-w-sm shadow-2xl"
+          className="fixed bottom-5 left-5 right-5 sm:left-auto sm:bottom-8 sm:right-8 z-50 rounded-2xl border border-emerald-100 bg-white p-5 max-w-sm shadow-2xl"
         >
           <div className="flex items-start gap-3.5">
             <div className="w-9 h-9 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 flex-shrink-0">
