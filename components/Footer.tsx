@@ -81,15 +81,15 @@ export default function Footer() {
                   <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   Open to opportunities
                 </div>
-                <h2 className="max-w-2xl text-[26px] min-[390px]:text-[30px] sm:text-[36px] lg:text-[44px] font-extrabold leading-[1.08] tracking-tight text-white">
+                <h2 className="max-w-2xl text-[24px] min-[360px]:text-[26px] min-[390px]:text-[30px] sm:text-[36px] lg:text-[44px] font-extrabold leading-[1.08] tracking-tight text-white">
                   Let&apos;s build something <span className="text-emerald-400 italic">meaningful together.</span>
                 </h2>
-                <p className="max-w-xl text-[14px] sm:text-[15px] font-medium leading-relaxed text-slate-400">
+                <p className="max-w-xl text-[13px] sm:text-[14px] font-medium leading-relaxed text-slate-400">
                   Backend developer focused on scalable APIs, secure auth systems, and reliable database architecture.
                 </p>
               </div>
 
-              <div className="grid gap-3 sm:flex sm:items-center">
+              <div className="grid gap-3 sm:flex sm:items-center sm:justify-end">
                 <a
                   href={`mailto:${personalInfo.email}`}
                   className="group inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-emerald-500 px-5 py-3 text-[13px] font-bold text-white shadow-lg shadow-emerald-500/20 transition-all duration-200 hover:-translate-y-0.5 hover:bg-emerald-400"
@@ -115,7 +115,7 @@ export default function Footer() {
             <div className="rounded-[24px] border border-white/10 bg-white/[0.03] p-5 sm:p-6">
               <button
                 onClick={() => scrollToSection('hero')}
-                className="inline-flex min-h-11 items-center text-[24px] font-black tracking-tight text-white transition-colors duration-200 hover:text-emerald-400"
+                className="inline-flex min-h-11 items-center text-[22px] sm:text-[24px] font-black tracking-tight text-white transition-colors duration-200 hover:text-emerald-400"
               >
                 Hiyan Jong Rai<span className="text-emerald-500">.</span>
               </button>
@@ -219,7 +219,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-5 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-5 text-center text-[12px] font-medium text-slate-500 sm:flex-row sm:text-left">
-            <p>(c) {new Date().getFullYear()} Hiyan Jong Rai. All rights reserved.</p>
+            <p className="max-w-full break-words">(c) {new Date().getFullYear()} Hiyan Jong Rai. All rights reserved.</p>
             <a
               href={socialLinks.blog}
               target="_blank"
