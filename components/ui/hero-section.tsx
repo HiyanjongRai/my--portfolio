@@ -6,7 +6,10 @@ import { useState, useEffect, useRef } from 'react';
 import {
   ArrowRight,
   Folder,
-  FileText
+  FileText,
+  Coffee,
+  Leaf,
+  Database,
 } from 'lucide-react';
 import { personalInfo, socialLinks } from '@/data/portfolio';
 import { scrollToSection } from '@/lib/utils';
@@ -49,6 +52,16 @@ const socials = [
       </svg>
     ),
   }
+];
+
+/* ─── Tech stack badges ─────────────────────────────────────────── */
+/* Simple, generic monochrome-with-accent icons representing each
+   technology (not the official trademarked logo artwork). */
+const techStack = [
+  { name: 'Java', icon: Coffee, color: 'text-orange-500' },
+  { name: 'Spring Boot', icon: Leaf, color: 'text-emerald-600' },
+  { name: 'MySQL', icon: Database, color: 'text-sky-600' },
+  { name: 'PostgreSQL', icon: Database, color: 'text-indigo-600' },
 ];
 
 /* ─── Hero Section ─────────────────────────────────────────────── */
@@ -109,16 +122,18 @@ export function HeroSection() {
               </div>
 
               {/* Floating Green Accent Sphere — Top Left */}
-              <div className="absolute -top-2 -left-2 sm:-top-3 sm:-left-3 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-gradient-to-br from-emerald-300 via-emerald-500 to-emerald-700 shadow-md shadow-emerald-500/30 z-20" />
+              <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-gradient-to-br from-emerald-300 via-emerald-500 to-emerald-700 shadow-md shadow-emerald-500/30 z-20" />
 
               {/* Floating Green Accent Sphere — Bottom Right */}
-              <div className="absolute -bottom-2 -right-2 sm:-bottom-3 sm:-right-3 h-6 w-6 sm:h-7 sm:w-7 rounded-full bg-gradient-to-br from-emerald-300 via-emerald-500 to-emerald-700 shadow-md shadow-emerald-500/30 z-20" />
+              <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 h-6 w-6 sm:h-7 sm:w-7 rounded-full bg-gradient-to-br from-emerald-300 via-emerald-500 to-emerald-700 shadow-md shadow-emerald-500/30 z-20" />
 
               {/* Top-Right Floating Badge: Projects Completed */}
+              {/* Repositioned to sit higher, straddling the top edge of the photo
+                  card (as in the reference image) rather than hanging below it. */}
               <motion.div
                 animate={{ y: [0, -5, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-                className="absolute top-4 right-2 sm:top-6 sm:-right-6 rounded-2xl border border-white/80 bg-white/90 p-2.5 sm:p-3 shadow-lg shadow-slate-200/50 backdrop-blur-md z-20 flex items-center gap-2.5"
+                className="absolute -top-3 right-3 sm:-top-5 sm:-right-4 rounded-2xl border border-white/80 bg-white/90 p-2.5 sm:p-3 shadow-lg shadow-slate-200/50 backdrop-blur-md z-20 flex items-center gap-2.5"
               >
                 <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
                   <Folder className="h-4 w-4" />
@@ -197,6 +212,30 @@ export function HeroSection() {
                 <FileText className="h-4 w-4 text-emerald-600" />
                 Download CV
               </a>
+            </motion.div>
+
+            {/* Tech Stack Badges — NEW: matches reference image row of
+                Java / Spring Boot / MySQL / PostgreSQL pill badges. */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5"
+            >
+              {techStack.map((tech) => {
+                const Icon = tech.icon;
+                return (
+                  <div
+                    key={tech.name}
+                    className="inline-flex items-center gap-2 rounded-xl border border-slate-100 bg-white px-3.5 py-2 shadow-sm"
+                  >
+                    <Icon className={`h-4 w-4 shrink-0 ${tech.color}`} />
+                    <span className="text-[13px] font-semibold text-slate-700 whitespace-nowrap">
+                      {tech.name}
+                    </span>
+                  </div>
+                );
+              })}
             </motion.div>
 
             {/* Stats Card */}

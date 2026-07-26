@@ -2,7 +2,23 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
-import { GraduationCap, BookOpen, Calendar, BookMarked } from 'lucide-react';
+import {
+  Calendar,
+  BookMarked,
+  CheckCircle2,
+  Database,
+  Globe,
+  Code2,
+  Monitor,
+  Sigma,
+  Terminal,
+  FlaskConical,
+  Calculator,
+  Puzzle,
+  GraduationCap,
+  BookOpen,
+  School,
+} from 'lucide-react';
 
 function AnimatedCounter({ to, suffix = '' }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -40,7 +56,12 @@ const educationTimeline = [
     dates: '2022 – Present',
     tag: 'Ongoing',
     desc: 'Pursuing BCA with focus on software engineering, database systems, and web technologies. Building real-world projects alongside coursework.',
-    highlights: ['Data Structures & Algorithms', 'DBMS & SQL', 'Web Technologies', 'OOP with Java'],
+    highlights: [
+      { icon: Database, label: 'Data Structures & Algorithms' },
+      { icon: Database, label: 'DBMS & SQL' },
+      { icon: Globe, label: 'Web Technologies' },
+      { icon: Code2, label: 'OOP with Java' },
+    ],
   },
   {
     icon: BookOpen,
@@ -49,16 +70,24 @@ const educationTimeline = [
     dates: '2020 – 2022',
     tag: 'Completed',
     desc: 'Completed +2 with computer science fundamentals, mathematics, and English. Gained strong programming foundations.',
-    highlights: ['Computer Science', 'Mathematics', 'C++ Programming'],
+    highlights: [
+      { icon: Monitor, label: 'Computer Science' },
+      { icon: Sigma, label: 'Mathematics' },
+      { icon: Terminal, label: 'C++ Programming' },
+    ],
   },
   {
-    icon: GraduationCap,
+    icon: School,
     title: 'Secondary Education (SEE)',
     institution: 'Shree Sunkoshi Secondary School',
     dates: '2019 – 2020',
     tag: 'Completed',
     desc: 'Completed secondary education with distinction. Developed early interest in technology and problem-solving.',
-    highlights: ['Science & Technology', 'Maths', 'Problem Solving'],
+    highlights: [
+      { icon: FlaskConical, label: 'Science & Technology' },
+      { icon: Calculator, label: 'Maths' },
+      { icon: Puzzle, label: 'Problem Solving' },
+    ],
   },
 ];
 
@@ -82,16 +111,16 @@ export default function Education() {
       <div className="mx-auto max-w-[1280px] w-full space-y-12 sm:space-y-20">
 
         {/* ── Header: Left-aligned editorial ── */}
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-end">
+        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-center">
           <div>
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="flex items-center gap-3 mb-5"
+              className="flex items-center gap-2.5 mb-5"
             >
-              <span className="h-px w-8 bg-emerald-500" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-600">Education</span>
+              <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-600">Education Journey</span>
             </motion.div>
 
             <motion.h2
@@ -104,26 +133,35 @@ export default function Education() {
               Where I learned<br className="hidden min-[390px]:block" />
               <span className="text-emerald-600 italic">to build things.</span>
             </motion.h2>
+
+            <motion.span
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="mt-4 block h-1 w-10 origin-left rounded-full bg-emerald-500"
+            />
           </div>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.2 }}
-            className="text-[16px] sm:text-[17px] text-slate-500 leading-[1.75] sm:leading-[1.8] font-medium lg:self-end lg:pb-1"
+            className="border-l-2 border-emerald-500 pl-4 sm:pl-5"
           >
-            A strong academic foundation — shaped by formal degrees, self-study, and a relentless curiosity for technology.
-          </motion.p>
+            <p className="text-[16px] sm:text-[17px] text-slate-500 leading-[1.75] sm:leading-[1.8] font-medium">
+              A strong academic foundation — shaped by formal degrees, self-study, and a relentless curiosity for technology.
+            </p>
+          </motion.div>
         </div>
 
         {/* ── Timeline ── */}
         <div className="relative pl-6 sm:pl-10 space-y-8 sm:space-y-10">
-          {/* Vertical line */}
+          {/* Vertical dashed connector */}
           <motion.div
             initial={{ scaleY: 0 }}
             animate={isInView ? { scaleY: 1 } : {}}
             transition={{ duration: 1.2, delay: 0.3 }}
-            className="absolute left-1 sm:left-[11px] top-3 bottom-3 w-[2px] bg-gradient-to-b from-emerald-500 via-emerald-300 to-slate-100 origin-top"
+            className="absolute left-[3px] sm:left-[15px] top-3 bottom-3 w-0 border-l-2 border-dashed border-emerald-300 origin-top"
           />
 
           {educationTimeline.map((item, idx) => (
@@ -143,30 +181,33 @@ export default function Education() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.55, delay: 0.4 + idx * 0.12 }}
-                className="group rounded-[22px] sm:rounded-3xl border border-slate-100 bg-white p-5 sm:p-7 hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300"
+                className="group rounded-[22px] sm:rounded-3xl border border-slate-100 bg-white p-5 sm:p-7 shadow-[0_2px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
                   <div className="flex items-start gap-3 sm:gap-4">
                     {/* Icon */}
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 group-hover:bg-emerald-100 transition-colors duration-200">
-                      <item.icon className="h-5 w-5" />
+                    <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 group-hover:bg-emerald-100 transition-colors duration-200">
+                      <item.icon className="h-6 w-6 sm:h-7 sm:w-7 text-emerald-600" strokeWidth={1.75} />
                     </div>
+
                     <div className="min-w-0">
-                      <h3 className="text-[17px] sm:text-[17px] font-extrabold text-slate-900 leading-tight">{item.title}</h3>
+                      <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 mb-2">
+                        {item.tag === 'Ongoing' ? (
+                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        ) : (
+                          <CheckCircle2 className="h-3 w-3" />
+                        )}
+                        {item.tag}
+                      </span>
+                      <h3 className="text-[17px] font-extrabold text-slate-900 leading-tight">{item.title}</h3>
                       <p className="text-[13px] font-semibold text-emerald-600 mt-0.5">{item.institution}</p>
                     </div>
                   </div>
 
-                  {/* Date + Tag */}
-                  <div className="flex items-center gap-2 sm:text-right sm:flex-col sm:items-end shrink-0">
-                    <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${item.tag === 'Ongoing' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-slate-50 text-slate-600 border border-slate-200'}`}>
-                      {item.tag === 'Ongoing' && <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />}
-                      {item.tag}
-                    </span>
-                    <div className="flex items-center gap-1.5 text-[12px] font-semibold text-slate-400">
-                      <Calendar className="h-3.5 w-3.5" />
-                      {item.dates}
-                    </div>
+                  {/* Date only, top-right */}
+                  <div className="flex items-center gap-1.5 text-[12px] font-semibold text-slate-400 shrink-0 sm:pt-1">
+                    <Calendar className="h-3.5 w-3.5" />
+                    {item.dates}
                   </div>
                 </div>
 
@@ -174,8 +215,9 @@ export default function Education() {
 
                 <div className="mt-4 flex flex-wrap gap-2">
                   {item.highlights.map((hl, hi) => (
-                    <span key={hi} className="rounded-full bg-slate-50 border border-slate-100 px-3 py-1.5 text-[12px] sm:text-[11px] font-semibold text-slate-600">
-                      {hl}
+                    <span key={hi} className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 border border-slate-100 px-3 py-1.5 text-[12px] sm:text-[11px] font-semibold text-slate-600">
+                      <hl.icon className="h-3.5 w-3.5 text-emerald-600" strokeWidth={2} />
+                      {hl.label}
                     </span>
                   ))}
                 </div>
@@ -189,14 +231,15 @@ export default function Education() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="grid grid-cols-1 min-[390px]:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-100 border border-slate-100 rounded-[22px] sm:rounded-3xl overflow-hidden"
+          className="grid grid-cols-1 min-[390px]:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-100 border border-slate-200 rounded-2xl overflow-hidden"
         >
           {stats.map((stat, i) => (
-            <div key={i} className="bg-white px-6 sm:px-8 py-6 sm:py-7 text-center">
-              <p className="text-[38px] font-black text-emerald-600 leading-none tracking-tight">
-                <AnimatedCounter to={stat.value} suffix={stat.suffix} />
+            <div key={i} className="bg-white px-6 sm:px-8 py-7 sm:py-8 text-center">
+              <p className="text-[32px] sm:text-[36px] font-extrabold text-emerald-700 leading-none tracking-tight">
+                <AnimatedCounter to={stat.value} />
+                {stat.suffix && <span className="text-[0.75em] font-bold">{stat.suffix}</span>}
               </p>
-              <p className="mt-2 text-[12px] text-slate-500 font-semibold uppercase tracking-wider">{stat.label}</p>
+              <p className="mt-2.5 text-[11px] text-slate-400 font-semibold uppercase tracking-[0.1em]">{stat.label}</p>
             </div>
           ))}
         </motion.div>

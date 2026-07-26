@@ -13,7 +13,10 @@ import {
   CheckCircle2, 
   MessageSquare, 
   HeartHandshake, 
-  ShieldCheck 
+  ShieldCheck,
+  User,
+  Tag,
+  Edit3,
 } from 'lucide-react';
 import { personalInfo, socialLinks } from '@/data/portfolio';
 import emailjs from '@emailjs/browser';
@@ -39,20 +42,34 @@ const socials = [
     )
   },
   {
-    name: 'Pinterest',
-    url: socialLinks.pinterest,
+    name: 'Dribbble',
+    url: socialLinks.dribbble,
     icon: (props: React.SVGProps<SVGSVGElement>) => (
-      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-        <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.41 7.61 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.965 1.406-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345-.09.375-.293 1.195-.334 1.363-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12.017 24c6.62 0 11.988-5.367 11.988-11.987C24.005 5.367 18.636 0 12.017 0z"/>
+      <svg fill="none" stroke="currentColor" strokeWidth="1.6" viewBox="0 0 24 24" {...props}>
+        <circle cx="12" cy="12" r="10" />
+        <path d="M3.5 9.3c4.2 1.2 9.8 1 13.9-.55" strokeLinecap="round" />
+        <path d="M5.1 17.4c1.7-3.1 4.3-6.6 8-8.9 2-1.25 4-1.95 5.6-2.15" strokeLinecap="round" />
+        <path d="M10.2 3.1c2 2.9 4.4 8 5.1 12.9.35 2.2.35 3.4.3 4" strokeLinecap="round" />
       </svg>
     )
   },
   {
-    name: 'Facebook',
-    url: socialLinks.facebook,
+    name: 'Behance',
+    url: socialLinks.behance,
     icon: (props: React.SVGProps<SVGSVGElement>) => (
-      <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
-        <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+      <svg viewBox="0 0 24 24" fill="none" {...props}>
+        <rect x="1" y="1" width="22" height="22" rx="6" fill="none" />
+        <text
+          x="12"
+          y="16.2"
+          textAnchor="middle"
+          fontFamily="Georgia, 'Times New Roman', serif"
+          fontSize="11.5"
+          fontWeight="700"
+          fill="currentColor"
+        >
+          Bē
+        </text>
       </svg>
     )
   }
@@ -174,36 +191,38 @@ export default function Contact() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="rounded-[24px] border border-[#E5E7EB] bg-[#F6FBF8]/80 p-5 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
+              className="relative overflow-hidden rounded-[24px] border border-[#E5E7EB] bg-[#F6FBF8]/80 p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-5 sm:gap-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)]"
             >
-              {/* Mail envelope inline mockup */}
-              <div className="relative h-24 w-32 shrink-0 overflow-hidden rounded-2xl bg-white border border-[#E5E7EB] flex items-center justify-center shadow-sm">
-                <svg viewBox="0 0 100 80" fill="none" className="w-[85%] h-[85%] text-[#16A34A]">
-                  {/* Envelope body */}
-                  <rect x="10" y="25" width="80" height="50" rx="6" fill="#F9FAFB" stroke="#E5E7EB" strokeWidth="1.5" />
-                  {/* Sliding Sheet */}
-                  <path d="M22 15h56v30H22z" fill="white" stroke="#E5E7EB" strokeWidth="1.5" rx="3" />
-                  {/* Check circle inside sheet */}
-                  <circle cx="50" cy="30" r="10" fill="#16A34A" />
-                  <path d="M46 30l3 3 5-5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  {/* Envelope flap open back */}
-                  <path d="M10 25l40 25 40-25" stroke="#E5E7EB" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
+              {/* decorative faint wave lines */}
+              <svg
+                className="pointer-events-none absolute -right-6 -bottom-10 h-40 w-72 text-emerald-600/10"
+                viewBox="0 0 300 160"
+                fill="none"
+              >
+                <path d="M0 120 C 60 60, 120 160, 180 90 S 300 40, 300 40" stroke="currentColor" strokeWidth="2" />
+                <path d="M0 90 C 60 30, 120 130, 180 60 S 300 10, 300 10" stroke="currentColor" strokeWidth="2" />
+                <path d="M0 150 C 60 90, 120 190, 180 120 S 300 70, 300 70" stroke="currentColor" strokeWidth="2" />
+              </svg>
+
+              {/* icon */}
+              <div className="relative flex h-16 w-16 sm:h-20 sm:w-20 shrink-0 items-center justify-center rounded-full bg-[#14532D] text-white shadow-md shadow-emerald-900/10 mx-auto sm:mx-0">
+                <Mail className="h-7 w-7 sm:h-8 sm:w-8" strokeWidth={1.75} />
               </div>
-              
-              <div className="space-y-2 text-center sm:text-left w-full">
-                <h3 className="text-[16px] font-bold text-[#111827] leading-tight">Let's Work Together</h3>
-                <p className="text-[12.5px] text-[#6B7280] leading-relaxed">
+
+              <div className="relative flex-1 space-y-1.5 text-center sm:text-left">
+                <h3 className="text-[16px] sm:text-[17px] font-bold text-[#111827] leading-tight">Let&apos;s Work Together</h3>
+                <p className="text-[12.5px] sm:text-[13px] text-[#6B7280] leading-relaxed max-w-sm">
                   I'm currently available for freelance projects and full-time opportunities.
                 </p>
-                <button
-                  onClick={() => window.open(`mailto:${personalInfo.email}`)}
-                  className="mt-2.5 inline-flex min-h-11 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#E5E7EB] bg-white px-5 py-2.5 text-xs font-bold text-[#374151] shadow-sm hover:bg-[#FAFAFA] hover:border-[#D1FAE5] hover:text-[#16A34A] transition duration-200 cursor-pointer"
-                >
-                  <Calendar className="h-4 w-4 text-slate-500" />
-                  Schedule a Call
-                </button>
               </div>
+
+              <button
+                onClick={() => window.open(`mailto:${personalInfo.email}`)}
+                className="relative inline-flex min-h-12 w-full sm:w-auto shrink-0 items-center justify-center gap-2 rounded-xl bg-[#14532D] px-5 py-3 text-xs font-bold text-white shadow-md shadow-emerald-900/15 hover:bg-[#166534] transition duration-200 cursor-pointer"
+              >
+                <Calendar className="h-4 w-4" />
+                Schedule a Call
+              </button>
             </motion.div>
 
           </div>
@@ -236,27 +255,33 @@ export default function Contact() {
                     <label htmlFor="from_name" className="block text-xs font-bold text-[#374151] mb-2">
                       Your Name
                     </label>
-                    <input
-                      type="text"
-                      id="from_name"
-                      name="from_name"
-                      required
-                      placeholder="Enter your name"
-                      className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
-                    />
+                    <div className="relative">
+                      <input
+                        type="text"
+                        id="from_name"
+                        name="from_name"
+                        required
+                        placeholder="Enter your name"
+                        className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white pl-4 pr-11 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
+                      />
+                      <User className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9CA3AF]" />
+                    </div>
                   </div>
                   <div>
                     <label htmlFor="from_email" className="block text-xs font-bold text-[#374151] mb-2">
                       Your Email
                     </label>
-                    <input
-                      type="email"
-                      id="from_email"
-                      name="from_email"
-                      required
-                      placeholder="Enter your email"
-                      className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
-                    />
+                    <div className="relative">
+                      <input
+                        type="email"
+                        id="from_email"
+                        name="from_email"
+                        required
+                        placeholder="Enter your email"
+                        className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white pl-4 pr-11 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
+                      />
+                      <Mail className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9CA3AF]" />
+                    </div>
                   </div>
                 </div>
 
@@ -264,35 +289,41 @@ export default function Contact() {
                   <label htmlFor="subject" className="block text-xs font-bold text-[#374151] mb-2">
                     Subject
                   </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    required
-                    placeholder="What's this about?"
-                    className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
-                  />
+                  <div className="relative">
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      required
+                      placeholder="What's this about?"
+                      className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white pl-4 pr-11 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
+                    />
+                    <Tag className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9CA3AF]" />
+                  </div>
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-xs font-bold text-[#374151] mb-2">
                     Your Message
                   </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={4}
-                    placeholder="Tell me about your project or idea..."
-                    className="w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200 resize-none"
-                  />
+                  <div className="relative">
+                    <textarea
+                      id="message"
+                      name="message"
+                      required
+                      rows={4}
+                      placeholder="Tell me about your project or idea..."
+                      className="w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 pr-11 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200 resize-none"
+                    />
+                    <Edit3 className="pointer-events-none absolute bottom-3.5 right-4 h-4 w-4 text-[#9CA3AF]" />
+                  </div>
                 </div>
 
                 {/* Submit button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="min-h-12 w-full flex justify-center items-center gap-2 rounded-2xl bg-[#16A34A] py-3.5 text-sm font-bold text-white shadow-md shadow-[#D1FAE5]/40 hover:bg-[#15803D] disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 cursor-pointer"
+                  className="min-h-12 w-full flex justify-center items-center gap-2 rounded-2xl bg-gradient-to-r from-[#22C55E] to-[#15803D] py-3.5 text-sm font-bold text-white shadow-md shadow-[#D1FAE5]/40 hover:from-[#16A34A] hover:to-[#14532D] disabled:opacity-50 disabled:cursor-not-allowed transition duration-200 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>

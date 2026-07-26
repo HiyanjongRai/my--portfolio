@@ -2,7 +2,7 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Code2, Pencil, Rocket, Database, Gauge, Lightbulb } from 'lucide-react';
+import { Code2, Pencil, Rocket, Database, Gauge, Lightbulb, Layers } from 'lucide-react';
 
 /* ─── Expertise Cards ─────────────────────────────────────────── */
 const expertiseCards = [
@@ -57,14 +57,14 @@ function ProgressBar({ pct }: { pct: number }) {
             initial={{ width: 0 }}
             animate={isInView ? { width: `${pct}%` } : { width: 0 }}
             transition={{ duration: 1.1, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.2 }}
-            className="h-full rounded-full bg-gradient-to-r from-[#16A34A] to-[#4ADE80]"
+            className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-emerald-400"
           />
         </div>
         <motion.span
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="text-xs font-bold text-[#16A34A] shrink-0"
+          className="text-xs font-bold text-emerald-600 shrink-0"
         >
           {pct}%
         </motion.span>
@@ -180,20 +180,12 @@ const designTools = [
   }
 ];
 
-/* ─── Stats Footer ────────────────────────────────────────────── */
-const statsFooter = [
-  { value: '2+', label: 'Years Experience' },
-  { value: '4', label: 'Projects Completed' },
-  { value: '10+', label: 'Happy Clients' },
-  { value: '5', label: 'Awards Won' }
-];
-
 export default function Expertise() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="expertise" ref={ref} className="relative bg-slate-950 py-16 sm:py-20 lg:py-32 px-5 max-[360px]:px-4 sm:px-6 lg:px-8">
+    <section id="expertise" ref={ref} className="relative bg-white py-16 sm:py-20 lg:py-32 px-5 max-[360px]:px-4 sm:px-6 lg:px-8 border-t border-slate-100">
 
       <div className="mx-auto max-w-[1280px] w-full space-y-10 sm:space-y-14">
 
@@ -204,36 +196,44 @@ export default function Expertise() {
               initial={{ opacity: 0, y: -10 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
-              className="flex items-center gap-3 mb-5"
+              className="flex items-center gap-2.5 mb-5"
             >
-              <span className="h-px w-8 bg-emerald-500" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-500">Skills & Expertise</span>
+              <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
+              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-600">Skills &amp; Expertise</span>
             </motion.div>
 
             <motion.h2
               initial={{ opacity: 0, y: 22 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-extrabold tracking-tight text-white leading-[1.1]"
+              className="font-extrabold tracking-tight text-slate-900 leading-[1.1]"
               style={{ fontSize: 'clamp(32px, 3.5vw, 52px)' }}
             >
               The tools I use<br className="hidden min-[390px]:block" />
-              <span className="text-emerald-400 italic">to ship great work.</span>
+              <span className="text-emerald-600 italic">to ship great work.</span>
             </motion.h2>
           </div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[16px] sm:text-[17px] text-slate-400 font-medium leading-[1.7] lg:self-end lg:pb-1"
-          >
-            From backend APIs to frontend interfaces — I combine the right tools with disciplined engineering.
-          </motion.p>
+          <div>
+            <motion.p
+              initial={{ opacity: 0, y: 14 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-[16px] sm:text-[17px] text-slate-500 font-medium leading-[1.7]"
+            >
+              From backend APIs to frontend interfaces — I combine the right tools with disciplined engineering.
+            </motion.p>
+            <motion.span
+              initial={{ opacity: 0, scaleX: 0 }}
+              animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="mt-4 block h-1 w-10 origin-left rounded-full bg-emerald-500"
+            />
+          </div>
         </div>
 
         {/* ── 6 Expertise Cards ───────────────────────────────────── */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
           {expertiseCards.map((card, i) => {
             const Icon = card.icon;
             return (
@@ -242,16 +242,21 @@ export default function Expertise() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.25 + i * 0.08 }}
-                className="group flex flex-col rounded-[20px] border border-white/10 bg-white/5 p-5 sm:p-6 hover:bg-white/10 hover:-translate-y-2 transition-all duration-300"
+                className="group flex flex-col rounded-[20px] border border-slate-100 bg-white p-5 sm:p-6 shadow-[0_2px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 transition-all duration-300"
               >
                 {/* Icon box */}
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-emerald-500/10 text-emerald-400 group-hover:bg-emerald-500 group-hover:text-white group-hover:border-emerald-500 transition-colors duration-300">
+                <motion.div
+                  initial={{ scale: 0.6, opacity: 0 }}
+                  animate={isInView ? { scale: 1, opacity: 1 } : {}}
+                  transition={{ type: 'spring', stiffness: 220, damping: 16, delay: 0.35 + i * 0.08 }}
+                  className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl border border-emerald-100 bg-emerald-50 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white group-hover:border-emerald-600 transition-colors duration-300"
+                >
                   <Icon className="h-5 w-5" />
-                </div>
+                </motion.div>
 
                 {/* Text */}
-                <h3 className="text-[16px] sm:text-[15px] font-bold text-white leading-tight mb-2">{card.title}</h3>
-                <p className="text-[14px] sm:text-[12px] text-slate-400 leading-relaxed flex-1">{card.desc}</p>
+                <h3 className="text-[16px] sm:text-[15px] font-bold text-slate-900 leading-tight mb-2">{card.title}</h3>
+                <p className="text-[14px] sm:text-[12px] text-slate-500 leading-relaxed flex-1">{card.desc}</p>
 
                 {/* Animated progress bar */}
                 <ProgressBar pct={card.pct} />
@@ -268,16 +273,16 @@ export default function Expertise() {
           className="grid gap-6 lg:grid-cols-2"
         >
           {/* TECH STACK */}
-          <div className="rounded-[20px] border border-white/10 bg-white/5 p-5 sm:p-7">
+          <div className="rounded-[20px] border border-slate-100 bg-white p-5 sm:p-7 shadow-[0_2px_16px_rgba(0,0,0,0.03)]">
             <div className="flex flex-col min-[390px]:flex-row min-[390px]:items-center justify-between gap-3 mb-7">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-emerald-500/10 text-emerald-400">
-                  <Code2 className="h-4 w-4" />
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-emerald-100 bg-emerald-50 text-emerald-600">
+                  <Layers className="h-4 w-4" />
                 </div>
-                <span className="text-[13px] font-extrabold text-white uppercase tracking-wider">TECH STACK</span>
+                <span className="text-[13px] font-extrabold text-slate-900 uppercase tracking-wider">Tech Stack</span>
               </div>
-              <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-600">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Always Learning
               </div>
             </div>
@@ -286,31 +291,32 @@ export default function Expertise() {
               {techStack.map((tech, i) => (
                 <motion.div
                   key={tech.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.7 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.35, delay: 0.5 + i * 0.04 }}
-                  className="flex flex-col items-center gap-2 group"
+                  transition={{ duration: 0.35, delay: 0.5 + i * 0.05 }}
+                  whileHover={{ y: -3, scale: 1.06 }}
+                  className="flex flex-col items-center gap-2 group cursor-default"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2 group-hover:border-emerald-500/40 group-hover:-translate-y-1 transition-all duration-200">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-100 bg-white p-2 shadow-sm group-hover:border-emerald-200 group-hover:shadow-md transition-all duration-200">
                     {tech.icon}
                   </div>
-                  <span className="text-[11px] sm:text-[10px] font-semibold text-slate-400 text-center leading-tight">{tech.name}</span>
+                  <span className="text-[11px] sm:text-[10px] font-semibold text-slate-500 text-center leading-tight">{tech.name}</span>
                 </motion.div>
               ))}
             </div>
           </div>
 
           {/* DESIGN & TOOLS */}
-          <div className="rounded-[20px] border border-white/10 bg-white/5 p-5 sm:p-7">
+          <div className="rounded-[20px] border border-slate-100 bg-white p-5 sm:p-7 shadow-[0_2px_16px_rgba(0,0,0,0.03)]">
             <div className="flex flex-col min-[390px]:flex-row min-[390px]:items-center justify-between gap-3 mb-7">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-emerald-500/10 text-emerald-400">
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg border border-emerald-100 bg-emerald-50 text-emerald-600">
                   <Pencil className="h-4 w-4" />
                 </div>
-                <span className="text-[13px] font-extrabold text-white uppercase tracking-wider">DESIGN & TOOLS</span>
+                <span className="text-[13px] font-extrabold text-slate-900 uppercase tracking-wider">Design &amp; Tools</span>
               </div>
-              <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-600">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 Tools I Love
               </div>
             </div>
@@ -319,61 +325,19 @@ export default function Expertise() {
               {designTools.map((tool, i) => (
                 <motion.div
                   key={tool.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.7 }}
                   animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.35, delay: 0.5 + i * 0.04 }}
-                  className="flex flex-col items-center gap-2 group"
+                  transition={{ duration: 0.35, delay: 0.5 + i * 0.05 }}
+                  whileHover={{ y: -3, scale: 1.06 }}
+                  className="flex flex-col items-center gap-2 group cursor-default"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 p-2 group-hover:border-emerald-500/40 group-hover:-translate-y-1 transition-all duration-200">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-slate-100 bg-white p-2 shadow-sm group-hover:border-emerald-200 group-hover:shadow-md transition-all duration-200">
                     {tool.icon}
                   </div>
-                  <span className="text-[11px] sm:text-[10px] font-semibold text-slate-400 text-center leading-tight">{tool.name}</span>
+                  <span className="text-[11px] sm:text-[10px] font-semibold text-slate-500 text-center leading-tight">{tool.name}</span>
                 </motion.div>
               ))}
             </div>
-          </div>
-        </motion.div>
-
-        {/* ── Stats Footer Banner ──────────────────────────────────── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, delay: 0.55 }}
-          className="rounded-[20px] border border-white/10 bg-white/5 px-5 sm:px-8 py-6 flex flex-col md:flex-row items-start sm:items-center gap-6 md:gap-0"
-        >
-          {/* Left: quote */}
-          <div className="flex items-center gap-4 md:w-[260px] shrink-0 md:border-r md:border-white/10 md:pr-8">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-emerald-500/30 bg-emerald-500/10 text-emerald-400">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="h-7 w-7">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
-              </svg>
-            </div>
-            <p className="text-[13px] font-semibold text-slate-300 leading-snug">
-              Committed to excellence and always delivering my best.
-            </p>
-          </div>
-
-          {/* Right: Stats */}
-          <div className="grid grid-cols-1 min-[390px]:grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-6 md:pl-8 flex-1 w-full">
-            {statsFooter.map((stat, i) => {
-              const icons = [
-                <svg key="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>,
-                <svg key="users" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" /></svg>,
-                <svg key="smile" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" /></svg>,
-                <svg key="award" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-5 w-5"><path strokeLinecap="round" strokeLinejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" /></svg>
-              ];
-              return (
-                <div key={i} className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-emerald-400">
-                    {icons[i]}
-                  </div>
-                  <div>
-                    <p className="text-[28px] font-extrabold text-emerald-400 leading-none">{stat.value}</p>
-                    <p className="text-[11px] text-slate-400 font-medium mt-1 leading-tight">{stat.label}</p>
-                  </div>
-                </div>
-              );
-            })}
           </div>
         </motion.div>
 
