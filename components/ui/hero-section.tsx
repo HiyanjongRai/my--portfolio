@@ -155,19 +155,19 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-extrabold tracking-tight text-slate-900 leading-[1.08] text-[34px] max-[360px]:text-[31px] sm:text-[48px] md:text-[60px] lg:text-[72px]"
+                className="font-extrabold tracking-tight text-slate-900 leading-[1.08] text-[32px] max-[360px]:text-[30px] sm:text-[44px] md:text-[56px] lg:text-[72px] break-words"
               >
                 Backend Dev<br />
                 crafting{' '}
                 <span className="italic text-emerald-600 font-black">scalable</span><br />
                 software<span className="text-emerald-500">.</span>
               </motion.h1>
-
+ 
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, delay: 0.2 }}
-                className="mx-auto sm:mx-0 text-[16px] sm:text-[17px] text-slate-500 leading-[1.75] max-w-[460px] font-medium"
+                className="mx-auto sm:mx-0 text-[15px] sm:text-[16px] md:text-[17px] text-slate-500 leading-[1.75] max-w-[460px] font-medium"
               >
                 I build robust APIs, secure backends, and clean databases with Java, Spring Boot, MySQL &amp; PostgreSQL.
               </motion.p>

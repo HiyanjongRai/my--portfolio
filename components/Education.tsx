@@ -117,7 +117,7 @@ export default function Education() {
         </div>
 
         {/* ── Timeline ── */}
-        <div className="relative pl-8 sm:pl-10 space-y-8 sm:space-y-10">
+        <div className="relative pl-6 sm:pl-10 space-y-8 sm:space-y-10">
           {/* Vertical line */}
           <motion.div
             initial={{ scaleY: 0 }}
@@ -133,7 +133,7 @@ export default function Education() {
                 initial={{ scale: 0, opacity: 0 }}
                 animate={isInView ? { scale: 1, opacity: 1 } : {}}
                 transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.4 + idx * 0.15 }}
-                className="absolute -left-[34px] sm:-left-[34px] top-6 h-5 w-5 rounded-full bg-white border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.35)] z-10 flex items-center justify-center"
+                className="absolute -left-[30px] sm:-left-[34px] top-6 h-5 w-5 rounded-full bg-white border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.35)] z-10 flex items-center justify-center"
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </motion.div>

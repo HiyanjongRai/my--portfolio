@@ -186,12 +186,12 @@ export default function Experience() {
               variants={lineVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
-            className="absolute left-3 sm:left-6 top-3 bottom-3 w-[2px] bg-gradient-to-b from-[#16A34A] via-[#86EFAC] to-[#F3F4F6] origin-top"
+              className="absolute left-2 sm:left-6 top-3 bottom-3 w-[2px] bg-gradient-to-b from-[#16A34A] via-[#86EFAC] to-[#F3F4F6] origin-top"
             />
 
             <div className="space-y-8 sm:space-y-10">
               {experiences.map((exp, idx) => (
-                <div key={idx} className="relative flex gap-4 sm:gap-8 pl-8 sm:pl-16">
+                <div key={idx} className="relative flex gap-3 sm:gap-8 pl-6 sm:pl-16">
                   
                   {/* Glowing Node Dot */}
                   <motion.div
@@ -199,7 +199,7 @@ export default function Experience() {
                     variants={nodeVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
-                    className="absolute left-3 sm:left-6 -translate-x-[9px] top-4 z-10 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-white border-2 border-[#16A34A] shadow-[0_0_12px_rgba(22,163,74,0.35)]"
+                    className="absolute left-2 sm:left-6 -translate-x-[9px] top-4 z-10 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-white border-2 border-[#16A34A] shadow-[0_0_12px_rgba(22,163,74,0.35)]"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" />
                   </motion.div>

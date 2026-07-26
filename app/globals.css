@@ -16,13 +16,19 @@
     --success: #10B981;
   }
 
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   body {
     @apply bg-white text-[#0F172A] antialiased;
     font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1.75;
     font-size: 16px;
-    min-width: 320px;
+    min-width: 0;
     overflow-x: hidden;
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
 
   html {
@@ -159,6 +165,10 @@
     width: 100%;
   }
 
+  .card {
+    min-width: 0;
+  }
+
   /* Skill Chip */
   .skill-chip {
     background: white;
@@ -229,20 +239,20 @@
   outline-offset: 2px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 520px) {
   body {
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.65;
   }
 
   h1 {
-    font-size: clamp(32px, 10vw, 40px);
-    line-height: 1.08;
+    font-size: clamp(32px, 10vw, 42px);
+    line-height: 1.06;
   }
 
   h2 {
-    font-size: clamp(28px, 8vw, 36px);
-    line-height: 1.12;
+    font-size: clamp(26px, 8vw, 34px);
+    line-height: 1.1;
   }
 
   h3 {
@@ -250,13 +260,13 @@
   }
 
   .section {
-    padding-top: 64px;
-    padding-bottom: 64px;
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
 
   .container-custom {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .card {
@@ -272,10 +282,28 @@
   }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 400px) {
+  body {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  h1 {
+    font-size: clamp(30px, 12vw, 38px);
+  }
+
+  h2 {
+    font-size: clamp(24px, 10vw, 32px);
+  }
+
   .container-custom {
     padding-left: 16px;
     padding-right: 16px;
+  }
+
+  .section {
+    padding-top: 48px;
+    padding-bottom: 48px;
   }
 }
 
