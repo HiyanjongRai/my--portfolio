@@ -23,6 +23,8 @@ export const socialLinks = {
   pinterest: "https://www.pinterest.com/HiyanjongRai/",
   instagram: "https://www.instagram.com/tilung.hiyanjongrai/",
   facebook: "https://www.facebook.com/profile.php?id=61573473294780",
+  dribbble: "https://dribbble.com/your-profile",
+  behance: "https://www.behance.net/your-profile",
   blog: "https://hiyanjongblog.vercel.app/"
 };
 
