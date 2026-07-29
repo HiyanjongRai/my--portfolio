@@ -67,6 +67,8 @@ function VideoCard({
       onClick={() => onPreview(asset)}
       onMouseEnter={() => videoRef.current?.play()}
       onMouseLeave={() => { videoRef.current?.pause(); if (videoRef.current) videoRef.current.currentTime = 0; }}
+      onTouchStart={() => videoRef.current?.play()}
+      onTouchEnd={() => { videoRef.current?.pause(); if (videoRef.current) videoRef.current.currentTime = 0; }}
       className="break-inside-avoid mb-3 group relative overflow-hidden rounded-2xl bg-slate-950 cursor-pointer shadow-sm hover:shadow-xl transition-shadow duration-300"
     >
       {/* Aspect ratio wrapper — videos always 16:9 */}
@@ -88,8 +90,8 @@ function VideoCard({
         </div>
       </div>
 
-      {/* Hover overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-3 pointer-events-none group-hover:pointer-events-auto">
+      {/* Hover overlay — desktop only; touch users tap to expand */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col justify-between p-3 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:pointer-events-auto">
         <div className="flex justify-end gap-2">
           <button
             onClick={handleCopy}
@@ -114,6 +116,14 @@ function VideoCard({
             <Maximize2 className="h-2.5 w-2.5" /> Tap to expand
           </p>
         </div>
+      </div>
+
+      {/* Persistent label on touch devices */}
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-3 [@media(hover:hover)]:hidden">
+        <p className="text-xs font-bold text-white truncate">{name}</p>
+        <p className="flex items-center gap-1 text-[10px] text-emerald-400 font-semibold mt-0.5">
+          <Maximize2 className="h-2.5 w-2.5" /> Tap to expand
+        </p>
       </div>
     </motion.div>
   );
@@ -179,8 +189,8 @@ function ImageCard({
         </div>
       </div>
 
-      {/* Hover overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-3 pointer-events-none group-hover:pointer-events-auto">
+      {/* Hover overlay — desktop only */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col justify-between p-3 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:pointer-events-auto">
         <div className="flex justify-end gap-2">
           <button
             onClick={handleCopy}
@@ -205,6 +215,13 @@ function ImageCard({
             <Maximize2 className="h-2.5 w-2.5" /> Tap to expand
           </p>
         </div>
+      </div>
+
+      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent p-3 [@media(hover:hover)]:hidden">
+        <p className="text-xs font-bold text-white truncate">{name}</p>
+        <p className="flex items-center gap-1 text-[10px] text-emerald-400 font-semibold mt-0.5">
+          <Maximize2 className="h-2.5 w-2.5" /> Tap to expand
+        </p>
       </div>
     </motion.div>
   );

@@ -66,6 +66,7 @@ const techStack = [
 
 /* ─── Hero Section ─────────────────────────────────────────────── */
 export function HeroSection() {
+  const [canHover, setCanHover] = useState(false);
   // Mouse parallax
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -74,7 +75,12 @@ export function HeroSection() {
   const rotateX = useTransform(springY, [-300, 300], [4, -4]);
   const rotateY = useTransform(springX, [-300, 300], [-4, 4]);
 
+  useEffect(() => {
+    setCanHover(window.matchMedia('(hover: hover)').matches);
+  }, []);
+
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (!canHover) return;
     const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
     mouseX.set(e.clientX - rect.left - rect.width / 2);
     mouseY.set(e.clientY - rect.top - rect.height / 2);
@@ -88,8 +94,8 @@ export function HeroSection() {
     <section
       id="hero"
       className="relative overflow-hidden bg-[#FBFDFB] pt-6 pb-16 sm:pt-8 sm:pb-16 md:pt-12 md:pb-20"
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      onMouseMove={canHover ? handleMouseMove : undefined}
+      onMouseLeave={canHover ? handleMouseLeave : undefined}
     >
       {/* Background Glows */}
       <div className="pointer-events-none absolute inset-0 -z-20">
@@ -100,54 +106,8 @@ export function HeroSection() {
       <div className="container-custom relative z-10 mx-auto max-w-7xl">
         <div className="flex flex-col lg:grid lg:grid-cols-[1.15fr_0.85fr] gap-8 sm:gap-10 lg:gap-16 items-center">
 
-          {/* ── Image Card (Shows FIRST / Above text on small devices, RIGHT column on desktop) ─── */}
-          <div className="order-1 lg:order-2 w-full flex items-center justify-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              style={{ rotateX, rotateY, transformPerspective: 800 }}
-              className="relative w-full max-w-[300px] min-[390px]:max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] aspect-[1/1] sm:aspect-[4/4.5] bg-white border border-slate-100/90 shadow-[0_15px_45px_-12px_rgba(0,0,0,0.06)] rounded-[2rem] sm:rounded-[3rem] p-3 sm:p-4 z-10"
-            >
-              {/* Profile Image container */}
-              <div className="relative w-full h-full overflow-hidden rounded-[1.8rem] sm:rounded-[2.4rem] bg-slate-50">
-                <Image
-                  src={personalInfo.image}
-                  alt={personalInfo.name}
-                  fill
-                  style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
-                  sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 420px"
-                  priority
-                />
-              </div>
-
-              {/* Floating Green Accent Sphere — Top Left */}
-              <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-gradient-to-br from-emerald-300 via-emerald-500 to-emerald-700 shadow-md shadow-emerald-500/30 z-20" />
-
-              {/* Floating Green Accent Sphere — Bottom Right */}
-              <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 h-6 w-6 sm:h-7 sm:w-7 rounded-full bg-gradient-to-br from-emerald-300 via-emerald-500 to-emerald-700 shadow-md shadow-emerald-500/30 z-20" />
-
-              {/* Top-Right Floating Badge: Projects Completed */}
-              {/* Repositioned to sit higher, straddling the top edge of the photo
-                  card (as in the reference image) rather than hanging below it. */}
-              <motion.div
-                animate={{ y: [0, -5, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-                className="absolute -top-3 right-3 sm:-top-5 sm:-right-4 rounded-2xl border border-white/80 bg-white/90 p-2.5 sm:p-3 shadow-lg shadow-slate-200/50 backdrop-blur-md z-20 flex items-center gap-2.5"
-              >
-                <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
-                  <Folder className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none">Projects Completed</p>
-                  <p className="mt-0.5 text-sm sm:text-base font-black text-slate-900 leading-none">4</p>
-                </div>
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* ── Text Content (Shows SECOND / Below image on small devices, LEFT column on desktop) ─── */}
-          <div className="order-2 lg:order-1 w-full space-y-6 sm:space-y-8 text-center sm:text-left">
+          {/* ── Text Content (first on mobile per content hierarchy) ─── */}
+          <div className="order-1 w-full space-y-6 sm:space-y-8 text-center sm:text-left">
             {/* Status Badge */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -177,7 +137,7 @@ export function HeroSection() {
                 <span className="italic text-emerald-600 font-black">scalable</span><br />
                 software<span className="text-emerald-500">.</span>
               </motion.h1>
- 
+
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -214,8 +174,7 @@ export function HeroSection() {
               </a>
             </motion.div>
 
-            {/* Tech Stack Badges — NEW: matches reference image row of
-                Java / Spring Boot / MySQL / PostgreSQL pill badges. */}
+            {/* Tech Stack Badges */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -284,7 +243,45 @@ export function HeroSection() {
                 );
               })}
             </motion.div>
+          </div>
 
+          {/* ── Image Card (after primary content on mobile) ─── */}
+          <div className="order-2 w-full flex items-center justify-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              style={{ rotateX, rotateY, transformPerspective: 800 }}
+              className="relative w-full max-w-[300px] min-[390px]:max-w-[320px] sm:max-w-[380px] lg:max-w-[420px] aspect-[1/1] sm:aspect-[4/4.5] bg-white border border-slate-100/90 shadow-[0_15px_45px_-12px_rgba(0,0,0,0.06)] rounded-[2rem] sm:rounded-[3rem] p-3 sm:p-4 z-10"
+            >
+              <div className="relative w-full h-full overflow-hidden rounded-[1.8rem] sm:rounded-[2.4rem] bg-slate-50">
+                <Image
+                  src={personalInfo.image}
+                  alt={personalInfo.name}
+                  fill
+                  style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
+                  sizes="(max-width: 640px) 320px, (max-width: 1024px) 380px, 420px"
+                  priority
+                />
+              </div>
+
+              <div className="absolute -top-3 -left-3 sm:-top-4 sm:-left-4 h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-gradient-to-br from-emerald-300 via-emerald-500 to-emerald-700 shadow-md shadow-emerald-500/30 z-20" />
+              <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 h-6 w-6 sm:h-7 sm:w-7 rounded-full bg-gradient-to-br from-emerald-300 via-emerald-500 to-emerald-700 shadow-md shadow-emerald-500/30 z-20" />
+
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
+                className="absolute -top-3 right-3 sm:-top-5 sm:-right-4 rounded-2xl border border-white/80 bg-white/90 p-2.5 sm:p-3 shadow-lg shadow-slate-200/50 backdrop-blur-md z-20 flex items-center gap-2.5"
+              >
+                <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
+                  <Folder className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-[8px] sm:text-[9px] font-bold text-slate-400 uppercase tracking-wider leading-none">Projects Completed</p>
+                  <p className="mt-0.5 text-sm sm:text-base font-black text-slate-900 leading-none">4</p>
+                </div>
+              </motion.div>
+            </motion.div>
           </div>
 
         </div>

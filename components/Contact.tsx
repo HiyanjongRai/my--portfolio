@@ -82,11 +82,13 @@ export default function Contact() {
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formRef.current) return;
     setIsSubmitting(true);
+    setSubmitError(null);
 
     try {
       await emailjs.sendForm(
@@ -104,7 +106,7 @@ export default function Contact() {
       }, 5000);
     } catch (error) {
       console.error('Email error:', error);
-      alert('Failed to send message. Please try again or email directly.');
+      setSubmitError('Failed to send your message. Please try again or email me directly.');
     } finally {
       setIsSubmitting(false);
     }
@@ -249,8 +251,15 @@ export default function Contact() {
               </div>
 
               {/* Form Fields */}
-              <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" noValidate>
+                <div aria-live="polite" aria-atomic="true">
+                  {submitError && (
+                    <div role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-700">
+                      {submitError}
+                    </div>
+                  )}
+                </div>
+                <div className="grid grid-cols-1 gap-4">
                   <div>
                     <label htmlFor="from_name" className="block text-xs font-bold text-[#374151] mb-2">
                       Your Name
@@ -261,8 +270,10 @@ export default function Contact() {
                         id="from_name"
                         name="from_name"
                         required
-                        placeholder="Enter your name"
-                        className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white pl-4 pr-11 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
+                        autoComplete="name"
+                        enterKeyHint="next"
+                        placeholder="Jane Doe"
+                        className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white pl-4 pr-11 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition duration-200"
                       />
                       <User className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9CA3AF]" />
                     </div>
@@ -277,8 +288,11 @@ export default function Contact() {
                         id="from_email"
                         name="from_email"
                         required
-                        placeholder="Enter your email"
-                        className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white pl-4 pr-11 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
+                        autoComplete="email"
+                        inputMode="email"
+                        enterKeyHint="next"
+                        placeholder="you@example.com"
+                        className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white pl-4 pr-11 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition duration-200"
                       />
                       <Mail className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9CA3AF]" />
                     </div>
@@ -295,8 +309,10 @@ export default function Contact() {
                       id="subject"
                       name="subject"
                       required
+                      autoComplete="off"
+                      enterKeyHint="next"
                       placeholder="What's this about?"
-                      className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white pl-4 pr-11 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200"
+                      className="min-h-12 w-full rounded-xl border border-[#E5E7EB] bg-white pl-4 pr-11 py-3 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition duration-200"
                     />
                     <Tag className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-[#9CA3AF]" />
                   </div>
@@ -312,8 +328,9 @@ export default function Contact() {
                       name="message"
                       required
                       rows={4}
+                      enterKeyHint="send"
                       placeholder="Tell me about your project or idea..."
-                      className="w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 pr-11 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none transition duration-200 resize-none"
+                      className="min-h-24 w-full rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 pr-11 text-base sm:text-sm font-semibold text-[#111827] placeholder:text-[#9CA3AF] placeholder:font-medium focus:border-[#16A34A] focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition duration-200 resize-y"
                     />
                     <Edit3 className="pointer-events-none absolute bottom-3.5 right-4 h-4 w-4 text-[#9CA3AF]" />
                   </div>
@@ -421,7 +438,9 @@ export default function Contact() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
-          className="fixed bottom-5 left-5 right-5 sm:left-auto sm:bottom-8 sm:right-8 z-50 rounded-2xl border border-emerald-100 bg-white p-5 max-w-sm shadow-2xl"
+          role="status"
+          aria-live="polite"
+          className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-5 right-5 sm:left-auto sm:bottom-8 sm:right-8 z-50 rounded-2xl border border-emerald-100 bg-white p-5 max-w-sm shadow-2xl"
         >
           <div className="flex items-start gap-3.5">
             <div className="w-9 h-9 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600 flex-shrink-0">
