@@ -75,3 +75,25 @@ export async function GET() {
     return NextResponse.json({ assets: [], error: msg }, { status: 500 });
   }
 }
+
+export async function DELETE(request: Request) {
+  try {
+    const { public_id, resource_type = 'image' } = await request.json();
+    if (!public_id) {
+      return NextResponse.json({ error: 'public_id is required' }, { status: 400 });
+    }
+
+    const apiSecret = process.env.CLOUDINARY_API_SECRET;
+    if (apiSecret) {
+      await cloudinary.uploader.destroy(public_id, {
+        resource_type: resource_type || 'image',
+        invalidate: true,
+      });
+    }
+
+    return NextResponse.json({ success: true, message: `Asset ${public_id} deleted` });
+  } catch (error: unknown) {
+    const msg = error instanceof Error ? error.message : 'Failed to delete asset';
+    return NextResponse.json({ error: msg }, { status: 500 });
+  }
+}

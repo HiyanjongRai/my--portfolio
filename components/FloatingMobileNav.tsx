@@ -36,17 +36,17 @@ const navItems: NavItem[] = [
   { id: 'about', label: 'About', icon: faUser },
   { id: 'moments', label: 'Moments', icon: faCamera, isRoute: true },
   { id: 'projects', label: 'Projects', icon: faFolderOpen },
-  { id: 'contact', label: 'Contact', icon: faEnvelope },
   { id: 'social', label: 'Social', icon: faShareNodes, isSocial: true },
+  { id: 'contact', label: 'Contact', icon: faEnvelope },
 ];
 
 const socialOptions = [
-  { name: 'GitHub', url: socialLinks.github, icon: faGithub, color: 'hover:text-emerald-400 hover:border-emerald-500/40' },
-  { name: 'LinkedIn', url: socialLinks.linkedin, icon: faLinkedin, color: 'hover:text-blue-400 hover:border-blue-500/40' },
-  { name: 'Instagram', url: socialLinks.instagram, icon: faInstagram, color: 'hover:text-pink-400 hover:border-pink-500/40' },
-  { name: 'Facebook', url: socialLinks.facebook, icon: faFacebook, color: 'hover:text-sky-400 hover:border-sky-500/40' },
-  { name: 'Pinterest', url: socialLinks.pinterest, icon: faPinterest, color: 'hover:text-red-400 hover:border-red-500/40' },
-  { name: 'Blog', url: socialLinks.blog, icon: faGlobe, color: 'hover:text-emerald-300 hover:border-emerald-400/40' },
+  { name: 'GitHub',    url: socialLinks.github,    icon: faGithub,    iconColor: 'text-gray-900',   bg: 'bg-gray-50   border-gray-200',   hover: 'hover:bg-gray-900   hover:border-gray-900   hover:text-white' },
+  { name: 'LinkedIn',  url: socialLinks.linkedin,  icon: faLinkedin,  iconColor: 'text-blue-600',   bg: 'bg-blue-50   border-blue-100',   hover: 'hover:bg-blue-600   hover:border-blue-600   hover:text-white' },
+  { name: 'Instagram', url: socialLinks.instagram, icon: faInstagram, iconColor: 'text-pink-500',   bg: 'bg-pink-50   border-pink-100',   hover: 'hover:bg-pink-500   hover:border-pink-500   hover:text-white' },
+  { name: 'Facebook',  url: socialLinks.facebook,  icon: faFacebook,  iconColor: 'text-[#1877F2]',  bg: 'bg-blue-50   border-blue-100',   hover: 'hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-white' },
+  { name: 'Pinterest', url: socialLinks.pinterest, icon: faPinterest, iconColor: 'text-red-600',    bg: 'bg-red-50    border-red-100',    hover: 'hover:bg-red-600    hover:border-red-600    hover:text-white' },
+  { name: 'Blog',      url: socialLinks.blog,      icon: faGlobe,     iconColor: 'text-emerald-600', bg: 'bg-emerald-50 border-emerald-100', hover: 'hover:bg-emerald-600 hover:border-emerald-600 hover:text-white' },
 ];
 
 export default function FloatingMobileNav() {
@@ -122,31 +122,33 @@ export default function FloatingMobileNav() {
               className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm md:hidden"
             />
 
-            {/* Social Popup Menu */}
+            {/* Social Popup Menu — white/green theme */}
             <motion.div
               initial={{ opacity: 0, scale: 0.85, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.85, y: 30 }}
               transition={{ type: 'spring', stiffness: 380, damping: 26 }}
-              className="fixed bottom-[90px] left-1/2 -translate-x-1/2 z-50 md:hidden w-[90%] max-w-[360px] rounded-3xl bg-slate-900/95 border border-emerald-500/30 p-5 shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-xl"
+              className="fixed bottom-[90px] left-1/2 -translate-x-1/2 z-50 md:hidden w-[90%] max-w-[360px] rounded-3xl bg-white border border-emerald-200 p-5 shadow-[0_20px_60px_rgba(16,185,129,0.15),0_4px_24px_rgba(0,0,0,0.1)] backdrop-blur-xl"
               style={{ paddingBottom: 'calc(1.25rem + env(safe-area-inset-bottom))' }}
             >
-              <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+              {/* Header */}
+              <div className="flex items-center justify-between pb-3 border-b border-emerald-100 mb-4">
                 <div className="flex items-center gap-2">
                   <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <h4 className="text-xs font-extrabold uppercase tracking-widest text-slate-300">
+                  <h4 className="text-xs font-extrabold uppercase tracking-widest text-emerald-700">
                     Connect With Me
                   </h4>
                 </div>
                 <button
                   onClick={() => setIsSocialOpen(false)}
-                  className="flex h-7 w-7 items-center justify-center rounded-full bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700 transition"
+                  className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 hover:bg-emerald-500 hover:text-white transition-all duration-200"
                   aria-label="Close social menu"
                 >
                   <FontAwesomeIcon icon={faXmark} className="h-3.5 w-3.5" />
                 </button>
               </div>
 
+              {/* Social Grid */}
               <div className="grid grid-cols-3 gap-3">
                 {socialOptions.map((social, i) => (
                   <motion.a
@@ -158,10 +160,13 @@ export default function FloatingMobileNav() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.05 * i, duration: 0.25 }}
                     whileTap={{ scale: 0.92 }}
-                    className={`flex flex-col items-center justify-center gap-2 p-3 rounded-2xl bg-slate-800/80 border border-slate-700/60 text-slate-300 transition-all duration-200 group ${social.color}`}
+                    className={`flex flex-col items-center justify-center gap-2 p-3 rounded-2xl border transition-all duration-200 group ${social.bg} ${social.hover}`}
                   >
-                    <FontAwesomeIcon icon={social.icon} className="h-5 w-5 transition-transform duration-200 group-hover:scale-110" />
-                    <span className="text-[11px] font-bold tracking-tight">{social.name}</span>
+                    <FontAwesomeIcon
+                      icon={social.icon}
+                      className={`h-5 w-5 transition-all duration-200 group-hover:scale-110 group-hover:text-white ${social.iconColor}`}
+                    />
+                    <span className="text-[11px] font-bold tracking-tight text-slate-700 group-hover:text-white transition-colors duration-200">{social.name}</span>
                   </motion.a>
                 ))}
               </div>

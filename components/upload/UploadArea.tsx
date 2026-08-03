@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { UploadCloud, Image as ImageIcon, Video, AlertTriangle, CheckCircle2, Sparkles } from 'lucide-react';
+import { UploadCloud, Image as ImageIcon, Video, AlertTriangle, CheckCircle2, Sparkles, X } from 'lucide-react';
 import { CloudinaryAsset } from '@/types/upload';
 import { UploadWidget } from './UploadWidget';
 
@@ -17,8 +17,20 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
   const [progress, setProgress] = useState(0);
   const [currentFileName, setCurrentFileName] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const xhrRef = useRef<XMLHttpRequest | null>(null);
 
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+
+  const handleCancelUpload = () => {
+    if (xhrRef.current) {
+      xhrRef.current.abort();
+      xhrRef.current = null;
+    }
+    setUploading(false);
+    setProgress(0);
+    setCurrentFileName('');
+    onError('File upload was cancelled.');
+  };
 
   const validateFile = (file: File): string | null => {
     const isImage = file.type.startsWith('image/');
@@ -41,7 +53,6 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
     }
 
     if (!cloudName) {
-      // Fallback message if env var not configured
       onError('Cloudinary Cloud Name is not configured. Set NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME in .env.local');
       return;
     }
@@ -86,6 +97,7 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
 
       // Step 2: Perform upload with progress tracking via XMLHttpRequest
       const xhr = new XMLHttpRequest();
+      xhrRef.current = xhr;
       xhr.open('POST', endpoint, true);
 
       xhr.upload.onprogress = (e) => {
@@ -97,6 +109,7 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
 
       const uploadPromise = new Promise<CloudinaryAsset>((resolve, reject) => {
         xhr.onload = () => {
+          xhrRef.current = null;
           if (xhr.status >= 200 && xhr.status < 300) {
             const data = JSON.parse(xhr.responseText);
             const asset: CloudinaryAsset = {
@@ -124,8 +137,18 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
           }
         };
 
-        xhr.onerror = () => reject(new Error('Network error during file upload'));
+        xhr.onerror = () => {
+          xhrRef.current = null;
+          reject(new Error('Network error during file upload'));
+        };
+
+        xhr.onabort = () => {
+          xhrRef.current = null;
+          reject(new Error('File upload was cancelled'));
+        };
       });
+
+      xhr.send(formData);
 
       const uploadedAsset = await uploadPromise;
       setProgress(100);
@@ -142,7 +165,9 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
       setProgress(0);
       setCurrentFileName('');
       const message = err instanceof Error ? err.message : 'File upload failed';
-      onError(message);
+      if (message !== 'File upload was cancelled') {
+        onError(message);
+      }
     }
   };
 
@@ -162,13 +187,6 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
     e.preventDefault();
     e.stopPropagation();
     setIsDragging(false);
-
-    const files = Array.from(e.dataTransfer.files);
-    if (files.length === 0) return;
-
-    for (const file of files) {
-      await uploadFileDirectly(file);
-    }
   };
 
   const handleFileInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -184,11 +202,12 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
     <div className="w-full">
       <input
         ref={fileInputRef}
+        id="browse-local-files-input"
         type="file"
         multiple
         accept="image/*,video/*"
         onChange={handleFileInputChange}
-        className="hidden"
+        className="sr-only opacity-0 absolute w-0 h-0 pointer-events-none"
       />
 
       <motion.div
@@ -196,7 +215,6 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         whileHover={{ scale: 1.005 }}
-        whileTap={{ scale: 0.998 }}
         className={`relative overflow-hidden rounded-3xl border-2 border-dashed p-8 md:p-12 text-center transition-all duration-300 ${
           isDragging
             ? 'border-emerald-500 bg-emerald-50/80 dark:bg-emerald-950/20 shadow-xl shadow-emerald-500/10'
@@ -229,9 +247,20 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <div className="flex justify-between text-xs font-bold text-slate-500">
+            <div className="flex justify-between items-center text-xs font-bold text-slate-500">
               <span>Progress</span>
               <span className="text-emerald-600">{progress}%</span>
+            </div>
+
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={handleCancelUpload}
+                className="inline-flex items-center gap-1.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 px-4 py-2 text-xs font-bold transition cursor-pointer"
+              >
+                <X className="h-4 w-4" />
+                Cancel / Abort Upload
+              </button>
             </div>
           </div>
         ) : (
@@ -272,14 +301,19 @@ export function UploadArea({ onSuccess, onError }: UploadAreaProps) {
 
             {/* Action Buttons */}
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-              <button
-                type="button"
-                onClick={() => fileInputRef.current?.click()}
-                className="btn-primary cursor-pointer shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30"
+              <label
+                htmlFor="browse-local-files-input"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  if (fileInputRef.current) {
+                    fileInputRef.current.click();
+                  }
+                }}
+                className="btn-primary cursor-pointer shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/30 flex items-center gap-2"
               >
                 <UploadCloud className="h-5 w-5" />
                 Browse Local Files
-              </button>
+              </label>
 
               <UploadWidget onSuccess={onSuccess} onError={onError}>
                 {(openWidget) => (

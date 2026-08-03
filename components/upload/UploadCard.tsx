@@ -26,6 +26,7 @@ interface UploadCardProps {
   onPreview: (asset: CloudinaryAsset) => void;
   onCopy: (text: string, label: string) => void;
   onDelete: (public_id: string) => void;
+  isAuthorized?: boolean;
 }
 
 function getRelativeTime(dateString: string): string {
@@ -56,7 +57,7 @@ function formatBytes(bytes: number): string {
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
 }
 
-export function UploadCard({ asset, onPreview, onCopy, onDelete }: UploadCardProps) {
+export function UploadCard({ asset, onPreview, onCopy, onDelete, isAuthorized = false }: UploadCardProps) {
   const [copiedField, setCopiedField] = useState<string | null>(null);
 
   const isVideo = asset.resource_type === 'video' || asset.format === 'mp4' || asset.format === 'webm' || asset.format === 'mov';
@@ -257,14 +258,16 @@ export function UploadCard({ asset, onPreview, onCopy, onDelete }: UploadCardPro
             </a>
           </div>
 
-          <button
-            onClick={() => onDelete(asset.public_id)}
-            className="inline-flex items-center gap-1 text-red-500 hover:text-red-700 hover:bg-red-50 px-2 py-1 rounded-lg transition-colors cursor-pointer"
-            title="Remove from history"
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-            Delete
-          </button>
+          {isAuthorized && (
+            <button
+              onClick={() => onDelete(asset.public_id)}
+              className="inline-flex items-center gap-1 text-red-500 hover:text-red-700 hover:bg-red-50 px-2 py-1 rounded-lg transition-colors cursor-pointer"
+              title="Remove from history"
+            >
+              <Trash2 className="h-3.5 w-3.5" />
+              Delete
+            </button>
+          )}
         </div>
       </div>
     </motion.div>

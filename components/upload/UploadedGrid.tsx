@@ -12,6 +12,7 @@ interface UploadedGridProps {
   onPreview: (asset: CloudinaryAsset) => void;
   onCopy: (text: string, label: string) => void;
   onDelete: (public_id: string) => void;
+  isAuthorized?: boolean;
 }
 
 export function UploadedGrid({
@@ -20,6 +21,7 @@ export function UploadedGrid({
   onPreview,
   onCopy,
   onDelete,
+  isAuthorized = false,
 }: UploadedGridProps) {
   if (loading) {
     return (
@@ -80,6 +82,7 @@ export function UploadedGrid({
             onPreview={onPreview}
             onCopy={onCopy}
             onDelete={onDelete}
+            isAuthorized={isAuthorized}
           />
         ))}
       </AnimatePresence>
