@@ -3,7 +3,9 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
-import { ArrowRight, Download, MapPin, GraduationCap, Briefcase, Code2, Quote, ShieldCheck, Layers, Sparkles, Gauge } from 'lucide-react';
+import { ArrowRight, Download, MapPin, GraduationCap, Briefcase, Code2, Quote, ShieldCheck, Layers, Gauge } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
 import { personalInfo } from '@/data/portfolio';
 import { scrollToSection } from '@/lib/utils';
 
@@ -24,7 +26,7 @@ const mindset = [
   { icon: Gauge, label: 'Scalability first', sub: 'Code that survives growth' },
   { icon: ShieldCheck, label: 'Security minded', sub: 'Auth, JWT, and validation' },
   { icon: Layers, label: 'Clean architecture', sub: 'MVC, layered, readable' },
-  { icon: Sparkles, label: 'Always learning', sub: 'New tech, better patterns' },
+  { faIcon: faWandMagicSparkles, label: 'Always learning', sub: 'New tech, better patterns' },
 ];
 
 export default function AboutIntro() {
@@ -177,7 +179,11 @@ export default function AboutIntro() {
                 {mindset.map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-100">
-                      <item.icon className="h-4 w-4" />
+                      {item.faIcon ? (
+                        <FontAwesomeIcon icon={item.faIcon} className="h-4 w-4 text-emerald-600" />
+                      ) : item.icon ? (
+                        <item.icon className="h-4 w-4" />
+                      ) : null}
                     </div>
                     <div className="min-w-0">
                       <p className="text-[13px] font-bold text-slate-800 leading-tight">{item.label}</p>

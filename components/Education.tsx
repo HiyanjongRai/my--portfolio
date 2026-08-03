@@ -155,23 +155,24 @@ export default function Education() {
         </div>
 
         {/* ── Timeline ── */}
-        <div className="relative pl-6 sm:pl-10 space-y-8 sm:space-y-10">
-          {/* Vertical dashed connector */}
+        {/* NODE_SIZE=20px, LINE_X = 10px from left of wrapper (center of node) */}
+        <div className="relative ml-[10px] sm:ml-[14px] pl-8 sm:pl-12 space-y-8 sm:space-y-10">
+          {/* Vertical dashed connector — sits at left:0, which aligns with node centers */}
           <motion.div
             initial={{ scaleY: 0 }}
             animate={isInView ? { scaleY: 1 } : {}}
             transition={{ duration: 1.2, delay: 0.3 }}
-            className="absolute left-[3px] sm:left-[15px] top-3 bottom-3 w-0 border-l-2 border-dashed border-emerald-300 origin-top"
+            className="absolute left-0 top-8 bottom-8 w-0 border-l-2 border-dashed border-emerald-300 origin-top z-0"
           />
 
           {educationTimeline.map((item, idx) => (
             <div key={idx} className="relative">
-              {/* Timeline node */}
+              {/* Timeline node — centered on left:0 of wrapper = same line as connector */}
               <motion.div
                 initial={{ scale: 0, opacity: 0 }}
                 animate={isInView ? { scale: 1, opacity: 1 } : {}}
                 transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.4 + idx * 0.15 }}
-                className="absolute -left-[30px] sm:-left-[34px] top-6 h-5 w-5 rounded-full bg-white border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.35)] z-10 flex items-center justify-center"
+                className="absolute left-0 -translate-x-1/2 top-6 h-5 w-5 rounded-full bg-white border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.35)] z-10 flex items-center justify-center"
               >
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               </motion.div>

@@ -5,7 +5,6 @@ import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
   Target,
-  Sparkles,
   Heart,
   TrendingUp,
   Briefcase,
@@ -14,6 +13,8 @@ import {
   Quote,
   Download
 } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
 import { personalInfo } from '@/data/portfolio';
 
 function AnimatedCounter({ to, suffix = '' }: { to: number; suffix?: string }) {
@@ -64,7 +65,7 @@ const highlights = [
     color: 'from-emerald-500/10 to-emerald-500/5 text-emerald-700 border-emerald-100/50'
   },
   {
-    icon: Sparkles,
+    faIcon: faWandMagicSparkles,
     title: 'My Approach',
     desc: 'I combine design thinking with modern technologies.',
     color: 'from-blue-500/10 to-blue-500/5 text-blue-700 border-blue-100/50'
@@ -149,7 +150,11 @@ export default function About() {
                     className={`flex flex-col gap-2 p-5 rounded-2xl border bg-gradient-to-br ${item.color} shadow-sm hover:shadow-md transition-all duration-300`}
                   >
                     <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm">
-                      <IconComponent className="h-4.5 w-4.5" />
+                      {item.faIcon ? (
+                        <FontAwesomeIcon icon={item.faIcon} className="h-4.5 w-4.5 text-blue-600" />
+                      ) : IconComponent ? (
+                        <IconComponent className="h-4.5 w-4.5" />
+                      ) : null}
                     </div>
                     <div>
                       <h3 className="text-sm font-extrabold text-slate-900 leading-tight">{item.title}</h3>

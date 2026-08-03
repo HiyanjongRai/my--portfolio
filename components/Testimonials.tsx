@@ -2,7 +2,9 @@
 
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Quote, Star } from 'lucide-react';
+import { Quote } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const testimonials = [
   {
@@ -96,7 +98,7 @@ export default function Testimonials() {
               {/* Stars */}
               <div className="flex gap-1 mb-5">
                 {[...Array(t.stars)].map((_, j) => (
-                  <Star key={j} className="h-4 w-4 fill-emerald-500 text-emerald-500" />
+                  <FontAwesomeIcon key={j} icon={faStar} className="h-4 w-4 text-emerald-500" />
                 ))}
               </div>
 

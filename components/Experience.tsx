@@ -181,25 +181,26 @@ export default function Experience() {
           
           {/* LEFT: Interactive Timeline (60%) */}
           <div className="relative">
-            {/* Timeline Line */}
+            {/* Timeline Line — ml-[10px] wrapper + left-0 ensures line and nodes share x-axis */}
+            <div className="relative ml-[10px] sm:ml-[14px]">
             <motion.div
               variants={lineVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
-              className="absolute left-2 sm:left-6 top-3 bottom-3 w-[2px] bg-gradient-to-b from-[#16A34A] via-[#86EFAC] to-[#F3F4F6] origin-top"
+              className="absolute left-0 top-8 bottom-8 w-[2px] bg-gradient-to-b from-[#16A34A] via-[#86EFAC] to-[#F3F4F6] origin-top z-0"
             />
 
-            <div className="space-y-8 sm:space-y-10">
+            <div className="pl-8 sm:pl-12 space-y-8 sm:space-y-10">
               {experiences.map((exp, idx) => (
-                <div key={idx} className="relative flex gap-3 sm:gap-8 pl-6 sm:pl-16">
+                <div key={idx} className="relative">
                   
-                  {/* Glowing Node Dot */}
+                  {/* Glowing Node Dot — left-0 of ml-offset wrapper = same as line */}
                   <motion.div
                     custom={idx}
                     variants={nodeVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
-                    className="absolute left-2 sm:left-6 -translate-x-[9px] top-4 z-10 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-white border-2 border-[#16A34A] shadow-[0_0_12px_rgba(22,163,74,0.35)]"
+                    className="absolute left-0 -translate-x-1/2 top-5 z-10 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-white border-2 border-[#16A34A] shadow-[0_0_12px_rgba(22,163,74,0.35)]"
                   >
                     <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" />
                   </motion.div>
@@ -210,7 +211,7 @@ export default function Experience() {
                     variants={cardVariants}
                     initial="hidden"
                     animate={isInView ? "visible" : "hidden"}
-                    className="group flex-1 rounded-[22px] sm:rounded-[28px] border border-[#E5E7EB] bg-white p-5 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300"
+                    className="group w-full rounded-[22px] sm:rounded-[28px] border border-[#E5E7EB] bg-white p-5 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300"
                   >
                     {/* Header Row */}
                     <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
@@ -291,6 +292,7 @@ export default function Experience() {
                 </div>
               ))}
             </div>
+            </div> {/* close ml wrapper */}
           </div>
 
           {/* RIGHT: Visual Philosophy Panel (40%) */}

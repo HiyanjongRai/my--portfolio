@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/ui/header';
 import Footer from '@/components/Footer';
 import ScrollProgress from '@/components/ScrollProgress';
+import FloatingMobileNav from '@/components/FloatingMobileNav';
 
 import { PinterestGrid } from '@/components/moments/PinterestGrid';
 import { MediaModal } from '@/components/upload/MediaModal';
@@ -62,7 +63,7 @@ export default function MomentsPage() {
       <ScrollProgress />
       <Header />
 
-      <main className="mx-auto max-w-7xl px-3 sm:px-6 md:px-8 py-10 space-y-8">
+      <main className="mx-auto max-w-7xl px-3 sm:px-6 md:px-8 py-10 pb-28 space-y-8">
         {/* Page Header */}
         <div className="text-center max-w-2xl mx-auto pt-4 space-y-3">
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
@@ -93,6 +94,9 @@ export default function MomentsPage() {
       />
 
       <ToastContainer toasts={toasts} onDismiss={(id) => setToasts((prev) => prev.filter((t) => t.id !== id))} />
+
+      {/* Floating mobile bottom navigation */}
+      <FloatingMobileNav />
     </div>
   );
 }
