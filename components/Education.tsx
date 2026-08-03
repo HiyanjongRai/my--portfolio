@@ -154,76 +154,68 @@ export default function Education() {
           </motion.div>
         </div>
 
-        {/* ── Timeline ── */}
-        {/* NODE_SIZE=20px, LINE_X = 10px from left of wrapper (center of node) */}
-        <div className="relative ml-[10px] sm:ml-[14px] pl-8 sm:pl-12 space-y-8 sm:space-y-10">
-          {/* Vertical dashed connector — sits at left:0, which aligns with node centers */}
-          <motion.div
-            initial={{ scaleY: 0 }}
-            animate={isInView ? { scaleY: 1 } : {}}
-            transition={{ duration: 1.2, delay: 0.3 }}
-            className="absolute left-0 top-8 bottom-8 w-0 border-l-2 border-dashed border-emerald-300 origin-top z-0"
-          />
-
+        {/* ── Education Cards ── */}
+        <div className="space-y-6 sm:space-y-8">
           {educationTimeline.map((item, idx) => (
-            <div key={idx} className="relative">
-              {/* Timeline node — centered on left:0 of wrapper = same line as connector */}
-              <motion.div
-                initial={{ scale: 0, opacity: 0 }}
-                animate={isInView ? { scale: 1, opacity: 1 } : {}}
-                transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.4 + idx * 0.15 }}
-                className="absolute left-0 -translate-x-1/2 top-6 h-5 w-5 rounded-full bg-white border-2 border-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.35)] z-10 flex items-center justify-center"
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, x: -32 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.55, delay: 0.3 + idx * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="group relative flex gap-5 sm:gap-7 rounded-[22px] sm:rounded-3xl border border-slate-100 bg-white p-5 sm:p-7 shadow-[0_2px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(16,185,129,0.10)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+            >
+              {/* Left emerald accent bar */}
+              <span className="absolute left-0 top-6 bottom-6 w-1 rounded-r-full bg-emerald-500 opacity-80 group-hover:opacity-100 group-hover:top-4 group-hover:bottom-4 transition-all duration-300" />
+
+              {/* Step number — decorative background */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none text-[80px] sm:text-[100px] font-black leading-none text-emerald-50 group-hover:text-emerald-100/70 transition-colors duration-300"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              </motion.div>
+                {String(idx + 1).padStart(2, '0')}
+              </span>
 
-              {/* Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.55, delay: 0.4 + idx * 0.12 }}
-                className="group rounded-[22px] sm:rounded-3xl border border-slate-100 bg-white p-5 sm:p-7 shadow-[0_2px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300"
-              >
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-                  <div className="flex items-start gap-3 sm:gap-4">
-                    {/* Icon */}
-                    <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 group-hover:bg-emerald-100 transition-colors duration-200">
-                      <item.icon className="h-6 w-6 sm:h-7 sm:w-7 text-emerald-600" strokeWidth={1.75} />
-                    </div>
+              {/* Icon column */}
+              <div className="relative z-10 flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 group-hover:bg-emerald-100 transition-colors duration-200 self-start mt-1">
+                <item.icon className="h-6 w-6 sm:h-7 sm:w-7 text-emerald-600" strokeWidth={1.75} />
+              </div>
 
-                    <div className="min-w-0">
-                      <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200 mb-2">
-                        {item.tag === 'Ongoing' ? (
-                          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                        ) : (
-                          <CheckCircle2 className="h-3 w-3" />
-                        )}
-                        {item.tag}
-                      </span>
-                      <h3 className="text-[17px] font-extrabold text-slate-900 leading-tight">{item.title}</h3>
-                      <p className="text-[13px] font-semibold text-emerald-600 mt-0.5">{item.institution}</p>
-                    </div>
-                  </div>
-
-                  {/* Date only, top-right */}
-                  <div className="flex items-center gap-1.5 text-[12px] font-semibold text-slate-400 shrink-0 sm:pt-1">
+              {/* Content */}
+              <div className="relative z-10 flex-1 min-w-0">
+                {/* Top row: tag + date */}
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
+                    {item.tag === 'Ongoing' ? (
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    ) : (
+                      <CheckCircle2 className="h-3 w-3" />
+                    )}
+                    {item.tag}
+                  </span>
+                  <div className="flex items-center gap-1.5 text-[12px] font-semibold text-slate-400">
                     <Calendar className="h-3.5 w-3.5" />
                     {item.dates}
                   </div>
                 </div>
 
-                <p className="mt-4 text-[15px] sm:text-[14px] text-slate-500 leading-relaxed font-medium">{item.desc}</p>
+                <h3 className="text-[17px] font-extrabold text-slate-900 leading-tight">{item.title}</h3>
+                <p className="text-[13px] font-semibold text-emerald-600 mt-0.5 mb-3">{item.institution}</p>
+                <p className="text-[14px] text-slate-500 leading-relaxed font-medium mb-4">{item.desc}</p>
 
-                <div className="mt-4 flex flex-wrap gap-2">
+                {/* Highlights */}
+                <div className="flex flex-wrap gap-2">
                   {item.highlights.map((hl, hi) => (
-                    <span key={hi} className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 border border-slate-100 px-3 py-1.5 text-[12px] sm:text-[11px] font-semibold text-slate-600">
+                    <span
+                      key={hi}
+                      className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 border border-slate-100 px-3 py-1.5 text-[11px] font-semibold text-slate-600"
+                    >
                       <hl.icon className="h-3.5 w-3.5 text-emerald-600" strokeWidth={2} />
                       {hl.label}
                     </span>
                   ))}
                 </div>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           ))}
         </div>
 

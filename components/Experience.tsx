@@ -108,26 +108,12 @@ export default function Experience() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 } }
   };
 
-  const lineVariants: Variants = {
-    hidden: { scaleY: 0 },
-    visible: { scaleY: 1, transition: { duration: 1.2, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 } }
-  };
-
   const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 24 },
+    hidden: { opacity: 0, x: -32 },
     visible: (custom: number) => ({
       opacity: 1,
-      y: 0,
-      transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.35 + custom * 0.15 }
-    })
-  };
-
-  const nodeVariants: Variants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: (custom: number) => ({
-      scale: 1,
-      opacity: 1,
-      transition: { type: 'spring', stiffness: 200, damping: 15, delay: 0.45 + custom * 0.15 }
+      x: 0,
+      transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.3 + custom * 0.15 }
     })
   };
 
@@ -178,121 +164,101 @@ export default function Experience() {
 
         {/* ── Two-Column Layout ── */}
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-start">
-          
-          {/* LEFT: Interactive Timeline (60%) */}
-          <div className="relative">
-            {/* Timeline Line — ml-[10px] wrapper + left-0 ensures line and nodes share x-axis */}
-            <div className="relative ml-[10px] sm:ml-[14px]">
-            <motion.div
-              variants={lineVariants}
-              initial="hidden"
-              animate={isInView ? "visible" : "hidden"}
-              className="absolute left-0 top-8 bottom-8 w-[2px] bg-gradient-to-b from-[#16A34A] via-[#86EFAC] to-[#F3F4F6] origin-top z-0"
-            />
 
-            <div className="pl-8 sm:pl-12 space-y-8 sm:space-y-10">
-              {experiences.map((exp, idx) => (
-                <div key={idx} className="relative">
-                  
-                  {/* Glowing Node Dot — left-0 of ml-offset wrapper = same as line */}
-                  <motion.div
-                    custom={idx}
-                    variants={nodeVariants}
-                    initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
-                    className="absolute left-0 -translate-x-1/2 top-5 z-10 flex h-[20px] w-[20px] items-center justify-center rounded-full bg-white border-2 border-[#16A34A] shadow-[0_0_12px_rgba(22,163,74,0.35)]"
-                  >
-                    <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" />
-                  </motion.div>
+          {/* LEFT: Experience Cards */}
+          <div className="space-y-6 sm:space-y-7">
+            {experiences.map((exp, idx) => (
+              <motion.div
+                key={idx}
+                custom={idx}
+                variants={cardVariants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                className="group relative flex flex-col rounded-[22px] sm:rounded-[28px] border border-[#E5E7EB] bg-white p-5 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(16,163,74,0.10)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+              >
+                {/* Left accent bar */}
+                <span className="absolute left-0 top-6 bottom-6 w-1 rounded-r-full bg-[#16A34A] opacity-80 group-hover:opacity-100 group-hover:top-4 group-hover:bottom-4 transition-all duration-300" />
 
-                  {/* Experience Card */}
-                  <motion.div
-                    custom={idx}
-                    variants={cardVariants}
-                    initial="hidden"
-                    animate={isInView ? "visible" : "hidden"}
-                    className="group w-full rounded-[22px] sm:rounded-[28px] border border-[#E5E7EB] bg-white p-5 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.07)] hover:-translate-y-1 transition-all duration-300"
-                  >
-                    {/* Header Row */}
-                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-5">
-                      <div className="space-y-2">
-                        <div className="flex flex-wrap items-center gap-2">
-                          <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${exp.statusColor}`}>
-                            {exp.status}
-                          </span>
-                          <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 border border-slate-100 px-2.5 py-0.5 text-[10px] font-bold text-slate-500">
-                            <Briefcase className="h-2.5 w-2.5 text-[#16A34A]" />
-                            {exp.type}
-                          </span>
-                        </div>
-                        
-                        <h3 className="text-[18px] sm:text-xl font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-300 leading-tight">
-                          {exp.title}
-                        </h3>
-                        <p className="text-sm font-bold text-slate-500">{exp.company}</p>
+                {/* Decorative step number */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none text-[80px] sm:text-[100px] font-black leading-none text-emerald-50 group-hover:text-emerald-100/60 transition-colors duration-300"
+                >
+                  {String(idx + 1).padStart(2, '0')}
+                </span>
+
+                {/* Content */}
+                <div className="relative z-10">
+                  {/* Header Row */}
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
+                    <div className="space-y-1.5">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${exp.statusColor}`}>
+                          {exp.status}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 border border-slate-100 px-2.5 py-0.5 text-[10px] font-bold text-slate-500">
+                          <Briefcase className="h-2.5 w-2.5 text-[#16A34A]" />
+                          {exp.type}
+                        </span>
                       </div>
-
-                      {/* Period & Location */}
-                      <div className="sm:text-right shrink-0 space-y-1">
-                        <div className="flex items-center sm:justify-end gap-1.5 text-xs font-bold text-slate-500">
-                          <Calendar className="h-3.5 w-3.5 text-[#16A34A]" />
-                          {exp.period}
-                        </div>
-                        <div className="flex items-center sm:justify-end gap-1.5 text-xs font-semibold text-slate-400">
-                          <MapPin className="h-3.5 w-3.5" />
-                          {exp.location}
-                        </div>
-                      </div>
+                      <h3 className="text-[18px] sm:text-xl font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-300 leading-tight">
+                        {exp.title}
+                      </h3>
+                      <p className="text-sm font-bold text-slate-500">{exp.company}</p>
                     </div>
 
-                    {/* Paragraph description */}
-                    <p className="text-[14px] text-[#6B7280] font-normal leading-relaxed mb-5">
-                      {exp.description}
-                    </p>
-
-                    {/* Core highlights */}
-                    <ul className="space-y-2.5 mb-6">
-                      {exp.highlights.map((highlight, hIdx) => (
-                        <li key={hIdx} className="flex items-start gap-3 text-[13px] text-[#374151] font-medium leading-relaxed">
-                          <span className="mt-0.5 flex h-4.5 w-4.5 shrink-0 items-center justify-center rounded-full bg-[#F3FAF5] text-[#16A34A]">
-                            <CheckCircle2 className="h-3.5 w-3.5" />
-                          </span>
-                          {highlight}
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* Footer Tech Tags */}
-                    <div className="flex flex-wrap items-center gap-2 border-t border-[#F3F4F6] pt-4.5">
-                      <div className="flex flex-wrap gap-1.5">
-                        {exp.tags.map((tag, tIdx) => (
-                          <span
-                            key={tIdx}
-                            className="rounded-full bg-slate-50 border border-slate-100 px-3 py-1 text-[10px] font-bold text-slate-600"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                    {/* Period & Location */}
+                    <div className="sm:text-right shrink-0 space-y-1">
+                      <div className="flex items-center sm:justify-end gap-1.5 text-xs font-bold text-slate-500">
+                        <Calendar className="h-3.5 w-3.5 text-[#16A34A]" />
+                        {exp.period}
                       </div>
-
-                      {exp.link && exp.link !== '#' && (
-                        <a
-                          href={exp.link}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="mt-2 sm:mt-0 sm:ml-auto inline-flex min-h-11 items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-white px-3.5 py-1.5 text-[11px] font-bold text-[#374151] hover:bg-[#F3FAF5] hover:border-[#D1FAE5] hover:text-[#16A34A] transition-all duration-200"
-                        >
-                          Visit Page
-                          <ArrowUpRight className="h-3 w-3" />
-                        </a>
-                      )}
+                      <div className="flex items-center sm:justify-end gap-1.5 text-xs font-semibold text-slate-400">
+                        <MapPin className="h-3.5 w-3.5" />
+                        {exp.location}
+                      </div>
                     </div>
+                  </div>
 
-                  </motion.div>
+                  {/* Description */}
+                  <p className="text-[14px] text-[#6B7280] font-normal leading-relaxed mb-4">
+                    {exp.description}
+                  </p>
+
+                  {/* Highlights */}
+                  <ul className="space-y-2 mb-5">
+                    {exp.highlights.map((highlight, hIdx) => (
+                      <li key={hIdx} className="flex items-start gap-3 text-[13px] text-[#374151] font-medium leading-relaxed">
+                        <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#F3FAF5] text-[#16A34A]">
+                          <CheckCircle2 className="h-3 w-3" />
+                        </span>
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
+
+                  {/* Tags + Link */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    {exp.tags.map((tag, tIdx) => (
+                      <span key={tIdx} className="rounded-full bg-slate-50 border border-slate-100 px-3 py-1 text-[10px] font-bold text-slate-600">
+                        {tag}
+                      </span>
+                    ))}
+                    {exp.link && exp.link !== '#' && (
+                      <a
+                        href={exp.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-white px-3.5 py-1.5 text-[11px] font-bold text-[#374151] hover:bg-[#F3FAF5] hover:border-[#D1FAE5] hover:text-[#16A34A] transition-all duration-200"
+                      >
+                        Visit Page
+                        <ArrowUpRight className="h-3 w-3" />
+                      </a>
+                    )}
+                  </div>
                 </div>
-              ))}
-            </div>
-            </div> {/* close ml wrapper */}
+              </motion.div>
+            ))}
           </div>
 
           {/* RIGHT: Visual Philosophy Panel (40%) */}
