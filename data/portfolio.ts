@@ -21,8 +21,9 @@ export const socialLinks = {
   github: "https://github.com/HiyanjongRai",
   linkedin: "https://www.linkedin.com/in/hiyanjongrai",
   pinterest: "https://www.pinterest.com/HiyanjongRai/",
-  instagram: "https://www.instagram.com/tilung.hiyanjongrai/",
+  instagram: "https://www.instagram.com/_hatterika/",
   facebook: "https://www.facebook.com/profile.php?id=61573473294780",
+  youtube: "https://www.youtube.com/@Axois24",
   dribbble: "https://dribbble.com/your-profile",
   behance: "https://www.behance.net/your-profile",
   blog: "https://hiyanjongblog.vercel.app/"

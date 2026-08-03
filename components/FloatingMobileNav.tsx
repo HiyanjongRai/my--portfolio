@@ -20,6 +20,7 @@ import {
   faInstagram,
   faFacebook,
   faPinterest,
+  faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
 import { scrollToSection } from '@/lib/utils';
 import { socialLinks } from '@/data/portfolio';
@@ -46,7 +47,7 @@ const socialOptions = [
   { name: 'Instagram', url: socialLinks.instagram, icon: faInstagram, iconColor: 'text-pink-500',   bg: 'bg-pink-50   border-pink-100',   hover: 'hover:bg-pink-500   hover:border-pink-500   hover:text-white' },
   { name: 'Facebook',  url: socialLinks.facebook,  icon: faFacebook,  iconColor: 'text-[#1877F2]',  bg: 'bg-blue-50   border-blue-100',   hover: 'hover:bg-[#1877F2] hover:border-[#1877F2] hover:text-white' },
   { name: 'Pinterest', url: socialLinks.pinterest, icon: faPinterest, iconColor: 'text-red-600',    bg: 'bg-red-50    border-red-100',    hover: 'hover:bg-red-600    hover:border-red-600    hover:text-white' },
-  { name: 'Blog',      url: socialLinks.blog,      icon: faGlobe,     iconColor: 'text-emerald-600', bg: 'bg-emerald-50 border-emerald-100', hover: 'hover:bg-emerald-600 hover:border-emerald-600 hover:text-white' },
+  { name: 'YouTube',   url: socialLinks.youtube,   icon: faYoutube,   iconColor: 'text-red-500',    bg: 'bg-red-50    border-red-100',    hover: 'hover:bg-red-500    hover:border-red-500    hover:text-white' },
 ];
 
 export default function FloatingMobileNav() {

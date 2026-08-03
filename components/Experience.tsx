@@ -163,10 +163,10 @@ export default function Experience() {
         </div>
 
         {/* ── Two-Column Layout ── */}
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr] items-start">
+        <div className="grid gap-8 sm:gap-10 lg:gap-12 lg:grid-cols-[1.2fr_0.8fr] items-start">
 
-          {/* LEFT: Experience Cards */}
-          <div className="space-y-6 sm:space-y-7">
+          {/* LEFT: Experience Cards — always shows first on mobile */}
+          <div className="space-y-5 sm:space-y-6 order-1">
             {experiences.map((exp, idx) => (
               <motion.div
                 key={idx}
@@ -174,7 +174,7 @@ export default function Experience() {
                 variants={cardVariants}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
-                className="group relative flex flex-col rounded-[22px] sm:rounded-[28px] border border-[#E5E7EB] bg-white p-5 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(16,163,74,0.10)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                className="group relative flex flex-col rounded-[18px] sm:rounded-[28px] border border-[#E5E7EB] bg-white p-4 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(16,163,74,0.10)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
               >
                 {/* Left accent bar */}
                 <span className="absolute left-0 top-6 bottom-6 w-1 rounded-r-full bg-[#16A34A] opacity-80 group-hover:opacity-100 group-hover:top-4 group-hover:bottom-4 transition-all duration-300" />
@@ -201,7 +201,7 @@ export default function Experience() {
                           {exp.type}
                         </span>
                       </div>
-                      <h3 className="text-[18px] sm:text-xl font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-300 leading-tight">
+                  <h3 className="text-[16px] sm:text-xl font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-300 leading-tight">
                         {exp.title}
                       </h3>
                       <p className="text-sm font-bold text-slate-500">{exp.company}</p>
@@ -261,12 +261,12 @@ export default function Experience() {
             ))}
           </div>
 
-          {/* RIGHT: Visual Philosophy Panel (40%) */}
+          {/* RIGHT: Philosophy Panel — shows below cards on mobile, sticky sidebar on desktop */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="space-y-6 lg:sticky lg:top-[90px]"
+            className="space-y-5 sm:space-y-6 order-2 lg:sticky lg:top-[90px]"
           >
             {/* Overview / Philosophy Card */}
             <div className="rounded-[24px] sm:rounded-[32px] border border-[#E5E7EB] bg-white p-5 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-6">
