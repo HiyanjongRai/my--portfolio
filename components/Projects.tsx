@@ -2,7 +2,7 @@
 
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { ArrowRight, Trophy, Layers, X, ExternalLink, CheckCircle2, AlertCircle, Shield } from 'lucide-react';
+import { ArrowRight, Layers, X, ExternalLink, CheckCircle2, AlertCircle, Shield } from 'lucide-react';
 
 /* ─── Tag colour map ────────────────────────────────────────────── */
 const TAG_COLORS: Record<string, string> = {
@@ -21,6 +21,10 @@ const TAG_COLORS: Record<string, string> = {
   'JavaScript':    '#F7DF1E',
   'Node.js':       '#339933',
   'React':         '#61DAFB',
+  'Next.js':       '#000000',
+  'TypeScript':    '#3178C6',
+  'Tailwind CSS':  '#06B6D4',
+  'Prisma':        '#2D3748',
 };
 
 function TagDot({ tag }: { tag: string }) {
@@ -141,6 +145,54 @@ const allProjects = [
       </svg>
     )
   }
+  ,
+  {
+    id: 4,
+    category: 'E-Commerce',
+    badge: 'Live Fashion Store',
+    badgeColor: 'bg-yellow-50 text-yellow-700 border-yellow-200',
+    title: 'AuraBeads — Fashion Jewelry Store',
+    description: 'A fully live fashion jewelry e-commerce platform featuring a multi-category storefront, seller portal, wishlist, cart, and secure checkout for a Nepali brand.',
+    problemSolved: 'Built an end-to-end online storefront that replaced manual sales operations, enabling sellers to list jewelry and buyers to browse, wishlist, and purchase seamlessly with order tracking.',
+    role: 'Full Stack Developer',
+    keyFeatures: [
+      'Multi-category storefront: Earrings, Necklaces, Bracelets, Rings, Hair Accessories & Sunglasses.',
+      'Seller portal with product upload, approval, and inventory management.',
+      'Wishlist, cart, secure checkout, and real-time order tracking.',
+    ],
+    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Prisma'],
+    github: 'https://github.com/HiyanjongRai',
+    demo: 'https://www.raianjaan.com.np/',
+    architecture: 'Next.js full-stack application with server-side rendering, Prisma ORM for data persistence, and a RESTful API layer for seller and buyer operations.',
+    gradientFrom: '#92400E',
+    gradientTo: '#1C1917',
+    logoUrl: '/aurabeads-logo.png',
+    previewIcon: (
+      <svg viewBox="0 0 80 60" fill="none" className="w-32 h-24 opacity-90">
+        {/* Storefront header */}
+        <rect x="4" y="4" width="72" height="10" rx="2" fill="#ffffff15"/>
+        <text x="40" y="12" textAnchor="middle" fill="#D97706" fontSize="5" fontWeight="bold">AURABEADS</text>
+        {/* Product grid */}
+        <rect x="4" y="18" width="20" height="16" rx="2" fill="#ffffff12"/>
+        <circle cx="14" cy="24" r="4" fill="#D97706A0"/>
+        <rect x="6" y="30" width="16" height="2" rx="1" fill="#ffffff25"/>
+        <rect x="26" y="18" width="20" height="16" rx="2" fill="#ffffff12"/>
+        <circle cx="36" cy="24" r="4" fill="#D9770680"/>
+        <rect x="28" y="30" width="16" height="2" rx="1" fill="#ffffff25"/>
+        <rect x="48" y="18" width="20" height="16" rx="2" fill="#ffffff12"/>
+        <circle cx="58" cy="24" r="4" fill="#D97706A0"/>
+        <rect x="50" y="30" width="16" height="2" rx="1" fill="#ffffff25"/>
+        {/* Category pills */}
+        <rect x="4" y="38" width="14" height="5" rx="2.5" fill="#D9770640"/>
+        <rect x="20" y="38" width="14" height="5" rx="2.5" fill="#ffffff15"/>
+        <rect x="36" y="38" width="14" height="5" rx="2.5" fill="#ffffff15"/>
+        <rect x="52" y="38" width="14" height="5" rx="2.5" fill="#ffffff15"/>
+        {/* CTA button */}
+        <rect x="20" y="48" width="40" height="8" rx="3" fill="#D97706"/>
+        <text x="40" y="54" textAnchor="middle" fill="white" fontSize="4" fontWeight="bold">SHOP NOW</text>
+      </svg>
+    )
+  }
 ];
 
 const categories = ['All Projects', 'Web Applications', 'E-Commerce'];
@@ -168,7 +220,7 @@ function ProjectCard({
     >
       {/* ── Visual Banner ── */}
       <div
-        className="relative h-[168px] sm:h-[220px] flex items-center justify-center overflow-hidden"
+        className="relative h-[140px] sm:h-[160px] flex items-center justify-center overflow-hidden"
         style={{ background: `linear-gradient(135deg, ${project.gradientFrom}, ${project.gradientTo})` }}
       >
         {/* Browser chrome top bar */}
@@ -192,9 +244,17 @@ function ProjectCard({
           }}
         />
 
-        {/* SVG Mockup */}
-        <div className="relative z-10 flex items-center justify-center mt-3 sm:mt-6 scale-75 sm:scale-100">
-          {project.previewIcon}
+        {/* SVG / Logo Mockup */}
+        <div className="relative z-10 flex items-center justify-center mt-2 sm:mt-4 scale-75">
+          {(project as typeof allProjects[0] & { logoUrl?: string }).logoUrl ? (
+            <img
+              src={(project as typeof allProjects[0] & { logoUrl?: string }).logoUrl}
+              alt={`${project.title} logo`}
+              className="w-32 h-22 object-contain drop-shadow-2xl"
+            />
+          ) : (
+            project.previewIcon
+          )}
         </div>
 
         {/* Hover overlay */}
@@ -202,42 +262,56 @@ function ProjectCard({
       </div>
 
       {/* ── Card Body ── */}
-      <div className="flex flex-1 flex-col p-5 sm:p-6 gap-3 sm:gap-4">
+      <div className="flex flex-1 flex-col p-3 sm:p-4 gap-2 sm:gap-3">
         {/* Title + Description */}
-        <div className="space-y-1 sm:space-y-2">
-          <h3 className="text-[17px] sm:text-[15px] font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-200 leading-snug line-clamp-2">
+        <div className="space-y-1">
+          <h3 className="text-[13px] font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-200 leading-snug line-clamp-2">
             {project.title}
           </h3>
-          <p className="text-[14px] sm:text-[12.5px] text-[#6B7280] leading-relaxed line-clamp-3">
+          <p className="text-[11px] text-[#6B7280] leading-relaxed line-clamp-2">
             {project.description}
           </p>
         </div>
 
         {/* Tech tag row */}
-        <div className="flex flex-wrap gap-1 sm:gap-1.5 mt-auto">
+        <div className="flex flex-wrap gap-1 mt-auto">
           {project.tags.map((tag) => (
             <TagDot key={tag} tag={tag} />
           ))}
         </div>
 
         {/* Divider + Actions */}
-        <div className="flex items-center justify-between border-t border-[#F3F4F6] pt-2.5 sm:pt-4">
+        <div className="flex items-center justify-between border-t border-[#F3F4F6] pt-2">
           <button
             onClick={() => onCaseStudy(project)}
-            className="min-h-11 rounded-full pr-3 text-[13px] sm:text-[11px] font-bold text-[#374151] hover:text-[#16A34A] transition-colors duration-200 cursor-pointer"
+            className="min-h-9 rounded-full pr-2 text-[10px] font-bold text-[#374151] hover:text-[#16A34A] transition-colors duration-200 cursor-pointer"
           >
             Case Study
           </button>
 
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="View on GitHub"
-            className="flex h-11 w-11 sm:h-8 sm:w-8 items-center justify-center rounded-full border border-[#E5E7EB] bg-[#F9FAFB] text-[#374151] hover:bg-[#16A34A] hover:border-[#16A34A] hover:text-white transition-all duration-200"
-          >
-            <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
-          </a>
+          <div className="flex items-center gap-1.5">
+            {(project as typeof allProjects[0] & { demo?: string | null }).demo && (
+              <a
+                href={(project as typeof allProjects[0] & { demo?: string | null }).demo!}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Live Demo"
+                className="inline-flex h-7 items-center gap-1 rounded-full border border-amber-200 bg-amber-50 px-2 text-[9px] font-bold text-amber-700 hover:bg-amber-100 hover:border-amber-300 transition-all duration-200 whitespace-nowrap"
+              >
+                <ExternalLink className="h-2.5 w-2.5" />
+                Live
+              </a>
+            )}
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="View on GitHub"
+              className="flex h-7 w-7 items-center justify-center rounded-full border border-[#E5E7EB] bg-[#F9FAFB] text-[#374151] hover:bg-[#16A34A] hover:border-[#16A34A] hover:text-white transition-all duration-200"
+            >
+              <ArrowRight className="h-3 w-3" />
+            </a>
+          </div>
         </div>
       </div>
     </motion.div>
@@ -306,21 +380,9 @@ export default function Projects() {
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
                   <Layers className="h-4.5 w-4.5" />
                 </div>
-                <p className="text-[34px] font-extrabold text-[#111827] leading-none tracking-tight">4</p>
+                <p className="text-[34px] font-extrabold text-[#111827] leading-none tracking-tight">4+</p>
               </div>
               <p className="text-[10px] text-[#9CA3AF] font-bold uppercase tracking-wider">Projects Completed</p>
-            </div>
-
-            <div className="hidden sm:block w-px h-12 bg-[#E5E7EB]" />
-
-            <div className="text-center">
-              <div className="flex items-center gap-2.5 mb-1.5">
-                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F3FAF5] text-[#16A34A]">
-                  <Trophy className="h-4.5 w-4.5" />
-                </div>
-                <p className="text-[34px] font-extrabold text-[#111827] leading-none tracking-tight">5</p>
-              </div>
-              <p className="text-[10px] text-[#9CA3AF] font-bold uppercase tracking-wider">Awards Won</p>
             </div>
           </motion.div>
         </div>
@@ -332,12 +394,12 @@ export default function Projects() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
         >
-          <div className="grid w-full grid-cols-1 min-[390px]:grid-cols-3 gap-2 sm:flex sm:w-auto sm:flex-wrap">
+          <div className="flex w-full flex-wrap gap-2 sm:w-auto">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`inline-flex min-h-11 items-center justify-center gap-1.5 rounded-[12px] border px-4 py-2 text-[12px] font-bold transition-all duration-200 cursor-pointer ${
+                className={`inline-flex min-h-11 items-center justify-center gap-1.5 rounded-[12px] border px-4 py-2 text-[12px] font-bold transition-all duration-200 cursor-pointer whitespace-nowrap ${
                   activeCategory === cat
                     ? 'bg-[#111827] border-[#111827] text-white shadow-sm'
                     : 'bg-white border-[#E5E7EB] text-[#374151] hover:border-[#D1FAE5] hover:bg-[#F3FAF5]'
@@ -362,17 +424,10 @@ export default function Projects() {
               </button>
             ))}
           </div>
-
-          <div className="inline-flex min-h-11 w-full sm:w-auto items-center justify-center gap-2 rounded-[12px] border border-[#E5E7EB] bg-white px-4 py-2 text-[12px] font-bold text-[#374151] shadow-sm cursor-default select-none">
-            Sort by: Latest
-            <svg className="h-3.5 w-3.5 text-[#9CA3AF]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path d="M6 9l6 6 6-6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </div>
         </motion.div>
 
-        {/* ── Project Cards (2x2 Grid on Mobile, 3-Col on Desktop) ── */}
-        <motion.div layout className="grid gap-5 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {/* ── Project Cards (2-Col on Mobile, 4-Col on Desktop) ── */}
+        <motion.div layout className="grid gap-4 sm:gap-5 grid-cols-2 xl:grid-cols-4">
           <AnimatePresence mode="popLayout">
             {filtered.map((project, index) => (
               <ProjectCard

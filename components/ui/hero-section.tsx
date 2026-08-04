@@ -106,8 +106,8 @@ export function HeroSection() {
       <div className="container-custom relative z-10 mx-auto max-w-7xl">
         <div className="flex flex-col lg:grid lg:grid-cols-[1.15fr_0.85fr] gap-8 sm:gap-10 lg:gap-16 items-center">
 
-          {/* ── Text Content (first on mobile per content hierarchy) ─── */}
-          <div className="order-1 w-full space-y-6 sm:space-y-8 text-center sm:text-left">
+          {/* ── Text Content (below image on mobile, left on desktop) ─── */}
+          <div className="order-2 lg:order-1 w-full space-y-6 sm:space-y-8 text-center sm:text-left">
             {/* Status Badge */}
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -245,8 +245,8 @@ export function HeroSection() {
             </motion.div>
           </div>
 
-          {/* ── Image Card (after primary content on mobile) ─── */}
-          <div className="order-2 w-full flex items-center justify-center">
+          {/* ── Image Card (above text on mobile, right on desktop) ─── */}
+          <div className="order-1 lg:order-2 w-full flex items-center justify-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
