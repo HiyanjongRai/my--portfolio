@@ -109,8 +109,8 @@ export function Header() {
     <header
       ref={headerRef}
       className={cn(
-        'sticky top-0 z-50 w-full border-b border-transparent transition-all duration-300 py-4 bg-white/70 backdrop-blur-md',
-        scrolled && 'bg-white/85 border-slate-100/80 shadow-[0_2px_15px_-8px_rgba(0,0,0,0.03)] py-3'
+        'sticky top-0 z-50 w-full border-b border-transparent transition-all duration-300 py-4 bg-white/80 backdrop-blur-md',
+        scrolled && 'bg-white/95 border-slate-200/70 shadow-md shadow-slate-900/5 py-3'
       )}
       style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}
     >
