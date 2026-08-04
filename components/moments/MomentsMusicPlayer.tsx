@@ -134,6 +134,7 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
   const handlePromptAccept = () => {
     setShowPrompt(false);
     setIsPlaying(true);
+    setShowTrackList(true);
     if (!isYouTube && audioRef.current) {
       audioRef.current.play().catch(() => setIsPlaying(false));
     }

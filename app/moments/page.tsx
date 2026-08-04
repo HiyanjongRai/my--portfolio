@@ -180,9 +180,6 @@ export default function MomentsPage() {
 
       <ToastContainer toasts={toasts} onDismiss={(id) => setToasts((prev) => prev.filter((t) => t.id !== id))} />
 
-      {/* Floating background music player */}
-      <MomentsMusicPlayer />
-
       {/* Floating mobile bottom navigation */}
       <FloatingMobileNav />
     </div>

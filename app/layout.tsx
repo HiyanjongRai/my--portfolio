@@ -52,6 +52,8 @@ export const metadata: Metadata = {
   }
 };
 
+import { MomentsMusicPlayer } from '@/components/moments/MomentsMusicPlayer';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -69,6 +71,7 @@ export default function RootLayout({
       </head>
       <body className="antialiased min-h-full bg-white font-sans" suppressHydrationWarning>
         {children}
+        <MomentsMusicPlayer />
         <Analytics />
         <SpeedInsights />
       </body>
