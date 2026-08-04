@@ -9,6 +9,7 @@ import { CloudinaryAsset } from '@/types/upload';
 interface PinterestGridProps {
   assets: CloudinaryAsset[];
   loading?: boolean;
+  activeFilter?: 'all' | 'photos' | 'videos';
   onPreview: (asset: CloudinaryAsset) => void;
   onCopy: (text: string, label: string) => void;
 }
@@ -228,7 +229,13 @@ function ImageCard({
 }
 
 /* ── Main Grid ────────────────────────────────────────── */
-export function PinterestGrid({ assets, loading = false, onPreview, onCopy }: PinterestGridProps) {
+export function PinterestGrid({
+  assets,
+  loading = false,
+  activeFilter = 'all',
+  onPreview,
+  onCopy,
+}: PinterestGridProps) {
   if (loading) {
     return (
       <div className="columns-2 sm:columns-2 md:columns-3 lg:columns-4 gap-3">
@@ -240,6 +247,20 @@ export function PinterestGrid({ assets, loading = false, onPreview, onCopy }: Pi
   }
 
   if (assets.length === 0) {
+    const emptyTitle =
+      activeFilter === 'photos'
+        ? 'No photos found'
+        : activeFilter === 'videos'
+        ? 'No videos found'
+        : 'No moments yet';
+
+    const emptyDesc =
+      activeFilter === 'photos'
+        ? 'No photos match your current filter.'
+        : activeFilter === 'videos'
+        ? 'No videos match your current filter.'
+        : 'Upload photos or videos to start your gallery.';
+
     return (
       <motion.div
         initial={{ opacity: 0, y: 15 }}
@@ -248,12 +269,18 @@ export function PinterestGrid({ assets, loading = false, onPreview, onCopy }: Pi
       >
         <div className="flex justify-center mb-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600 border border-emerald-200">
-            <Camera className="h-8 w-8" />
+            {activeFilter === 'videos' ? (
+              <Film className="h-8 w-8 text-emerald-600" />
+            ) : activeFilter === 'photos' ? (
+              <ImageIcon className="h-8 w-8 text-emerald-600" />
+            ) : (
+              <Camera className="h-8 w-8 text-emerald-600" />
+            )}
           </div>
         </div>
-        <h3 className="text-lg font-extrabold text-slate-900 tracking-tight">No moments yet</h3>
+        <h3 className="text-lg font-extrabold text-slate-900 tracking-tight">{emptyTitle}</h3>
         <p className="text-sm font-medium text-slate-500 mt-1">
-          Upload photos or videos to start your gallery.
+          {emptyDesc}
         </p>
       </motion.div>
     );

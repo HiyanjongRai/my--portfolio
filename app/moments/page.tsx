@@ -10,12 +10,17 @@ import { PinterestGrid } from '@/components/moments/PinterestGrid';
 import { MediaModal } from '@/components/upload/MediaModal';
 import { ToastContainer } from '@/components/upload/Toast';
 import { CloudinaryAsset, ToastMessage } from '@/types/upload';
+import { LayoutGrid, Image as ImageIcon, Film } from 'lucide-react';
+import { MomentsMusicPlayer } from '@/components/moments/MomentsMusicPlayer';
+
+export type MomentFilter = 'all' | 'photos' | 'videos';
 
 export default function MomentsPage() {
   const [assets, setAssets] = useState<CloudinaryAsset[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedAsset, setSelectedAsset] = useState<CloudinaryAsset | null>(null);
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+  const [activeFilter, setActiveFilter] = useState<MomentFilter>('all');
 
   useEffect(() => {
     async function loadAssets() {
@@ -47,6 +52,25 @@ export default function MomentsPage() {
     loadAssets();
   }, []);
 
+  const isVideoAsset = (asset: CloudinaryAsset) => {
+    return (
+      asset.resource_type === 'video' ||
+      asset.format === 'mp4' ||
+      asset.format === 'webm' ||
+      asset.format === 'mov'
+    );
+  };
+
+  const photoAssets = assets.filter((a) => !isVideoAsset(a));
+  const videoAssets = assets.filter((a) => isVideoAsset(a));
+
+  const filteredAssets = assets.filter((asset) => {
+    const isVideo = isVideoAsset(asset);
+    if (activeFilter === 'photos') return !isVideo;
+    if (activeFilter === 'videos') return isVideo;
+    return true;
+  });
+
   const addToast = (type: 'success' | 'error' | 'info', title: string, description?: string) => {
     const id = Math.random().toString(36).substring(2, 9);
     setToasts((prev) => [...prev, { id, type, title, description }]);
@@ -67,17 +91,78 @@ export default function MomentsPage() {
         {/* Page Header */}
         <div className="text-center max-w-2xl mx-auto pt-4 space-y-3">
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight">
-            Memories <span className="text-emerald-500">&</span> Moments<span className="text-emerald-500">.</span>
+            Memories <span className="text-emerald-500">&amp;</span> Moments<span className="text-emerald-500">.</span>
           </h1>
           <p className="text-base md:text-lg font-medium text-slate-500 leading-relaxed max-w-xl mx-auto">
             Just some memories I captured with my little phone — unfiltered, unplanned, and honestly some of my favorites.
           </p>
+
+          {/* Filter Tabs */}
+          <div className="flex items-center justify-center gap-2 pt-4 flex-wrap">
+            <button
+              onClick={() => setActiveFilter('all')}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                activeFilter === 'all'
+                  ? 'bg-slate-900 text-white shadow-md shadow-slate-900/10'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80'
+              }`}
+            >
+              <LayoutGrid className={`h-4 w-4 ${activeFilter === 'all' ? 'text-emerald-400' : 'text-slate-400'}`} />
+              <span>Moments</span>
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold ${
+                  activeFilter === 'all' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
+                }`}
+              >
+                {assets.length}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setActiveFilter('photos')}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                activeFilter === 'photos'
+                  ? 'bg-slate-900 text-white shadow-md shadow-slate-900/10'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80'
+              }`}
+            >
+              <ImageIcon className={`h-4 w-4 ${activeFilter === 'photos' ? 'text-emerald-400' : 'text-slate-400'}`} />
+              <span>Photos</span>
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold ${
+                  activeFilter === 'photos' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
+                }`}
+              >
+                {photoAssets.length}
+              </span>
+            </button>
+
+            <button
+              onClick={() => setActiveFilter('videos')}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+                activeFilter === 'videos'
+                  ? 'bg-slate-900 text-white shadow-md shadow-slate-900/10'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200/80'
+              }`}
+            >
+              <Film className={`h-4 w-4 ${activeFilter === 'videos' ? 'text-emerald-400' : 'text-slate-400'}`} />
+              <span>Videos</span>
+              <span
+                className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold ${
+                  activeFilter === 'videos' ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-500'
+                }`}
+              >
+                {videoAssets.length}
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* Pinterest Grid */}
         <PinterestGrid
-          assets={assets}
+          assets={filteredAssets}
           loading={loading}
+          activeFilter={activeFilter}
           onPreview={(asset) => setSelectedAsset(asset)}
           onCopy={handleCopy}
         />
@@ -87,13 +172,16 @@ export default function MomentsPage() {
 
       <MediaModal
         asset={selectedAsset}
-        assets={assets}
+        assets={filteredAssets}
         onClose={() => setSelectedAsset(null)}
         onCopy={handleCopy}
         onNavigate={(asset) => setSelectedAsset(asset)}
       />
 
       <ToastContainer toasts={toasts} onDismiss={(id) => setToasts((prev) => prev.filter((t) => t.id !== id))} />
+
+      {/* Floating background music player */}
+      <MomentsMusicPlayer />
 
       {/* Floating mobile bottom navigation */}
       <FloatingMobileNav />
