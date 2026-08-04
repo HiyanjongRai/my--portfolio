@@ -93,7 +93,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-[#FBFDFB] pt-6 pb-16 sm:pt-8 sm:pb-16 md:pt-12 md:pb-20"
+      className="relative overflow-hidden bg-[#FBFDFB] pt-24 pb-16 sm:pt-28 sm:pb-16 md:pt-32 md:pb-20"
       onMouseMove={canHover ? handleMouseMove : undefined}
       onMouseLeave={canHover ? handleMouseLeave : undefined}
     >

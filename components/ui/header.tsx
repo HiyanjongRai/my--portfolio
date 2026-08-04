@@ -109,10 +109,10 @@ export function Header() {
     <header
       ref={headerRef}
       className={cn(
-        'sticky top-0 z-50 w-full border-b border-transparent transition-all duration-300 py-4 bg-white/80 backdrop-blur-md',
-        scrolled && 'bg-white/95 border-slate-200/70 shadow-md shadow-slate-900/5 py-3'
+        'fixed top-0 inset-x-0 z-50 w-full border-b border-transparent transition-all duration-300 py-3.5 bg-white/80 backdrop-blur-md',
+        scrolled && 'bg-white/95 border-slate-200/70 shadow-md shadow-slate-900/5 py-2.5'
       )}
-      style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}
+      style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}
     >
       <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 max-[360px]:px-4 md:px-8">
         <button
