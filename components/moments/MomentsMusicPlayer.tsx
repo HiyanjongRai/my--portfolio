@@ -28,12 +28,36 @@ export interface Track {
 
 export const DEFAULT_PLAYLIST: Track[] = [
   {
+    id: 'alag-aasmaan',
+    title: 'Alag Aasmaan',
+    artist: 'Anuv Jain',
+    url: 'https://music.youtube.com/watch?v=i1IDh_ZoJgI&t=64s',
+    youtubeId: 'i1IDh_ZoJgI',
+    startTime: 64, // 1m 04s
+  },
+  {
     id: 'junkeri',
     title: 'Junkeri',
     artist: 'Bipul Chettri',
     url: 'https://music.youtube.com/watch?v=ChOV_o7JeJo&t=119s',
     youtubeId: 'ChOV_o7JeJo',
     startTime: 119, // 1m 59s
+  },
+  {
+    id: 'ram-sailee',
+    title: 'Ram Sailee',
+    artist: 'Bipul Chettri',
+    url: 'https://music.youtube.com/watch?v=8pQtKDGLR0Y&t=85s',
+    youtubeId: '8pQtKDGLR0Y',
+    startTime: 85, // 1m 25s
+  },
+  {
+    id: 'safar',
+    title: 'Safar',
+    artist: 'Bayaan & Sherazam',
+    url: 'https://music.youtube.com/watch?v=zfWlGsiFDzk&t=100s',
+    youtubeId: 'zfWlGsiFDzk',
+    startTime: 100, // 1m 40s
   },
 ];
 
