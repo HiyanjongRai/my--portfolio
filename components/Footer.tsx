@@ -331,22 +331,6 @@ export default function Footer() {
           </div>
         </div>
       </footer>
-
-      <AnimatePresence>
-        {showTop && (
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 10 }}
-            transition={{ duration: 0.2 }}
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="fixed bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1.25rem,env(safe-area-inset-right))] sm:bottom-8 sm:right-8 z-[999] w-12 h-12 sm:w-11 sm:h-11 rounded-2xl bg-slate-900 border border-slate-700 text-white shadow-xl hover:bg-slate-800 hover:-translate-y-0.5 active:scale-95 transition-all flex items-center justify-center cursor-pointer"
-            aria-label="Back to top"
-          >
-            <ArrowUp className="h-4 w-4" />
-          </motion.button>
-        )}
-      </AnimatePresence>
     </>
   );
 }
