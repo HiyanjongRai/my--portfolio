@@ -69,6 +69,7 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
   const playlist = customPlaylist && customPlaylist.length > 0 ? customPlaylist : DEFAULT_PLAYLIST;
 
   const [showPrompt, setShowPrompt] = useState(false);
+  const [hasAccepted, setHasAccepted] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(false);
@@ -82,17 +83,17 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
   const currentTrack = playlist[currentTrackIndex] || playlist[0];
   const isYouTube = Boolean(currentTrack.youtubeId);
 
-  // Show friendly prompt 1.2s after loading if not dismissed
+  // Show friendly prompt 1.2s after loading if not dismissed or accepted yet
   useEffect(() => {
     const timer = setTimeout(() => {
       const promptSeen = sessionStorage.getItem('moments_music_prompt_dismissed');
-      if (!promptSeen && !isPlaying) {
+      if (!promptSeen && !hasAccepted) {
         setShowPrompt(true);
       }
     }, 1200);
 
     return () => clearTimeout(timer);
-  }, [isPlaying]);
+  }, [hasAccepted]);
 
   // Handle standard HTML5 audio volume & mute
   useEffect(() => {
@@ -133,6 +134,7 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
 
   const handlePromptAccept = () => {
     setShowPrompt(false);
+    setHasAccepted(true);
     setIsPlaying(true);
     setShowTrackList(true);
     if (!isYouTube && audioRef.current) {
@@ -142,6 +144,8 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
 
   const handlePromptDismiss = () => {
     setShowPrompt(false);
+    setHasAccepted(false);
+    setIsPlaying(false);
     sessionStorage.setItem('moments_music_prompt_dismissed', 'true');
   };
 
@@ -243,6 +247,7 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
       </AnimatePresence>
 
       {/* ── 2. Floating Controller Widget ───────────────────────── */}
+      {hasAccepted && (
       <div className="fixed bottom-20 right-4 sm:bottom-6 sm:right-6 z-40">
         {/* Playlist Selector Popup */}
         <AnimatePresence>
@@ -395,6 +400,7 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
           )}
         </motion.div>
       </div>
+      )}
     </>
   );
 }
