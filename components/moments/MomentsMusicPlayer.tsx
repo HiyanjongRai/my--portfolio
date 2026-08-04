@@ -203,14 +203,14 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
               </div>
               <div className="flex-1 min-w-0 pr-2">
                 <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
-                  <Sparkles className="h-3.5 w-3.5" />
+                  <Music className="h-3.5 w-3.5" />
                   <span>Now Playing: {currentTrack.title}</span>
                 </div>
                 <h4 className="text-sm font-extrabold text-white mt-0.5">
                   Wanna listen to my playlist?
                 </h4>
                 <p className="text-xs text-slate-400 mt-1 leading-relaxed">
-                  Listen to <strong className="text-slate-200">{currentTrack.title}</strong> by {currentTrack.artist} {currentTrack.startTime ? `(starts at ${Math.floor(currentTrack.startTime / 60)}:${(currentTrack.startTime % 60).toString().padStart(2, '0')})` : ''} while viewing memories!
+                  Listen to <strong className="text-slate-200">{currentTrack.title}</strong> by {currentTrack.artist} while exploring!
                 </p>
 
                 {/* Action Buttons */}
@@ -282,7 +282,7 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
                     >
                       <p className="font-bold truncate">{track.title}</p>
                       <p className="text-[10px] text-slate-400 truncate">
-                        {track.artist} {track.startTime ? `(Start: ${Math.floor(track.startTime / 60)}:${(track.startTime % 60).toString().padStart(2, '0')})` : ''}
+                        {track.artist}
                       </p>
                     </button>
                     <a
@@ -329,7 +329,7 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
                 {currentTrack.title}
               </p>
               <p className="text-[10px] font-semibold text-slate-400 truncate">
-                {currentTrack.artist} {currentTrack.startTime ? `(${Math.floor(currentTrack.startTime / 60)}:${(currentTrack.startTime % 60).toString().padStart(2, '0')})` : ''}
+                {currentTrack.artist}
               </p>
             </div>
           )}
