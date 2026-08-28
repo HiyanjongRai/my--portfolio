@@ -94,10 +94,10 @@ export default function MomentsPage() {
             MOMENTS &amp; CAPTURES
           </div>
           <h1 className="text-4xl sm:text-6xl font-black uppercase tracking-tight text-black leading-[1.02]">
-            Visual Journal<span className="text-neutral-400">.</span>
+            A Look Into My World<span className="text-neutral-400">.</span>
           </h1>
           <p className="text-base text-[#525252] leading-relaxed">
-            Unfiltered snapshots and candid captures from travels, everyday work, and personal moments.
+            A collection of photos and moments from my travels, everyday work, projects, and life outside the screen.
           </p>
 
           {/* Filter Tabs */}

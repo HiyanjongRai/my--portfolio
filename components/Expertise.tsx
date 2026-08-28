@@ -9,38 +9,38 @@ import { TypingText } from '@/components/ui/typing-text';
 const services = [
   {
     num: '01',
-    title: 'Backend Architecture',
-    desc: 'Designing RESTful APIs, secure authentication flows with JWT & Spring Security, and scalable enterprise services with Spring Boot.',
+    title: 'Backend Development',
+    desc: 'Building REST APIs, secure authentication with JWT and Spring Security, and reliable backend applications using Spring Boot.',
     icon: Server,
   },
   {
     num: '02',
-    title: 'Database Engineering',
-    desc: 'Managing relational databases across PostgreSQL and MySQL — table normalization, schema design, complex joins, and query optimization.',
+    title: 'Database Development',
+    desc: 'Working with PostgreSQL and MySQL to design clean database structures, write efficient queries, and manage relationships between data.',
     icon: Database,
   },
   {
     num: '03',
     title: 'Full-Stack Web Development',
-    desc: 'Building responsive, high-performance web applications using modern methodologies from clean Next.js/React frontends to Java backends.',
+    desc: 'Building responsive and high-performance websites and web applications with Next.js, React, and Java-based backends.',
     icon: Globe,
   },
   {
     num: '04',
-    title: 'Search Engine Optimization',
-    desc: 'Maximizing organic visibility through technical SEO audits, site speed optimization, keyword strategies, and structured data schemas.',
+    title: 'SEO',
+    desc: 'Improving website visibility with technical SEO, faster page performance, keyword optimization, and structured data.',
     icon: LineChart,
   },
   {
     num: '05',
-    title: 'API & Systems Integration',
-    desc: 'Integrating payment providers, transactional mailers, third-party REST services, and designing resilient error handling patterns.',
+    title: 'API & System Integration',
+    desc: 'Connecting payment gateways, email services, and third-party APIs while making sure systems handle errors reliably.',
     icon: Code2,
   },
   {
     num: '06',
     title: 'Deployment & DevOps',
-    desc: 'Configuring cost-effective deployment pipelines, containerization, and hosting web systems on Vercel, Render, and cloud platforms.',
+    desc: 'Deploying and managing web applications using platforms like Vercel, Render, and cloud services, with a focus on simple and reliable deployment.',
     icon: Cloud,
   },
 ];
@@ -100,7 +100,7 @@ export default function Expertise() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-[15px] sm:text-[16px] text-[#525252] leading-[1.65] max-w-xl"
           >
-            A comprehensive spectrum of core engineering competencies, specialized services, and production-tested technologies.
+            I work with modern technologies to build reliable, fast, and user-friendly web applications—from backend systems and databases to frontend development, APIs, and deployment.
           </motion.p>
         </div>
 

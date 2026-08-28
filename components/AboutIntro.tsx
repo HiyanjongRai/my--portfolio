@@ -16,10 +16,11 @@ const quickFacts = [
 ];
 
 const storyParagraphs = [
-  "I'm Hiyan Jong Rai (हियान जोङ राई), a Backend and Full-Stack Developer originally from Udayapur, Bagaha, and currently based in Kathmandu, Nepal. I am pursuing a Bachelor of Computer Applications (BCA) at Tribhuvan University (Aadim National College).",
-  "My core technical expertise centers on designing robust RESTful APIs, securing backend services with Spring Security and JWT, and architecting relational database schemas across MySQL and PostgreSQL. I take pride in writing structured, maintainable code following enterprise patterns.",
-  "Beyond backend engineering, I have driven digital performance and search engine optimization (SEO) for high-traffic restaurant brands (Delito Kathmandu, Himalayan Hub) and an international printing company (Mirai Design & Print), combining strong technical acumen with tangible organic growth.",
-  "I enjoy turning ideas into clean, working software, backed by 1,000+ hours of continuous self-study across modern software engineering methodologies.",
+  "Hi, I'm Hiyan Jong Rai (हियान जोङ राई), a Backend and Full-Stack Developer from Udayapur, Nepal, currently based in Kathmandu.",
+  "I'm currently studying Bachelor of Computer Applications (BCA) at Tribhuvan University, Aadim National College.",
+  "I mainly work with Java, Spring Boot, REST APIs, MySQL, and PostgreSQL. I enjoy building backend systems, designing databases, and writing clean and maintainable code. I'm also interested in full-stack development and enjoy turning ideas into real, working applications.",
+  "Along with development, I've worked on SEO and digital growth for businesses including Delito Kathmandu, Himalayan Hub, and Mirai Design & Print.",
+  "I'm always learning and improving my skills through personal projects, practice, and continuous self-study. I enjoy solving problems and building software that is simple, reliable, and useful.",
 ];
 
 const mindset = [
@@ -85,7 +86,6 @@ export default function AboutIntro() {
                 style={{
                   objectFit: 'cover',
                   objectPosition: 'top',
-                  filter: 'grayscale(100%) contrast(105%)',
                 }}
                 sizes="(max-width: 1024px) 100vw, 420px"
                 priority

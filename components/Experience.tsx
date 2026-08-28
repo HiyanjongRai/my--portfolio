@@ -8,54 +8,57 @@ import { TypingText } from '@/components/ui/typing-text';
 /* ─── Experience Data ──────────────────────────────────────────── */
 const experiences = [
   {
-    period: '2024 (3 Months)',
+    period: '2024 · 3 Months · Full-time Internship',
     title: 'Backend Developer Intern',
     company: 'KritimMind Technology',
     location: 'Kathmandu, Nepal',
     type: 'Full-time Internship',
     status: 'Completed',
     description:
-      'Engineered backend systems and REST APIs utilizing Spring Boot, Java, and MySQL. Implemented Spring Security with JWT token authentication, designed relational data models, and integrated services with frontend client applications.',
+      'Worked on backend systems and REST APIs using Spring Boot, Java, and MySQL. I also worked with Spring Security and JWT authentication, database design, and frontend-backend integration.',
     highlights: [
-      'Built production-ready REST endpoints consumed by React frontend clients.',
-      'Implemented stateless authentication workflows using Spring Security and JWT filters.',
-      'Optimized SQL query procedures to reduce response latency across relational tables.',
+      'Built REST APIs used by React frontend applications.',
+      'Implemented secure authentication using Spring Security and JWT.',
+      'Designed relational database structures and improved SQL queries.',
+      'Worked with Hibernate and JPA for database operations.',
     ],
     tags: ['Spring Boot', 'Java', 'MySQL', 'Spring Security', 'REST API', 'Hibernate'],
     link: 'https://www.kritimmind.com/developers',
   },
   {
-    period: '2024',
+    period: '2024 · Remote · Freelance',
     title: 'SEO Executive',
     company: 'Mirai Design & Print',
     location: 'United States (Remote)',
     type: 'Remote / Freelance',
     status: 'Completed',
     description:
-      'Maintained digital platform performance, organic search presence, and on-page optimization for a US-based commercial print services company. Authored targeted technical blog posts and content hierarchies to drive search conversion.',
+      'Worked on improving website visibility, search rankings, and overall SEO performance for a US-based printing and design company.',
     highlights: [
-      'Conducted exhaustive keyword analysis for high-intent print and design queries.',
-      'Audited Core Web Vitals, improved asset delivery, and resolved indexing issues.',
-      'Formulated strategic content schedules directly improving organic ranking positions.',
+      'Researched keywords and identified opportunities to improve search rankings.',
+      'Worked on technical SEO, website performance, and indexing issues.',
+      'Created SEO-focused content and organized content strategies.',
+      'Monitored website performance using analytics and search tools.',
     ],
     tags: ['Keyword Research', 'Technical SEO', 'Google Analytics', 'Content Strategy'],
     link: 'https://miraisigns.com/',
   },
   {
-    period: '2024',
+    period: '2024 · Part-time',
     title: 'SEO & Content Specialist',
     company: 'DelhitoKathmandu & HimalayanHub',
     location: 'Nepal (Remote)',
     type: 'Part-time',
     status: 'Completed',
     description:
-      'Directed organic SEO positioning, digital content publishing, and analytics reporting for popular restaurant & bar hospitality brands, accelerating local search discovery and engagement.',
+      'Worked on SEO, content, and online visibility for restaurant and hospitality businesses. Focused on improving local search presence and creating useful content for their audiences.',
     highlights: [
-      'Authored localized keyword content strategies driving search traffic growth.',
-      'Managed search console diagnostics, metadata optimization, and web presence.',
-      'Delivered periodic performance reports to optimize user interaction flows.',
+      'Created content based on local search and relevant keywords.',
+      'Managed metadata, search visibility, and Search Console reports.',
+      'Monitored website performance and user engagement.',
+      'Used SEO insights to improve content and online presence.',
     ],
-    tags: ['SEO Architecture', 'Content Strategy', 'Local Search', 'Analytics'],
+    tags: ['SEO', 'Content Strategy', 'Local SEO', 'Analytics'],
     link: '#',
   },
 ];
@@ -119,7 +122,7 @@ export default function Experience() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-[15px] sm:text-[16px] text-[#525252] leading-[1.65] max-w-xl"
           >
-            A chronicle of professional engagements, backend development internships, and specialized technical consultancies.
+            A look at my professional experience in backend development, SEO, and web technologies.
           </motion.p>
         </div>
 

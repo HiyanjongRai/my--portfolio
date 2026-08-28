@@ -62,9 +62,8 @@ export function HeroSection() {
                 transition={{ duration: 0.55, delay: 0.1 }}
                 className="font-extrabold tracking-tighter text-black uppercase leading-[0.92] text-[40px] sm:text-[62px] md:text-[76px] lg:text-[84px] break-words"
               >
-                I Build Digital<br />
-                Experiences<br />
-                That Matter<span className="text-neutral-400">.</span>
+                I Build Things<br />
+                for the Web<span className="text-neutral-400">.</span>
               </motion.h1>
 
               <motion.p
@@ -73,7 +72,7 @@ export function HeroSection() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-[16px] sm:text-[18px] text-neutral-600 leading-[1.65] max-w-[540px] font-normal"
               >
-                Backend Developer specializing in Spring Boot, REST APIs, and database architecture. Building resilient, high-performance web systems with clean engineering discipline.
+                I&apos;m a backend developer who enjoys building reliable and practical web applications. I mainly work with Spring Boot, REST APIs, and databases, focusing on writing clean code and creating systems that work well.
               </motion.p>
             </div>
 
@@ -161,7 +160,6 @@ export function HeroSection() {
                   style={{
                     objectFit: 'cover',
                     objectPosition: 'center 20%',
-                    filter: 'grayscale(100%) contrast(108%) brightness(96%)',
                   }}
                   sizes="(max-width: 640px) 340px, (max-width: 1024px) 400px, 440px"
                   priority
@@ -204,46 +202,6 @@ export function HeroSection() {
 
         </div>
       </div>
-
-      {/* ── Clean Monochrome Logos Strip ── */}
-      <LogosSection />
     </section>
-  );
-}
-
-/* ─── Logos Section ─────────────────────────────────────────────── */
-export function LogosSection() {
-  return (
-    <div className="mt-16 sm:mt-24 pt-12 border-t border-neutral-200">
-      <div className="container-custom text-center space-y-6">
-        <p className="text-xs font-bold uppercase tracking-[0.18em] text-neutral-500">
-          Selected Collaborations &amp; Work
-        </p>
-
-        <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 md:gap-20 text-neutral-800">
-          {/* Delito Kathmandu */}
-          <div className="flex flex-col items-center gap-1 select-none">
-            <span className="font-extrabold text-base sm:text-lg tracking-tight uppercase">Delito Kathmandu</span>
-            <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wider">Restaurant · SEO · Content</span>
-          </div>
-
-          <div className="h-6 w-px bg-neutral-200 hidden sm:block" />
-
-          {/* Himalayan Hub */}
-          <div className="flex flex-col items-center gap-1 select-none">
-            <span className="font-extrabold text-base sm:text-lg tracking-tight uppercase">Himalayan Hub</span>
-            <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wider">Hospitality · SEO · Strategy</span>
-          </div>
-
-          <div className="h-6 w-px bg-neutral-200 hidden sm:block" />
-
-          {/* Mirai Design */}
-          <div className="flex flex-col items-center gap-1 select-none">
-            <span className="font-extrabold text-base sm:text-lg tracking-tight uppercase">Mirai Design &amp; Print</span>
-            <span className="text-[10px] font-semibold text-neutral-400 uppercase tracking-wider">US Remote · Web · SEO</span>
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }

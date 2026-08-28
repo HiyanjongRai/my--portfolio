@@ -56,13 +56,13 @@ const educationTimeline = [
     title: 'Bachelor of Computer Applications (BCA)',
     institution: 'Aadim National College, Tribhuvan University',
     dates: '2022 – Present',
-    tag: 'Ongoing',
-    desc: 'Pursuing undergraduate degree in Computer Applications with in-depth focus on software engineering, relational database systems, algorithms, and full-stack development.',
+    tag: 'In Progress',
+    desc: "Currently pursuing a BCA, where I'm learning software development, databases, algorithms, web technologies, and object-oriented programming. I also spend time building projects and improving my practical development skills.",
     highlights: [
+      'Java & OOP',
       'Data Structures & Algorithms',
-      'DBMS & SQL Schema Architecture',
-      'Web Technologies & MVC',
-      'Object-Oriented Programming (Java)',
+      'DBMS & SQL',
+      'Web Development',
     ],
   },
   {
@@ -70,23 +70,24 @@ const educationTimeline = [
     icon: BookOpen,
     title: 'Higher Secondary Education (+2 Science/CS)',
     institution: 'Triyuga Janta Multiple Campus',
-    dates: '2020 – 2022',
+    dates: '2019 – 2021',
     tag: 'Completed',
-    desc: 'Completed +2 with computer science fundamentals, advanced mathematics, and programming logic. Built early foundational software algorithms in C/C++.',
+    desc: 'Completed my +2 in Science with Computer Science. This is where I built my foundation in programming, mathematics, and problem-solving, with hands-on experience in C/C++.',
     highlights: [
-      'Computer Science Fundamentals',
-      'Discrete Mathematics',
-      'C/C++ Programming Logic',
+      'Computer Science',
+      'Mathematics',
+      'C/C++',
+      'Programming Fundamentals',
     ],
   },
   {
     step: '03',
     icon: School,
     title: 'Secondary Education Examination (SEE)',
-    institution: 'Shree Sunkoshi Secondary School',
-    dates: '2019 – 2020',
+    institution: 'Crimson Academy School',
+    dates: 'Completed',
     tag: 'Completed',
-    desc: 'Completed secondary education with distinction. Developed foundational analytical rigor, problem-solving skills, and passion for technology.',
+    desc: 'Completed my secondary education, where I developed a strong foundation in mathematics, science, and problem-solving and became more interested in technology.',
     highlights: [
       'Science & Technology',
       'Mathematics',
@@ -141,7 +142,7 @@ export default function Education() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-[15px] sm:text-[16px] text-[#525252] leading-[1.65] max-w-xl"
           >
-            A strong academic grounding paired with continuous self-directed learning in software engineering and modern backend architectures.
+            My academic background, along with the skills and knowledge I&apos;ve built through continuous learning and hands-on practice.
           </motion.p>
         </div>
 

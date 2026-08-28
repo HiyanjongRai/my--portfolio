@@ -185,7 +185,7 @@ export default function Projects() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-[15px] sm:text-[16px] text-neutral-600 leading-[1.65] max-w-xl"
             >
-              A curated selection of backend architectures, scalable web applications, and live production deployments.
+              A selection of projects I&apos;ve worked on, including backend systems, web applications, and live deployments.
             </motion.p>
           </div>
 

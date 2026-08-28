@@ -1,4 +1,4 @@
-import { HeroSection, LogosSection } from "@/components/ui/hero-section";
+import { HeroSection } from "@/components/ui/hero-section";
 import { Header } from "@/components/ui/header";
 
 export default function AltHeroPage() {
@@ -7,7 +7,6 @@ export default function AltHeroPage() {
       <Header />
       <main className="grow">
         <HeroSection />
-        <LogosSection />
       </main>
     </div>
   );

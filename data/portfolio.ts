@@ -66,110 +66,110 @@ export const techStack = [
 export const expertise = [
   {
     icon: "server",
-    title: "Backend Architecture",
-    description: "Designing resilient RESTful APIs, JWT stateless authentication, role-based access control, and scalable systems using Java and Spring Boot.",
+    title: "Backend Development",
+    description: "Building REST APIs, secure authentication with JWT and Spring Security, and reliable backend applications using Spring Boot.",
     color: "black"
   },
   {
     icon: "database",
-    title: "Database Architecture",
-    description: "Architecting normalized relational schemas in MySQL & PostgreSQL, writing optimized indexed queries, and ensuring atomic transactional safety.",
+    title: "Database Development",
+    description: "Working with PostgreSQL and MySQL to design clean database structures, write efficient queries, and manage relationships between data.",
     color: "black"
   },
   {
     icon: "laptop",
-    title: "Full-Stack Web Applications",
-    description: "Building end-to-end responsive web applications from clean modern frontends in Next.js/React to robust backend services.",
+    title: "Full-Stack Web Development",
+    description: "Building responsive and high-performance websites and web applications with Next.js, React, and Java-based backends.",
     color: "black"
   },
   {
     icon: "trending-up",
-    title: "SEO & Core Web Vitals",
-    description: "Driving organic search growth through on-page technical SEO, structured JSON-LD schemas, keyword mapping, and Lighthouse optimizations.",
+    title: "SEO",
+    description: "Improving website visibility with technical SEO, faster page performance, keyword optimization, and structured data.",
     color: "black"
   },
   {
-    icon: "palette",
-    title: "UI / UX Implementation",
-    description: "Translating design specifications into responsive, pixel-perfect user interfaces with Tailwind CSS, clean semantic HTML, and fluid micro-animations.",
+    icon: "code",
+    title: "API & System Integration",
+    description: "Connecting payment gateways, email services, and third-party APIs while making sure systems handle errors reliably.",
     color: "black"
   },
   {
     icon: "cloud-upload",
-    title: "Cloud & Deployment",
-    description: "Deploying and managing production applications on Vercel and Render, configuring environment variables, and automating continuous delivery pipelines.",
+    title: "Deployment & DevOps",
+    description: "Deploying and managing web applications using platforms like Vercel, Render, and cloud services, with a focus on simple and reliable deployment.",
     color: "black"
   }
 ];
 
 export const timeline = [
   {
-    year: "2024 (3 Months)",
+    year: "2024 · 3 Months · Full-time Internship",
     title: "Backend Developer Intern",
     organization: "KritimMind Technology",
     location: "Kathmandu, Nepal",
     type: "work",
     status: "Completed",
     badges: ["Completed"],
-    description: "Engineered scalable REST APIs with Spring Boot and MySQL. Implemented Spring Security with JWT stateless auth, designed relational data models, and optimized query procedures for client apps.",
-    tags: ["Spring Boot", "Java", "MySQL", "Spring Security", "JWT", "Hibernate"],
+    description: "Worked on backend systems and REST APIs using Spring Boot, Java, and MySQL. I also worked with Spring Security and JWT authentication, database design, and frontend-backend integration.",
+    tags: ["Spring Boot", "Java", "MySQL", "Spring Security", "REST API", "Hibernate"],
     link: "https://www.kritimmind.com/developers"
   },
   {
-    year: "2024",
-    title: "SEO Executive (Remote)",
+    year: "2024 · Remote · Freelance",
+    title: "SEO Executive",
     organization: "Mirai Design & Print",
     location: "United States (Remote)",
     type: "work",
     status: "Completed",
     badges: ["Completed"],
-    description: "Managed on-page and technical SEO for a US-based commercial print company, conducting keyword research, improving Lighthouse scores, and structuring content strategy.",
-    tags: ["Keyword Research", "On-Page SEO", "Google Analytics", "Content Strategy"],
+    description: "Worked on improving website visibility, search rankings, and overall SEO performance for a US-based printing and design company.",
+    tags: ["Keyword Research", "Technical SEO", "Google Analytics", "Content Strategy"],
     link: "https://miraisigns.com/"
   },
   {
-    year: "2024",
-    title: "SEO & Content Specialist (Part-time)",
+    year: "2024 · Part-time",
+    title: "SEO & Content Specialist",
     organization: "DelhitoKathmandu & HimalayanHub",
     location: "Nepal (Remote)",
     type: "work",
     status: "Completed",
     badges: ["Completed"],
-    description: "Directed organic search positioning, blog authoring, social media content, and analytics reporting for popular restaurant & hospitality brands.",
-    tags: ["SEO Architecture", "Content Strategy", "Local Search", "Analytics"],
+    description: "Worked on SEO, content, and online visibility for restaurant and hospitality businesses. Focused on improving local search presence and creating useful content for their audiences.",
+    tags: ["SEO", "Content Strategy", "Local SEO", "Analytics"],
     link: "#"
   },
   {
-    year: "2022 – Present (2079 – Present)",
+    year: "2022 – Present",
     title: "Bachelor of Computer Applications (BCA)",
     organization: "Aadim National College, Tribhuvan University",
     location: "Kathmandu, Nepal",
     type: "education",
-    status: "Ongoing",
-    badges: ["Ongoing"],
-    description: "Undergraduate degree focusing on software engineering, relational database management (DBMS/SQL), algorithms, OOP in Java, and web application architecture.",
-    tags: ["Databases", "Software Engineering", "Java OOP", "Data Structures"]
+    status: "In Progress",
+    badges: ["In Progress"],
+    description: "Currently pursuing a BCA, learning software development, databases, algorithms, web technologies, and object-oriented programming with continuous practical project building.",
+    tags: ["Java & OOP", "Data Structures & Algorithms", "DBMS & SQL", "Web Development"]
   },
   {
-    year: "2020 – 2022 (2077 – 2079)",
+    year: "2019 – 2021",
     title: "Higher Secondary Education (+2 Science/CS)",
     organization: "Triyuga Janta Multiple Campus",
     location: "Udayapur, Nepal",
     type: "education",
     status: "Completed",
-    badges: ["GPA: 2.49"],
-    description: "Studied computer science fundamentals, mathematics, English, and accounting. Built foundational software logic in C/C++.",
-    tags: ["Computer Science", "Mathematics", "Accounting"]
+    badges: ["Completed"],
+    description: "Completed +2 in Science with Computer Science. Built foundational programming logic, mathematics, and problem-solving with hands-on experience in C/C++.",
+    tags: ["Computer Science", "Mathematics", "C/C++", "Programming Fundamentals"]
   },
   {
-    year: "2019 – 2020",
+    year: "Completed",
     title: "Secondary Education Examination (SEE)",
-    organization: "Shree Sunkoshi Secondary School",
+    organization: "Crimson Academy School",
     location: "Nepal",
     type: "education",
     status: "Completed",
-    badges: ["Distinction"],
-    description: "Completed secondary education with distinction. Developed core analytical thinking, mathematics, and science fundamentals.",
+    badges: ["Completed"],
+    description: "Completed secondary education with a strong foundation in mathematics, science, and problem-solving, sparking a deep interest in technology.",
     tags: ["Science & Technology", "Mathematics", "Problem Solving"]
   }
 ];
@@ -250,18 +250,19 @@ export const projects = [
 ];
 
 export const aboutFacts = [
-  { label: "Origin", value: "Udayapur, Bagaha, Nepal" },
+  { label: "Origin", value: "Udayapur, Nepal" },
   { label: "Location", value: "Kathmandu, Nepal" },
-  { label: "Degree", value: "BCA (Ongoing)" },
+  { label: "Degree", value: "BCA (Aadim / TU)" },
   { label: "Experience", value: "2+ Years" },
   { label: "Status", value: "Open to work" }
 ];
 
 export const aboutBio = [
-  "I'm Hiyan Jong Rai (हियान जोङ राई), a Backend and Full-Stack Developer originally from Udayapur, Bagaha, and currently based in Kathmandu, Nepal. I am pursuing a Bachelor of Computer Applications (BCA) at Tribhuvan University (Aadim National College).",
-  "My core technical expertise centers on designing robust RESTful APIs, securing backend services with Spring Security and JWT, and architecting relational database schemas across MySQL and PostgreSQL. I take pride in writing structured, maintainable code following enterprise patterns.",
-  "Beyond backend engineering, I have driven digital performance and search engine optimization (SEO) for restaurant brands (Delito Kathmandu, Himalayan Hub) and an international printing company (Mirai Design & Print), combining strong technical acumen with organic search growth.",
-  "I describe myself as enjoying turning ideas into clean, working software, and I have completed 1,000+ hours of continuous self-study through specialized engineering coursework."
+  "Hi, I'm Hiyan Jong Rai (हियान जोङ राई), a Backend and Full-Stack Developer from Udayapur, Nepal, currently based in Kathmandu.",
+  "I'm currently studying Bachelor of Computer Applications (BCA) at Tribhuvan University, Aadim National College.",
+  "I mainly work with Java, Spring Boot, REST APIs, MySQL, and PostgreSQL. I enjoy building backend systems, designing databases, and writing clean and maintainable code. I'm also interested in full-stack development and enjoy turning ideas into real, working applications.",
+  "Along with development, I've worked on SEO and digital growth for businesses including Delito Kathmandu, Himalayan Hub, and Mirai Design & Print.",
+  "I'm always learning and improving my skills through personal projects, practice, and continuous self-study. I enjoy solving problems and building software that is simple, reliable, and useful."
 ];
 
 export const stats = [
