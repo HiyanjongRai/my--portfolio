@@ -19,6 +19,7 @@ import {
   BookOpen,
   School,
 } from 'lucide-react';
+import { TypingText } from '@/components/ui/typing-text';
 
 function AnimatedCounter({ to, suffix = '' }: { to: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -50,43 +51,46 @@ function AnimatedCounter({ to, suffix = '' }: { to: number; suffix?: string }) {
 
 const educationTimeline = [
   {
+    step: '01',
     icon: GraduationCap,
     title: 'Bachelor of Computer Applications (BCA)',
     institution: 'Aadim National College, Tribhuvan University',
     dates: '2022 – Present',
     tag: 'Ongoing',
-    desc: 'Pursuing BCA with focus on software engineering, database systems, and web technologies. Building real-world projects alongside coursework.',
+    desc: 'Pursuing undergraduate degree in Computer Applications with in-depth focus on software engineering, relational database systems, algorithms, and full-stack development.',
     highlights: [
-      { icon: Database, label: 'Data Structures & Algorithms' },
-      { icon: Database, label: 'DBMS & SQL' },
-      { icon: Globe, label: 'Web Technologies' },
-      { icon: Code2, label: 'OOP with Java' },
+      'Data Structures & Algorithms',
+      'DBMS & SQL Schema Architecture',
+      'Web Technologies & MVC',
+      'Object-Oriented Programming (Java)',
     ],
   },
   {
+    step: '02',
     icon: BookOpen,
-    title: 'Higher Secondary Education (+2)',
+    title: 'Higher Secondary Education (+2 Science/CS)',
     institution: 'Triyuga Janta Multiple Campus',
     dates: '2020 – 2022',
     tag: 'Completed',
-    desc: 'Completed +2 with computer science fundamentals, mathematics, and English. Gained strong programming foundations.',
+    desc: 'Completed +2 with computer science fundamentals, advanced mathematics, and programming logic. Built early foundational software algorithms in C/C++.',
     highlights: [
-      { icon: Monitor, label: 'Computer Science' },
-      { icon: Sigma, label: 'Mathematics' },
-      { icon: Terminal, label: 'C++ Programming' },
+      'Computer Science Fundamentals',
+      'Discrete Mathematics',
+      'C/C++ Programming Logic',
     ],
   },
   {
+    step: '03',
     icon: School,
-    title: 'Secondary Education (SEE)',
+    title: 'Secondary Education Examination (SEE)',
     institution: 'Shree Sunkoshi Secondary School',
     dates: '2019 – 2020',
     tag: 'Completed',
-    desc: 'Completed secondary education with distinction. Developed early interest in technology and problem-solving.',
+    desc: 'Completed secondary education with distinction. Developed foundational analytical rigor, problem-solving skills, and passion for technology.',
     highlights: [
-      { icon: FlaskConical, label: 'Science & Technology' },
-      { icon: Calculator, label: 'Maths' },
-      { icon: Puzzle, label: 'Problem Solving' },
+      'Science & Technology',
+      'Mathematics',
+      'Problem Solving',
     ],
   },
 ];
@@ -94,8 +98,8 @@ const educationTimeline = [
 const stats = [
   { value: 6, suffix: '+', label: 'Years of Learning' },
   { value: 3, suffix: '', label: 'Qualifications' },
-  { value: 1000, suffix: '+', label: 'Hours of Study' },
-  { value: 15, suffix: '+', label: 'Courses Done' },
+  { value: 1000, suffix: '+', label: 'Hours of Self-Study' },
+  { value: 15, suffix: '+', label: 'Completed Courses' },
 ];
 
 export default function Education() {
@@ -106,154 +110,125 @@ export default function Education() {
     <section
       id="education"
       ref={containerRef}
-      className="relative bg-white py-16 sm:py-20 lg:py-32 px-5 max-[360px]:px-4 sm:px-6 lg:px-8 border-t border-slate-100"
+      className="relative bg-[#FAFAFA] py-20 sm:py-28 lg:py-36 px-5 sm:px-8 border-b border-neutral-200"
     >
-      <div className="mx-auto max-w-[1280px] w-full space-y-12 sm:space-y-20">
+      <div className="container-custom mx-auto space-y-16 sm:space-y-20">
 
-        {/* ── Header: Left-aligned editorial ── */}
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-8 items-center">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-2.5 mb-5"
-            >
-              <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-600">Education Journey</span>
-            </motion.div>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 22 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="font-extrabold tracking-tight text-slate-900 leading-[1.1]"
-              style={{ fontSize: 'clamp(32px, 3.5vw, 52px)' }}
-            >
-              Where I learned<br className="hidden min-[390px]:block" />
-              <span className="text-emerald-600 italic">to build things.</span>
-            </motion.h2>
-
-            <motion.span
-              initial={{ opacity: 0, scaleX: 0 }}
-              animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.35 }}
-              className="mt-4 block h-1 w-10 origin-left rounded-full bg-emerald-500"
-            />
-          </div>
-
+        {/* ── Section Header ── */}
+        <div className="space-y-4">
           <motion.div
-            initial={{ opacity: 0, y: 14 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.55, delay: 0.2 }}
-            className="border-l-2 border-emerald-500 pl-4 sm:pl-5"
+            transition={{ duration: 0.4 }}
+            className="editorial-label"
           >
-            <p className="text-[16px] sm:text-[17px] text-slate-500 leading-[1.75] sm:leading-[1.8] font-medium">
-              A strong academic foundation — shaped by formal degrees, self-study, and a relentless curiosity for technology.
-            </p>
+            05 — EDUCATION
           </motion.div>
+
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-black leading-[1.02]">
+            <TypingText
+              text="Where did I learn to build things?"
+              speed={45}
+              delay={200}
+              showCursor={true}
+              hideCursorOnComplete={false}
+            />
+          </h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-[15px] sm:text-[16px] text-[#525252] leading-[1.65] max-w-xl"
+          >
+            A strong academic grounding paired with continuous self-directed learning in software engineering and modern backend architectures.
+          </motion.p>
         </div>
 
-        {/* ── Education Cards ── */}
-        <div className="space-y-5 sm:space-y-7">
+        {/* ── Education Timeline Cards ── */}
+        <div className="space-y-6">
           {educationTimeline.map((item, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, x: -24 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.3 + idx * 0.14, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="group relative rounded-[18px] sm:rounded-3xl border border-slate-100 bg-white p-4 sm:p-7 shadow-[0_2px_16px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(16,185,129,0.10)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.45, delay: 0.2 + idx * 0.1 }}
+              className="bg-white border border-neutral-200 p-6 sm:p-8 rounded-sm hover:border-black transition-colors duration-200 space-y-4"
             >
-              {/* Left emerald accent bar */}
-              <span className="absolute left-0 top-4 bottom-4 w-[3px] rounded-r-full bg-emerald-500 opacity-80 group-hover:opacity-100 group-hover:top-3 group-hover:bottom-3 transition-all duration-300" />
-
-              {/* Step number — decorative background */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 select-none text-[60px] sm:text-[90px] font-black leading-none text-emerald-50 group-hover:text-emerald-100/70 transition-colors duration-300"
-              >
-                {String(idx + 1).padStart(2, '0')}
-              </span>
-
-              {/* Card content */}
-              <div className="relative z-10 flex gap-3 sm:gap-5">
-                {/* Icon */}
-                <div className="flex h-12 w-12 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-emerald-50 group-hover:bg-emerald-100 transition-colors duration-200 self-start">
-                  <item.icon className="h-5 w-5 sm:h-7 sm:w-7 text-emerald-600" strokeWidth={1.75} />
+              {/* Header row */}
+              <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-100 pb-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-xl sm:text-2xl font-mono font-black text-black">
+                    {item.step}
+                  </span>
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-500">
+                    {item.dates}
+                  </span>
                 </div>
+                <span className="border border-neutral-300 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-black rounded-xs">
+                  {item.tag}
+                </span>
+              </div>
 
-                {/* Text content */}
-                <div className="flex-1 min-w-0">
-                  {/* Tag + Date row — stacks on very small screens */}
-                  <div className="flex flex-wrap items-center justify-between gap-1.5 mb-2">
-                    <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-200">
-                      {item.tag === 'Ongoing' ? (
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      ) : (
-                        <CheckCircle2 className="h-2.5 w-2.5" />
-                      )}
-                      {item.tag}
-                    </span>
-                    <div className="flex items-center gap-1 text-[11px] font-semibold text-slate-400">
-                      <Calendar className="h-3 w-3" />
-                      {item.dates}
-                    </div>
-                  </div>
+              {/* Title & Institution */}
+              <div>
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-black">
+                  {item.title}
+                </h3>
+                <p className="text-xs sm:text-sm font-semibold text-neutral-600 mt-0.5">
+                  {item.institution}
+                </p>
+              </div>
 
-                  <h3 className="text-[15px] sm:text-[17px] font-extrabold text-slate-900 leading-snug">{item.title}</h3>
-                  <p className="text-[12px] sm:text-[13px] font-semibold text-emerald-600 mt-0.5 mb-2 sm:mb-3">{item.institution}</p>
-                  <p className="text-[13px] sm:text-[14px] text-slate-500 leading-relaxed font-medium mb-3">{item.desc}</p>
+              {/* Description */}
+              <p className="text-sm text-[#525252] leading-relaxed">
+                {item.desc}
+              </p>
 
-                  {/* Highlights — wraps naturally */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {item.highlights.map((hl, hi) => (
-                      <span
-                        key={hi}
-                        className="inline-flex items-center gap-1 rounded-full bg-slate-50 border border-slate-100 px-2.5 py-1 text-[10px] sm:text-[11px] font-semibold text-slate-600"
-                      >
-                        <hl.icon className="h-3 w-3 text-emerald-600" strokeWidth={2} />
-                        {hl.label}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              {/* Highlights */}
+              <div className="flex flex-wrap gap-2 pt-2">
+                {item.highlights.map((hl, hi) => (
+                  <span
+                    key={hi}
+                    className="border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-[11px] font-medium text-neutral-700 rounded-xs"
+                  >
+                    {hl}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* ── Stats strip ── */}
+        {/* ── Stats Strip (Clean Monochrome Grid) ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="grid grid-cols-1 min-[390px]:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-100 border border-slate-200 rounded-2xl overflow-hidden"
+          transition={{ duration: 0.55, delay: 0.4 }}
+          className="grid grid-cols-2 lg:grid-cols-4 border border-neutral-200 bg-white divide-y sm:divide-y-0 sm:divide-x divide-neutral-200 rounded-sm"
         >
           {stats.map((stat, i) => (
-            <div key={i} className="bg-white px-6 sm:px-8 py-7 sm:py-8 text-center">
-              <p className="text-[32px] sm:text-[36px] font-extrabold text-emerald-700 leading-none tracking-tight">
-                <AnimatedCounter to={stat.value} />
-                {stat.suffix && <span className="text-[0.75em] font-bold">{stat.suffix}</span>}
+            <div key={i} className="p-6 sm:p-8 text-center">
+              <p className="text-3xl sm:text-4xl font-extrabold text-black leading-none font-mono">
+                <AnimatedCounter to={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="mt-2.5 text-[11px] text-slate-400 font-semibold uppercase tracking-[0.1em]">{stat.label}</p>
+              <p className="mt-2 text-[10px] font-bold uppercase tracking-widest text-neutral-400">{stat.label}</p>
             </div>
           ))}
         </motion.div>
 
-        {/* ── Self-learning callout ── */}
+        {/* ── Self-Learning Callout ── */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.55, delay: 0.85 }}
-          className="flex flex-col min-[390px]:flex-row items-start gap-4 sm:gap-5 rounded-[22px] sm:rounded-3xl bg-emerald-50 border border-emerald-100 p-5 sm:p-7"
+          transition={{ duration: 0.5, delay: 0.5 }}
+          className="border border-neutral-300 bg-white p-6 sm:p-7 rounded-sm flex items-start gap-4"
         >
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white border border-emerald-100 text-emerald-600">
-            <BookMarked className="h-5 w-5" />
-          </div>
-          <div>
-            <p className="font-bold text-slate-800 text-[15px]">Beyond the classroom</p>
-            <p className="text-[13px] text-slate-500 font-medium mt-1 leading-relaxed">
-              I supplement formal education with 1,000+ hours of self-study through Udemy, Coursera, YouTube, and building real projects — because the best learning happens when you ship code.
+          <BookMarked className="h-5 w-5 text-black shrink-0 mt-0.5" />
+          <div className="space-y-1">
+            <p className="text-sm font-bold text-black uppercase tracking-tight">Continuous Self-Directed Mastery</p>
+            <p className="text-xs sm:text-sm text-[#525252] leading-relaxed">
+              Complementing formal academic studies with over 1,000+ hours of independent exploration into enterprise frameworks, backend system design, database tuning, and production software shipping.
             </p>
           </div>
         </motion.div>

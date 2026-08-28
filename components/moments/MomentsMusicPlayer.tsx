@@ -12,6 +12,8 @@ import {
   VolumeX,
   ExternalLink,
   ChevronDown,
+  X,
+  Sparkles,
 } from 'lucide-react';
 
 export interface Track {
@@ -186,52 +188,74 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
         />
       </div>
 
-      {/* ── Prompt Banner ──────────────────────────────────────── */}
+      {/* ── Premium Monochrome Permission Prompt Banner ──────────────────────── */}
       <AnimatePresence>
         {showPrompt && !hasAccepted && (
           <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.93 }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.93 }}
-            transition={{ type: 'spring', damping: 26, stiffness: 300 }}
-            className="fixed bottom-24 right-4 sm:bottom-10 sm:right-6 z-50 w-[calc(100vw-2rem)] max-w-[310px]"
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ type: 'spring', damping: 26, stiffness: 320 }}
+            className="fixed bottom-24 right-4 sm:bottom-8 sm:right-8 z-50 w-[calc(100vw-2rem)] max-w-[340px]"
           >
-            <div className="relative rounded-2xl p-4 shadow-[0_14px_50px_rgba(0,0,0,0.22)]" style={{ background: '#059669' }}>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/20 border border-white/30">
-                  <Music className="h-5 w-5 text-white" />
+            <div className="relative rounded-2xl bg-black text-white p-5 border border-neutral-800 shadow-[0_20px_60px_rgba(0,0,0,0.6)] backdrop-blur-xl">
+              {/* Subtle close icon in corner */}
+              <button
+                onClick={handleDismissPrompt}
+                className="absolute top-3.5 right-3.5 p-1 rounded-full text-neutral-400 hover:text-white hover:bg-neutral-900 transition-colors cursor-pointer"
+                title="Dismiss"
+              >
+                <X className="h-4 w-4" />
+              </button>
+
+              {/* Header Label */}
+              <div className="flex items-center gap-2 mb-3">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+                </span>
+                <span className="text-[10px] font-mono font-bold tracking-widest uppercase text-neutral-400">
+                  AUDIO EXPERIENCE
+                </span>
+              </div>
+
+              {/* Main Headline */}
+              <h4 className="text-base font-bold text-white tracking-tight leading-snug mb-3">
+                Listen to curated soundtrack while exploring?
+              </h4>
+
+              {/* Track Preview Card */}
+              <div className="flex items-center gap-3 bg-neutral-900/90 rounded-xl p-3 mb-4 border border-neutral-800">
+                <div className="h-9 w-9 rounded-lg bg-neutral-800 flex items-center justify-center shrink-0 border border-neutral-700">
+                  <Music className="h-4 w-4 text-white" />
                 </div>
-                <div>
-                  <p className="text-[10px] font-extrabold text-white/90 uppercase tracking-widest mb-0.5">My Playlist</p>
-                  <h4 className="text-sm font-black text-white leading-snug">Wanna listen while you explore?</h4>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs font-semibold text-white truncate">{currentTrack.title}</p>
+                  <p className="text-[11px] text-neutral-400 truncate">{currentTrack.artist}</p>
+                </div>
+                {/* Visual equalizer waves indicator */}
+                <div className="flex items-end gap-[2px] h-3 shrink-0 px-1 opacity-70">
+                  <span className="w-[2px] rounded-full bg-white animate-pulse" style={{ height: '70%' }} />
+                  <span className="w-[2px] rounded-full bg-white animate-pulse" style={{ height: '100%', animationDelay: '150ms' }} />
+                  <span className="w-[2px] rounded-full bg-white animate-pulse" style={{ height: '40%', animationDelay: '300ms' }} />
                 </div>
               </div>
 
-              <div className="flex items-center gap-2.5 bg-white/15 rounded-xl px-3 py-2.5 mb-3 border border-white/20">
-                <div className="h-7 w-7 rounded-lg bg-white/20 flex items-center justify-center shrink-0 border border-white/25">
-                  <Music className="h-3.5 w-3.5 text-white" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-xs font-bold text-white truncate">{currentTrack.title}</p>
-                  <p className="text-[10px] text-white/75 truncate">{currentTrack.artist}</p>
-                </div>
-              </div>
-
-              <div className="flex gap-2">
+              {/* Actions */}
+              <div className="flex items-center gap-2">
                 <button
                   onClick={handleAccept}
                   onTouchEnd={handleAccept}
-                  className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-white hover:bg-white/90 active:bg-white/80 font-extrabold text-xs transition-all active:scale-95 cursor-pointer shadow-md"
-                  style={{ color: '#059669' }}
+                  className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-white hover:bg-neutral-200 active:bg-neutral-300 text-black font-bold text-xs transition-all active:scale-95 cursor-pointer shadow-sm"
                 >
-                  <Play className="h-3.5 w-3.5 fill-current" />
-                  Yes, play it!
+                  <Play className="h-3.5 w-3.5 fill-black" />
+                  Play Music
                 </button>
                 <button
                   onClick={handleDismissPrompt}
-                  className="px-4 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-bold text-xs transition-all cursor-pointer border border-white/25"
+                  className="py-2.5 px-4 rounded-xl bg-transparent hover:bg-neutral-900 text-neutral-400 hover:text-white font-medium text-xs transition-all cursor-pointer border border-neutral-800 hover:border-neutral-700"
                 >
-                  Not now
+                  Maybe Later
                 </button>
               </div>
             </div>
@@ -247,7 +271,7 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.5 }}
             transition={{ type: 'spring', damping: 22, stiffness: 280 }}
-            className="fixed bottom-24 right-4 sm:bottom-10 sm:right-6 z-50"
+            className="fixed bottom-24 right-4 sm:bottom-8 sm:right-8 z-50"
           >
             {/* Expanded panel */}
             <AnimatePresence>
@@ -257,21 +281,25 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.94 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute bottom-[calc(100%+12px)] right-0 w-72 rounded-2xl overflow-hidden shadow-[0_18px_55px_rgba(0,0,0,0.25)]"
-                  style={{ background: '#059669' }}
+                  className="absolute bottom-[calc(100%+12px)] right-0 w-80 rounded-2xl overflow-hidden bg-black text-white border border-neutral-800 shadow-[0_24px_70px_rgba(0,0,0,0.7)] backdrop-blur-xl"
                 >
                   {/* Header */}
-                  <div className="px-4 pt-4 pb-3 border-b border-white/20">
+                  <div className="px-4 pt-4 pb-3 border-b border-neutral-800">
                     <div className="flex items-start justify-between gap-2">
                       <div className="min-w-0">
-                        <p className="text-[10px] font-extrabold text-white/85 uppercase tracking-widest mb-0.5">Now Playing</p>
-                        <p className="text-sm font-black text-white truncate">{currentTrack.title}</p>
-                        <p className="text-xs text-white/75 truncate">{currentTrack.artist}</p>
+                        <div className="flex items-center gap-1.5 mb-1">
+                          <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
+                          <p className="text-[10px] font-mono font-bold text-neutral-400 uppercase tracking-widest">
+                            NOW PLAYING
+                          </p>
+                        </div>
+                        <p className="text-sm font-bold text-white truncate">{currentTrack.title}</p>
+                        <p className="text-xs text-neutral-400 truncate">{currentTrack.artist}</p>
                       </div>
                       {/* Collapse button */}
                       <button
                         onClick={() => setShowPanel(false)}
-                        className="shrink-0 mt-0.5 h-7 w-7 flex items-center justify-center rounded-lg bg-white/15 hover:bg-white/25 text-white transition-all cursor-pointer border border-white/20"
+                        className="shrink-0 mt-0.5 h-7 w-7 flex items-center justify-center rounded-lg bg-neutral-900 hover:bg-neutral-800 text-neutral-400 hover:text-white transition-all cursor-pointer border border-neutral-800"
                         title="Collapse"
                       >
                         <ChevronDown className="h-4 w-4" />
@@ -280,10 +308,10 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
                   </div>
 
                   {/* Controls */}
-                  <div className="flex items-center justify-center gap-1.5 px-4 py-3 border-b border-white/20">
+                  <div className="flex items-center justify-center gap-2 px-4 py-3.5 border-b border-neutral-800 bg-neutral-950/50">
                     <button
                       onClick={prevTrack}
-                      className="p-2.5 text-white/75 hover:text-white hover:bg-white/15 rounded-full transition-all cursor-pointer"
+                      className="p-2.5 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-full transition-all cursor-pointer"
                       title="Previous"
                     >
                       <SkipBack className="h-4 w-4" />
@@ -291,20 +319,19 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
 
                     <button
                       onClick={togglePlay}
-                      className="flex h-11 w-11 mx-1 items-center justify-center rounded-full bg-white hover:bg-white/90 active:bg-white/80 transition-all active:scale-95 cursor-pointer shadow-md"
-                      style={{ color: '#059669' }}
+                      className="flex h-11 w-11 mx-1 items-center justify-center rounded-full bg-white hover:bg-neutral-200 active:bg-neutral-300 text-black transition-all active:scale-95 cursor-pointer shadow-md"
                       title={isPlaying ? 'Pause' : 'Play'}
                     >
                       {isPlaying ? (
-                        <Pause className="h-5 w-5 fill-current" />
+                        <Pause className="h-5 w-5 fill-black" />
                       ) : (
-                        <Play className="h-5 w-5 fill-current ml-0.5" />
+                        <Play className="h-5 w-5 fill-black ml-0.5" />
                       )}
                     </button>
 
                     <button
                       onClick={nextTrack}
-                      className="p-2.5 text-white/75 hover:text-white hover:bg-white/15 rounded-full transition-all cursor-pointer"
+                      className="p-2.5 text-neutral-400 hover:text-white hover:bg-neutral-900 rounded-full transition-all cursor-pointer"
                       title="Next"
                     >
                       <SkipForward className="h-4 w-4" />
@@ -314,8 +341,8 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
                       onClick={() => setIsMuted((m) => !m)}
                       className={`p-2.5 ml-1 rounded-full transition-all cursor-pointer ${
                         isMuted
-                          ? 'text-white bg-white/25 border border-white/30'
-                          : 'text-white/75 hover:text-white hover:bg-white/15'
+                          ? 'text-white bg-neutral-800 border border-neutral-700'
+                          : 'text-neutral-400 hover:text-white hover:bg-neutral-900'
                       }`}
                       title={isMuted ? 'Unmute' : 'Mute'}
                     >
@@ -324,30 +351,32 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
                   </div>
 
                   {/* Playlist */}
-                  <div className="py-1.5 px-1.5">
+                  <div className="p-2 space-y-1">
                     {playlist.map((track, i) => (
                       <div
                         key={track.id}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all ${
                           i === currentTrackIndex
-                            ? 'bg-white/20 border border-white/30'
-                            : 'hover:bg-white/10'
+                            ? 'bg-neutral-900 border border-neutral-700'
+                            : 'hover:bg-neutral-900/60 border border-transparent'
                         }`}
                       >
                         {/* Track icon / animated equalizer */}
                         <div
                           className={`h-8 w-8 shrink-0 rounded-lg flex items-center justify-center border ${
-                            i === currentTrackIndex ? 'bg-white/25 border-white/35' : 'bg-white/10 border-white/15'
+                            i === currentTrackIndex
+                              ? 'bg-black border-neutral-600 text-white'
+                              : 'bg-neutral-900 border-neutral-800 text-neutral-500'
                           }`}
                         >
                           {i === currentTrackIndex && isPlaying ? (
                             <span className="flex items-end gap-[2px] h-3.5">
-                              <span className="w-[2.5px] rounded-full bg-white animate-bounce" style={{ height: '100%', animationDuration: '0.65s', animationDelay: '0ms' }} />
-                              <span className="w-[2.5px] rounded-full bg-white animate-bounce" style={{ height: '55%', animationDuration: '0.65s', animationDelay: '130ms' }} />
-                              <span className="w-[2.5px] rounded-full bg-white animate-bounce" style={{ height: '75%', animationDuration: '0.65s', animationDelay: '65ms' }} />
+                              <span className="w-[2px] rounded-full bg-white animate-bounce" style={{ height: '100%', animationDuration: '0.65s', animationDelay: '0ms' }} />
+                              <span className="w-[2px] rounded-full bg-white animate-bounce" style={{ height: '55%', animationDuration: '0.65s', animationDelay: '130ms' }} />
+                              <span className="w-[2px] rounded-full bg-white animate-bounce" style={{ height: '75%', animationDuration: '0.65s', animationDelay: '65ms' }} />
                             </span>
                           ) : (
-                            <Music className={`h-3.5 w-3.5 ${i === currentTrackIndex ? 'text-white' : 'text-white/60'}`} />
+                            <span className="text-[11px] font-mono font-bold">0{i + 1}</span>
                           )}
                         </div>
 
@@ -355,21 +384,21 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
                           onClick={() => handleTrackSelect(i)}
                           className="flex-1 text-left min-w-0 cursor-pointer"
                         >
-                          <p className={`text-xs truncate font-bold ${i === currentTrackIndex ? 'text-white font-extrabold' : 'text-white/90'}`}>
+                          <p className={`text-xs truncate font-semibold ${i === currentTrackIndex ? 'text-white font-bold' : 'text-neutral-300'}`}>
                             {track.title}
                           </p>
-                          <p className="text-[10px] text-white/65 truncate">{track.artist}</p>
+                          <p className="text-[10px] text-neutral-500 truncate">{track.artist}</p>
                         </button>
 
                         <a
                           href={track.url}
                           target="_blank"
                           rel="noreferrer"
-                          className="shrink-0 text-white/55 hover:text-white transition-colors p-1 cursor-pointer"
+                          className="shrink-0 text-neutral-500 hover:text-white transition-colors p-1 cursor-pointer"
                           title="Open on YouTube Music"
                           onClick={(e) => e.stopPropagation()}
                         >
-                          <ExternalLink className="h-3 w-3" />
+                          <ExternalLink className="h-3.5 w-3.5" />
                         </a>
                       </div>
                     ))}
@@ -381,22 +410,21 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
             {/* Circle FAB — always visible, toggles panel */}
             <button
               onClick={() => setShowPanel((s) => !s)}
-              className="relative flex h-12 w-12 items-center justify-center rounded-full shadow-[0_6px_28px_rgba(0,0,0,0.22)] hover:opacity-90 transition-all cursor-pointer group"
-              style={{ background: '#059669' }}
+              className="relative flex h-12 w-12 items-center justify-center rounded-full bg-black text-white border border-neutral-800 shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:border-neutral-600 transition-all cursor-pointer group"
               title={showPanel ? 'Collapse' : 'Open music player'}
             >
-              {/* Pulsing glow when playing */}
+              {/* Pulsing subtle glow when playing */}
               {isPlaying && (
-                <span className="absolute inset-0 rounded-full bg-white/25 animate-ping pointer-events-none" />
+                <span className="absolute inset-0 rounded-full bg-white/10 animate-ping pointer-events-none" />
               )}
 
               {/* Icon: equalizer when playing, music note when paused */}
               {isPlaying && !showPanel ? (
                 <span className="flex items-end gap-[2.5px] h-4 relative z-10">
-                  <span className="w-[3px] rounded-full bg-white animate-bounce" style={{ height: '100%', animationDuration: '0.65s', animationDelay: '0ms' }} />
-                  <span className="w-[3px] rounded-full bg-white animate-bounce" style={{ height: '55%', animationDuration: '0.65s', animationDelay: '120ms' }} />
-                  <span className="w-[3px] rounded-full bg-white animate-bounce" style={{ height: '80%', animationDuration: '0.65s', animationDelay: '240ms' }} />
-                  <span className="w-[3px] rounded-full bg-white animate-bounce" style={{ height: '45%', animationDuration: '0.65s', animationDelay: '60ms' }} />
+                  <span className="w-[2.5px] rounded-full bg-white animate-bounce" style={{ height: '100%', animationDuration: '0.65s', animationDelay: '0ms' }} />
+                  <span className="w-[2.5px] rounded-full bg-white animate-bounce" style={{ height: '55%', animationDuration: '0.65s', animationDelay: '120ms' }} />
+                  <span className="w-[2.5px] rounded-full bg-white animate-bounce" style={{ height: '80%', animationDuration: '0.65s', animationDelay: '240ms' }} />
+                  <span className="w-[2.5px] rounded-full bg-white animate-bounce" style={{ height: '45%', animationDuration: '0.65s', animationDelay: '60ms' }} />
                 </span>
               ) : (
                 <Music className="h-5 w-5 text-white relative z-10 group-hover:scale-110 transition-transform" />
@@ -408,3 +436,5 @@ export function MomentsMusicPlayer({ customPlaylist }: MomentsMusicPlayerProps) 
     </>
   );
 }
+
+export default MomentsMusicPlayer;

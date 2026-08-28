@@ -1,332 +1,251 @@
 'use client';
 
-import { motion, useInView, type Variants } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Briefcase, Calendar, MapPin, ArrowUpRight, CheckCircle2, Shield, Heart } from 'lucide-react';
+import { Calendar, MapPin, ArrowUpRight, CheckCircle2, Shield, Layers, Briefcase, FileCode } from 'lucide-react';
+import { TypingText } from '@/components/ui/typing-text';
 
 /* ─── Experience Data ──────────────────────────────────────────── */
 const experiences = [
   {
-    period: '2024',
-    duration: 'Internship',
+    period: '2024 (3 Months)',
     title: 'Backend Developer Intern',
     company: 'KritimMind Technology',
     location: 'Kathmandu, Nepal',
     type: 'Full-time Internship',
     status: 'Completed',
-    statusColor: 'bg-emerald-50 text-emerald-700 border-emerald-100',
-    dotColor: 'bg-emerald-500',
     description:
-      'Worked on backend development building web applications and REST APIs using Spring Boot and MySQL. Implemented Spring Security for authentication, designed relational database schemas, and integrated APIs with frontend clients.',
+      'Engineered backend systems and REST APIs utilizing Spring Boot, Java, and MySQL. Implemented Spring Security with JWT token authentication, designed relational data models, and integrated services with frontend client applications.',
     highlights: [
-      'Built robust REST APIs consumed by React client apps',
-      'Implemented secure JWT-based Spring Security auth filters',
-      'Optimized MySQL relational queries to reduce server response load times',
+      'Built production-ready REST endpoints consumed by React frontend clients.',
+      'Implemented stateless authentication workflows using Spring Security and JWT filters.',
+      'Optimized SQL query procedures to reduce response latency across relational tables.',
     ],
-    tags: ['Spring Boot', 'Java', 'MySQL', 'Spring Security', 'REST API'],
+    tags: ['Spring Boot', 'Java', 'MySQL', 'Spring Security', 'REST API', 'Hibernate'],
     link: 'https://www.kritimmind.com/developers',
   },
   {
     period: '2024',
-    duration: 'Remote',
     title: 'SEO Executive',
     company: 'Mirai Design & Print',
     location: 'United States (Remote)',
-    type: 'Freelance / Remote',
+    type: 'Remote / Freelance',
     status: 'Completed',
-    statusColor: 'bg-[#F3FAF5] text-[#16A34A] border-emerald-100',
-    dotColor: 'bg-emerald-600',
     description:
-      'Worked on their website, maintained SEO rankings, wrote blog articles, and created targeted content to improve organic search visibility for a sign printing services company.',
+      'Maintained digital platform performance, organic search presence, and on-page optimization for a US-based commercial print services company. Authored targeted technical blog posts and content hierarchies to drive search conversion.',
     highlights: [
-      'Conducted in-depth keyword research for printing services search terms',
-      'Improved page load speeds and overall SEO structure (Google Lighthouse)',
-      'Structured technical content strategy across search-friendly landing pages',
+      'Conducted exhaustive keyword analysis for high-intent print and design queries.',
+      'Audited Core Web Vitals, improved asset delivery, and resolved indexing issues.',
+      'Formulated strategic content schedules directly improving organic ranking positions.',
     ],
-    tags: ['Keyword Research', 'On-Page SEO', 'Google Analytics', 'Content Strategy'],
+    tags: ['Keyword Research', 'Technical SEO', 'Google Analytics', 'Content Strategy'],
     link: 'https://miraisigns.com/',
   },
   {
     period: '2024',
-    duration: 'Remote',
     title: 'SEO & Content Specialist',
     company: 'DelhitoKathmandu & HimalayanHub',
     location: 'Nepal (Remote)',
     type: 'Part-time',
     status: 'Completed',
-    statusColor: 'bg-[#F3FAF5] text-[#16A34A] border-emerald-100',
-    dotColor: 'bg-emerald-600',
     description:
-      'Managed SEO strategy, blog posts, content creation, social media handling, and analytics reporting for restaurant and bar brands. Focused on improving local search presence, on-page structure, and driving organic traffic.',
+      'Directed organic SEO positioning, digital content publishing, and analytics reporting for popular restaurant & bar hospitality brands, accelerating local search discovery and engagement.',
     highlights: [
-      'Wrote keyword-rich blog posts to boost restaurant search rankings',
-      'Managed content creation, social media handling, and page analytics reports',
-      'Monitored Google Search Console & Analytics performance reports to drive engagement',
+      'Authored localized keyword content strategies driving search traffic growth.',
+      'Managed search console diagnostics, metadata optimization, and web presence.',
+      'Delivered periodic performance reports to optimize user interaction flows.',
     ],
-    tags: ['SEO', 'Content Creation', 'Social Media', 'Analytics'],
+    tags: ['SEO Architecture', 'Content Strategy', 'Local Search', 'Analytics'],
     link: '#',
   },
 ];
 
-/* ─── Work Philosophy Bullet Points ────────────────────────────── */
-const philosophyPoints = [
+/* ─── Engineering Standards ───────────────────────────────────── */
+const standards = [
   {
-    title: 'Clean & Modern Backend Architecture',
-    desc: 'Structuring application domains with MVC, Hibernate ORM, and secure interceptor layers.'
+    title: 'Architectural Integrity',
+    desc: 'Strict separation of concerns via MVC, domain service isolation, and repository pattern.',
   },
   {
-    title: 'Secure & Reliable JWT Authentication',
-    desc: 'Implementing password encoders, token validation, and role-based access controller endpoints.'
+    title: 'Security & Verification',
+    desc: 'Stateless JWT validation, password hashing, and role-based endpoint authorization.',
   },
   {
-    title: 'SEO & Core Web Vitals Optimization',
-    desc: 'Conducting site audits, structured schema layouts, and assets optimization for fast page loads.'
+    title: 'Data Discipline',
+    desc: 'Normalized schemas, indexing on high-frequency columns, and atomic transactions.',
   },
   {
-    title: 'Agile & Collaborative Workflows',
-    desc: 'Working with Git branch controls, pull requests, and matching product expectations.'
-  }
+    title: 'Search & Performance',
+    desc: 'Fast server response times, structured schema markups, and clean semantic layouts.',
+  },
 ];
 
 export default function Experience() {
   const containerRef = useRef(null);
-  const isInView = useInView(containerRef, { once: true, margin: '-100px' });
-
-  // Motion variants
-  const badgeVariants: Variants = {
-    hidden: { opacity: 0, y: -12 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] } }
-  };
-
-  const titleVariants: Variants = {
-    hidden: { opacity: 0, y: 18 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.25, 0.1, 0.25, 1], delay: 0.1 } }
-  };
-
-  const subtitleVariants: Variants = {
-    hidden: { opacity: 0, y: 14 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1], delay: 0.2 } }
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, x: -32 },
-    visible: (custom: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.55, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.3 + custom * 0.15 }
-    })
-  };
+  const isInView = useInView(containerRef, { once: true, margin: '-80px' });
 
   return (
-    <section 
-      id="experience" 
-      ref={containerRef} 
-      className="relative overflow-hidden bg-[#FAFAFA] py-16 sm:py-20 lg:py-24 px-5 max-[360px]:px-4 sm:px-6 lg:px-8 border-t border-[#E5E7EB]"
+    <section
+      id="experience"
+      ref={containerRef}
+      className="relative bg-[#FAFAFA] py-20 sm:py-28 lg:py-36 px-5 sm:px-8 border-b border-neutral-200"
     >
-      {/* Background Soft Glows */}
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute top-0 right-[-10%] w-[45%] h-[45%] rounded-full bg-emerald-400/[0.06] blur-[110px]" />
-        <div className="absolute bottom-0 left-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-400/[0.04] blur-[110px]" />
-      </div>
-
-      <div className="mx-auto max-w-[1280px] w-full space-y-12 sm:space-y-16">
+      <div className="container-custom mx-auto space-y-16 sm:space-y-20">
 
         {/* ── Section Header ── */}
-        <div className="text-center space-y-4">
+        <div className="space-y-4">
           <motion.div
-            variants={badgeVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.1em] text-[#16A34A]"
+            initial={{ opacity: 0, y: -8 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4 }}
+            className="editorial-label"
           >
-            <span className="h-2 w-2 rounded-full bg-[#16A34A] animate-pulse" />
-            MY JOURNEY
+            03 — EXPERIENCE
           </motion.div>
 
-          <motion.h2
-            variants={titleVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="text-[32px] min-[390px]:text-[36px] sm:text-5xl lg:text-[56px] font-extrabold tracking-tight text-[#111827] leading-[1.1]"
-          >
-            Professional <span className="text-[#16A34A]">Experience</span>
-          </motion.h2>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-black leading-[1.02]">
+            <TypingText
+              text="Where have I worked?"
+              speed={55}
+              delay={200}
+              showCursor={true}
+              hideCursorOnComplete={false}
+            />
+          </h2>
 
           <motion.p
-            variants={subtitleVariants}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            className="text-[16px] sm:text-[17px] text-[#6B7280] font-normal max-w-lg mx-auto leading-[1.7]"
+            initial={{ opacity: 0, y: 12 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-[15px] sm:text-[16px] text-[#525252] leading-[1.65] max-w-xl"
           >
-            A timeline of my professional roles, internships, and remote collaborations.
+            A chronicle of professional engagements, backend development internships, and specialized technical consultancies.
           </motion.p>
         </div>
 
-        {/* ── Two-Column Layout ── */}
-        <div className="grid gap-8 sm:gap-10 lg:gap-12 lg:grid-cols-[1.2fr_0.8fr] items-start">
+        {/* ── Two Column Layout (Timeline Left, Standards Right) ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-12 lg:gap-16 items-start">
 
-          {/* LEFT: Experience Cards — always shows first on mobile */}
-          <div className="space-y-5 sm:space-y-6 order-1">
+          {/* ── Left: Editorial Timeline ── */}
+          <div className="relative pl-6 sm:pl-8 border-l border-neutral-300 space-y-12 sm:space-y-14">
             {experiences.map((exp, idx) => (
               <motion.div
                 key={idx}
-                custom={idx}
-                variants={cardVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                className="group relative flex flex-col rounded-[18px] sm:rounded-[28px] border border-[#E5E7EB] bg-white p-4 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_12px_36px_rgba(16,163,74,0.10)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 + idx * 0.12 }}
+                className="relative space-y-4"
               >
-                {/* Left accent bar */}
-                <span className="absolute left-0 top-6 bottom-6 w-1 rounded-r-full bg-[#16A34A] opacity-80 group-hover:opacity-100 group-hover:top-4 group-hover:bottom-4 transition-all duration-300" />
+                {/* Timeline Marker Dot */}
+                <span className="absolute -left-[31px] sm:-left-[39px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-black bg-white" />
 
-                {/* Decorative step number */}
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 select-none text-[80px] sm:text-[100px] font-black leading-none text-emerald-50 group-hover:text-emerald-100/60 transition-colors duration-300"
-                >
-                  {String(idx + 1).padStart(2, '0')}
-                </span>
-
-                {/* Content */}
-                <div className="relative z-10">
-                  {/* Header Row */}
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
-                    <div className="space-y-1.5">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider ${exp.statusColor}`}>
-                          {exp.status}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 rounded-full bg-slate-50 border border-slate-100 px-2.5 py-0.5 text-[10px] font-bold text-slate-500">
-                          <Briefcase className="h-2.5 w-2.5 text-[#16A34A]" />
-                          {exp.type}
-                        </span>
-                      </div>
-                  <h3 className="text-[16px] sm:text-xl font-extrabold text-[#111827] group-hover:text-[#16A34A] transition-colors duration-300 leading-tight">
-                        {exp.title}
-                      </h3>
-                      <p className="text-sm font-bold text-slate-500">{exp.company}</p>
-                    </div>
-
-                    {/* Period & Location */}
-                    <div className="sm:text-right shrink-0 space-y-1">
-                      <div className="flex items-center sm:justify-end gap-1.5 text-xs font-bold text-slate-500">
-                        <Calendar className="h-3.5 w-3.5 text-[#16A34A]" />
-                        {exp.period}
-                      </div>
-                      <div className="flex items-center sm:justify-end gap-1.5 text-xs font-semibold text-slate-400">
-                        <MapPin className="h-3.5 w-3.5" />
-                        {exp.location}
-                      </div>
-                    </div>
+                {/* Header & Meta */}
+                <div className="space-y-1">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-500">
+                      {exp.period}
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider border border-neutral-300 px-2 py-0.5 rounded-xs text-neutral-700">
+                      {exp.type}
+                    </span>
                   </div>
 
-                  {/* Description */}
-                  <p className="text-[14px] text-[#6B7280] font-normal leading-relaxed mb-4">
-                    {exp.description}
+                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-black">
+                    {exp.title}
+                  </h3>
+
+                  <p className="text-sm font-semibold text-neutral-700">
+                    {exp.company} <span className="text-neutral-400 font-normal">· {exp.location}</span>
                   </p>
+                </div>
 
-                  {/* Highlights */}
-                  <ul className="space-y-2 mb-5">
-                    {exp.highlights.map((highlight, hIdx) => (
-                      <li key={hIdx} className="flex items-start gap-3 text-[13px] text-[#374151] font-medium leading-relaxed">
-                        <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#F3FAF5] text-[#16A34A]">
-                          <CheckCircle2 className="h-3 w-3" />
-                        </span>
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
+                {/* Description */}
+                <p className="text-sm text-[#525252] leading-relaxed">
+                  {exp.description}
+                </p>
 
-                  {/* Tags + Link */}
-                  <div className="flex flex-wrap items-center gap-2">
-                    {exp.tags.map((tag, tIdx) => (
-                      <span key={tIdx} className="rounded-full bg-slate-50 border border-slate-100 px-3 py-1 text-[10px] font-bold text-slate-600">
-                        {tag}
-                      </span>
-                    ))}
-                    {exp.link && exp.link !== '#' && (
-                      <a
-                        href={exp.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-[#E5E7EB] bg-white px-3.5 py-1.5 text-[11px] font-bold text-[#374151] hover:bg-[#F3FAF5] hover:border-[#D1FAE5] hover:text-[#16A34A] transition-all duration-200"
-                      >
-                        Visit Page
-                        <ArrowUpRight className="h-3 w-3" />
-                      </a>
-                    )}
-                  </div>
+                {/* Key Highlights */}
+                <ul className="space-y-2 pt-1">
+                  {exp.highlights.map((item, hIdx) => (
+                    <li key={hIdx} className="flex items-start gap-2.5 text-xs text-neutral-700 leading-relaxed">
+                      <span className="h-1.5 w-1.5 rounded-full bg-black shrink-0 mt-1.5" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Tags & Link */}
+                <div className="flex flex-wrap items-center gap-2 pt-2">
+                  {exp.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="border border-neutral-300 bg-white px-2.5 py-0.5 text-[11px] font-mono text-neutral-800 rounded-xs"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                  {exp.link && exp.link !== '#' && (
+                    <a
+                      href={exp.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="ml-auto inline-flex items-center gap-1 text-xs font-bold text-black hover:underline"
+                    >
+                      Visit Organization
+                      <ArrowUpRight className="h-3 w-3" />
+                    </a>
+                  )}
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* RIGHT: Philosophy Panel — shows below cards on mobile, sticky sidebar on desktop */}
+          {/* ── Right: Engineering Standards Sidebar ── */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="space-y-5 sm:space-y-6 order-2 lg:sticky lg:top-[90px]"
+            transition={{ duration: 0.55, delay: 0.35 }}
+            className="space-y-6 lg:sticky lg:top-28"
           >
-            {/* Overview / Philosophy Card */}
-            <div className="rounded-[24px] sm:rounded-[32px] border border-[#E5E7EB] bg-white p-5 sm:p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] space-y-6">
-              
-              {/* Card Header */}
-              <div className="flex items-center gap-3.5 pb-2">
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-[#D1FAE5] bg-[#F3FAF5] text-[#16A34A]">
-                  <Shield className="h-5.5 w-5.5" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-[#9CA3AF]">METHODOLOGY</p>
-                  <h3 className="text-base font-extrabold text-[#111827] leading-none">Engineering Standards</h3>
-                </div>
+            <div className="bg-white border border-neutral-200 p-6 sm:p-7 rounded-sm space-y-6">
+              <div className="flex items-center gap-2.5 border-b border-neutral-100 pb-4">
+                <Shield className="h-4 w-4 text-black" />
+                <h4 className="text-xs font-bold uppercase tracking-widest text-black">
+                  Engineering Standards
+                </h4>
               </div>
 
-              {/* Philosophy list points */}
               <div className="space-y-5">
-                {philosophyPoints.map((item, pIdx) => (
-                  <div key={pIdx} className="space-y-1.5">
-                    <h4 className="text-xs font-extrabold text-[#111827] flex items-center gap-2">
-                      <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" />
-                      {item.title}
-                    </h4>
-                    <p className="text-[11px] text-[#6B7280] font-normal leading-relaxed pl-3.5">
-                      {item.desc}
+                {standards.map((std, sIdx) => (
+                  <div key={sIdx} className="space-y-1">
+                    <p className="text-xs font-bold text-black uppercase tracking-tight flex items-center gap-2">
+                      <span className="h-1 w-1 bg-black rounded-full" />
+                      {std.title}
+                    </p>
+                    <p className="text-[12px] text-[#525252] leading-relaxed pl-3">
+                      {std.desc}
                     </p>
                   </div>
                 ))}
               </div>
 
-              {/* Divider line */}
-              <div className="h-px bg-[#F3F4F6]" />
-
-              {/* Summary quote */}
-              <div className="flex gap-3 items-start text-xs text-[#374151] font-semibold leading-relaxed">
-                <Heart className="h-4.5 w-4.5 text-[#16A34A] shrink-0 mt-0.5 fill-[#16A34A]/10" />
-                <span>
-                  Designing services and workflows that are secure, optimized, and built to create real user and search impact.
-                </span>
+              <div className="border-t border-neutral-100 pt-4">
+                <p className="text-[11px] text-neutral-500 font-medium italic">
+                  Dedicated to disciplined software engineering, testable code, and high operational reliability.
+                </p>
               </div>
             </div>
 
-            {/* Availability status badge */}
-            <div className="rounded-[24px] sm:rounded-[28px] border border-[#D1FAE5] bg-gradient-to-br from-[#F4FAF6] to-white p-5 sm:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.02)] flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-emerald-100 text-[#16A34A]">
-                <Briefcase className="h-5.5 w-5.5" />
-              </div>
-              <div className="space-y-1">
-                <div className="inline-flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#16A34A] animate-pulse" />
-                  <span className="text-[10px] font-bold text-[#16A34A] uppercase tracking-wider">AVAILABLE NOW</span>
-                </div>
-                <p className="text-sm font-extrabold text-[#111827]">Open for Roles &amp; Freelance Work</p>
-                <p className="text-[11px] text-[#6B7280] font-medium leading-none">Kathmandu, Nepal · Remote &amp; Hybrid OK</p>
-              </div>
+            {/* Availability Box */}
+            <div className="border border-neutral-900 bg-black text-white p-5 rounded-sm space-y-2">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Status</p>
+              <p className="text-sm font-bold">Open for Full-time Roles &amp; Technical Contracts</p>
+              <p className="text-xs text-neutral-400">Kathmandu, Nepal · Remote &amp; Hybrid Worldwide</p>
             </div>
-
           </motion.div>
 
         </div>
+
       </div>
     </section>
   );

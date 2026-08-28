@@ -65,11 +65,11 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
         {/* Pinterest domain verification */}
         <meta name="p:domain_verify" content="f38c642430bc7f307780f539033e3f8e" />
       </head>
-      <body className="antialiased min-h-full bg-white font-sans" suppressHydrationWarning>
+      <body className="antialiased min-h-full bg-white text-black selection:bg-black selection:text-white" suppressHydrationWarning>
         {children}
         <MomentsMusicPlayer />
         <Analytics />

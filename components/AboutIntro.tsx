@@ -3,30 +3,37 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
-import { ArrowRight, Download, MapPin, GraduationCap, Briefcase, Code2, Quote, ShieldCheck, Layers, Gauge } from 'lucide-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
+import { ArrowRight, Download, MapPin, GraduationCap, Briefcase, Code2, Quote, ShieldCheck, Layers, Gauge, Terminal } from 'lucide-react';
 import { personalInfo } from '@/data/portfolio';
 import { scrollToSection } from '@/lib/utils';
+import { TypingText } from '@/components/ui/typing-text';
 
 const quickFacts = [
-  { icon: MapPin, label: 'Based in', value: 'Kathmandu, Nepal' },
-  { icon: GraduationCap, label: 'Degree', value: 'BCA (Ongoing)' },
+  { icon: MapPin, label: 'Location', value: 'Kathmandu, Nepal' },
+  { icon: GraduationCap, label: 'Degree', value: 'BCA (Aadim / TU)' },
   { icon: Briefcase, label: 'Experience', value: '2+ Years' },
-  { icon: Code2, label: 'Status', value: 'Open to work' },
+  { icon: Code2, label: 'Specialty', value: 'Backend & Full-Stack' },
 ];
 
 const storyParagraphs = [
-  "I'm Hiyan Jong Rai, a Backend Developer from Udayapur, Bagaha, currently based in Kathmandu where I'm pursuing my BCA at Tribhuvan University. I specialize in building robust Spring Boot services, designing scalable database schemas, and optimizing site architectures.",
-  "Beyond core development, I have extensive experience in digital presence and Search Engine Optimization (SEO). I work with brands like Delito Kathmandu and Himalayan Hub—popular local restaurants and bars—creating compelling content, managing their social media channels, and writing targeted blog posts rich with optimized keyword tags to boost search visibility.",
-  "I have also worked with Mirai Design, a professional printing services company. I developed and maintained their website, handled their on-page and off-page SEO, wrote informative blogs, and curated targeted content to attract customers and drive organic search performance.",
+  "I'm Hiyan Jong Rai (हियान जोङ राई), a Backend and Full-Stack Developer originally from Udayapur, Bagaha, and currently based in Kathmandu, Nepal. I am pursuing a Bachelor of Computer Applications (BCA) at Tribhuvan University (Aadim National College).",
+  "My core technical expertise centers on designing robust RESTful APIs, securing backend services with Spring Security and JWT, and architecting relational database schemas across MySQL and PostgreSQL. I take pride in writing structured, maintainable code following enterprise patterns.",
+  "Beyond backend engineering, I have driven digital performance and search engine optimization (SEO) for high-traffic restaurant brands (Delito Kathmandu, Himalayan Hub) and an international printing company (Mirai Design & Print), combining strong technical acumen with tangible organic growth.",
+  "I enjoy turning ideas into clean, working software, backed by 1,000+ hours of continuous self-study across modern software engineering methodologies.",
 ];
 
 const mindset = [
-  { icon: Gauge, label: 'Scalability first', sub: 'Code that survives growth' },
-  { icon: ShieldCheck, label: 'Security minded', sub: 'Auth, JWT, and validation' },
-  { icon: Layers, label: 'Clean architecture', sub: 'MVC, layered, readable' },
-  { faIcon: faWandMagicSparkles, label: 'Always learning', sub: 'New tech, better patterns' },
+  { icon: Gauge, label: 'Scalability First', sub: 'Systems engineered for growing load and concurrency' },
+  { icon: ShieldCheck, label: 'Security Conscious', sub: 'Strict JWT authorization, sanitization & validation' },
+  { icon: Layers, label: 'Clean Architecture', sub: 'Layered MVC, domain encapsulation, readable patterns' },
+  { icon: Terminal, label: 'Continuous Craft', sub: 'Adopting modern tooling, optimization & best practices' },
+];
+
+const stats = [
+  { num: '02+', label: 'Years Experience' },
+  { num: '04+', label: 'Featured Projects' },
+  { num: '03', label: 'Jobs / Internships' },
+  { num: '1000+', label: 'Hours Self-Study' },
 ];
 
 export default function AboutIntro() {
@@ -34,184 +41,189 @@ export default function AboutIntro() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section id="about" ref={ref} className="relative overflow-hidden bg-[#F8FAFC] py-16 sm:py-20 lg:py-32 px-5 max-[360px]:px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-[1280px] w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-start">
+    <section id="about" ref={ref} className="relative bg-[#FAFAFA] py-20 sm:py-28 lg:py-36 px-5 sm:px-8 border-b border-neutral-200">
+      <div className="container-custom mx-auto space-y-16 sm:space-y-20">
 
-          {/* ── Left: Photo + Quick Facts (sticky, unchanged behavior) ── */}
+        {/* ── Section Header ── */}
+        <div className="space-y-4">
           <motion.div
-            initial={{ opacity: 0, x: -24 }}
+            initial={{ opacity: 0, y: -8 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.4 }}
+            className="editorial-label"
+          >
+            01 — INTRODUCTION
+          </motion.div>
+
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-black leading-[1.02]">
+            <TypingText
+              text="Wanna know about me?"
+              speed={65}
+              delay={200}
+              showCursor={true}
+              hideCursorOnComplete={false}
+            />
+          </h2>
+        </div>
+
+        {/* ── Editorial Two-Column Grid ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16 items-start">
+
+          {/* ── Left: Editorial Portrait & Facts ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="md:sticky md:top-28 space-y-5 sm:space-y-6 w-full max-w-[420px] mx-auto md:mx-0"
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="space-y-6 max-w-[420px] mx-auto lg:mx-0 w-full"
           >
             {/* Image Frame */}
-            <div className="group relative w-full max-w-[420px] aspect-[4/5] rounded-[28px] sm:rounded-[2.5rem] overflow-hidden shadow-[0_24px_60px_-12px_rgba(0,0,0,0.12)] border border-slate-100">
+            <div className="relative w-full aspect-[4/5] overflow-hidden rounded-sm border border-neutral-900 bg-neutral-200">
               <Image
                 src="/images/profile1.jpg"
                 alt={personalInfo.name}
                 fill
-                style={{ objectFit: 'cover', objectPosition: 'top' }}
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: 'top',
+                  filter: 'grayscale(100%) contrast(105%)',
+                }}
                 sizes="(max-width: 1024px) 100vw, 420px"
                 priority
-                className="transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                className="transition-transform duration-700 hover:scale-[1.02]"
               />
-              {/* Subtle colour wash overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/45 via-slate-900/0 to-transparent" />
 
-              {/* Availability badge */}
-              <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 backdrop-blur-sm px-3 py-1.5 text-[11px] font-bold text-emerald-700 shadow-sm">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                </span>
-                Open to work
+              {/* Status pill overlay */}
+              <div className="absolute top-4 right-4 bg-white/95 border border-neutral-200 px-3 py-1 text-[11px] font-bold text-black uppercase tracking-wider rounded-sm shadow-sm">
+                ● Available for Work
               </div>
 
-              {/* Name tag */}
-              <div className="absolute bottom-5 left-5 right-5">
-                <p className="text-white font-bold text-[15px] leading-none">{personalInfo.name}</p>
-                <p className="text-white/70 text-[12px] font-medium mt-1">{personalInfo.title} · {personalInfo.location}</p>
+              {/* Name & Origin */}
+              <div className="absolute bottom-4 left-4 right-4 bg-black/80 text-white p-3 backdrop-blur-sm rounded-sm">
+                <p className="text-xs font-bold uppercase tracking-widest text-neutral-300">Origin</p>
+                <p className="text-sm font-semibold">{personalInfo.origin} · Based in {personalInfo.location}</p>
               </div>
             </div>
 
-            {/* Quick Facts 2x2 Grid */}
-            <div className="grid grid-cols-1 min-[390px]:grid-cols-2 gap-3 sm:gap-4">
+            {/* Quick Facts Grid */}
+            <div className="grid grid-cols-2 gap-2.5">
               {quickFacts.map((fact, i) => (
-                <motion.div
+                <div
                   key={i}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.45, delay: 0.3 + i * 0.07 }}
-                  className="flex items-start gap-3 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm hover:shadow-md hover:border-emerald-100 hover:-translate-y-0.5 transition-all duration-200"
+                  className="bg-white border border-neutral-200 p-3.5 rounded-sm"
                 >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 border border-emerald-100">
-                    <fact.icon className="h-4 w-4" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider leading-none">{fact.label}</p>
-                    <p className="text-[13px] font-extrabold text-slate-900 mt-1.5 leading-snug truncate">{fact.value}</p>
-                  </div>
-                </motion.div>
+                  <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 leading-none">{fact.label}</p>
+                  <p className="text-xs font-bold text-black mt-1.5 truncate">{fact.value}</p>
+                </div>
               ))}
             </div>
 
-            {/* Download CTA */}
+            {/* Resume Button */}
             <a
               href={personalInfo.resume}
               target="_blank"
               rel="noreferrer"
-              className="group inline-flex min-h-11 w-full min-[390px]:w-auto items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 py-2.5 text-[13px] font-bold text-slate-700 hover:bg-slate-900 hover:border-slate-900 hover:text-white transition-all duration-200 shadow-sm hover:shadow-md"
+              className="btn-secondary w-full"
             >
-              <Download className="h-4 w-4 text-slate-400 group-hover:text-white group-hover:translate-y-0.5 transition-all duration-200" />
-              Download Resume
+              <Download className="h-4 w-4 text-neutral-600" />
+              Download Full Resume (PDF)
             </a>
           </motion.div>
 
-          {/* ── Right: Editorial Bio ── */}
-          <div className="space-y-8 sm:space-y-12">
-            {/* Section Label */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
-              className="flex items-center gap-2.5"
-            >
-              <span className="h-2 w-2 shrink-0 rounded-full bg-emerald-500" />
-              <span className="text-[11px] font-bold uppercase tracking-[0.15em] text-emerald-600">About Me</span>
-            </motion.div>
-
-            {/* Headline */}
-            <div>
-              <motion.h2
-                initial={{ opacity: 0, y: 22 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="font-extrabold tracking-tight text-slate-900 leading-[1.1]"
-                style={{ fontSize: 'clamp(32px, 3.5vw, 48px)' }}
-              >
-                From Udayapur to building<br className="hidden sm:block" />
-                <span className="text-emerald-600 italic">enterprise backends.</span>
-              </motion.h2>
-              <motion.span
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={isInView ? { opacity: 1, scaleX: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="mt-4 block h-1 w-10 origin-left rounded-full bg-emerald-500"
-              />
-            </div>
+          {/* ── Right: Editorial Bio, Pull Quote & Mindset ── */}
+          <div className="space-y-8 sm:space-y-10">
 
             {/* Pull Quote */}
             <motion.blockquote
               initial={{ opacity: 0, x: 16 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.25 }}
-              className="relative border-l-2 border-emerald-400 pl-4 sm:pl-6 py-1"
+              transition={{ duration: 0.55, delay: 0.2 }}
+              className="border-l-2 border-black pl-5 py-1"
             >
-              <Quote className="absolute -left-1 -top-1 h-6 w-6 text-emerald-100" fill="currentColor" strokeWidth={0} aria-hidden="true" />
-              <p className="relative text-[16px] sm:text-[18px] font-semibold text-slate-700 leading-relaxed italic">
-                &ldquo;I like to travel, explore new places, and create memories. In the same way, I want to explore a system—how it works, and what it does.&rdquo;
+              <p className="text-lg sm:text-xl font-medium text-neutral-900 leading-relaxed italic">
+                &ldquo;I like to travel, explore new places, and create memories. In the same way, I want to explore a system — how it works, and what it does.&rdquo;
               </p>
             </motion.blockquote>
 
-            {/* Story paragraphs */}
-            {storyParagraphs.map((para, i) => (
-              <motion.p
-                key={i}
-                initial={{ opacity: 0, y: 14 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.55, delay: 0.3 + i * 0.08 }}
-                className="text-[16px] text-slate-600 leading-[1.75] sm:leading-[1.85] font-medium"
-              >
-                {para}
-              </motion.p>
-            ))}
+            {/* Biography Paragraphs */}
+            <div className="space-y-5 text-[15px] sm:text-[16px] text-[#525252] leading-[1.75]">
+              {storyParagraphs.map((para, i) => (
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: 0.25 + i * 0.08 }}
+                >
+                  {para}
+                </motion.p>
+              ))}
+            </div>
 
-            {/* Philosophy / Mindset card */}
+            {/* Stats Grid with Clean Dividers */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.55, delay: 0.5 }}
-              className="rounded-[22px] border border-slate-100 bg-white p-5 sm:p-7"
+              transition={{ duration: 0.55, delay: 0.4 }}
+              className="grid grid-cols-2 sm:grid-cols-4 border-y border-neutral-200 py-6 my-4 gap-6 sm:gap-0"
             >
-              <p className="text-[11px] font-bold uppercase tracking-[0.15em] text-slate-400 mb-5">My Mindset</p>
-              <div className="grid grid-cols-1 min-[390px]:grid-cols-2 gap-x-5 gap-y-5">
-                {mindset.map((item, i) => (
-                  <div key={i} className="flex items-start gap-3">
-                    <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 border border-emerald-100">
-                      {item.faIcon ? (
-                        <FontAwesomeIcon icon={item.faIcon} className="h-4 w-4 text-emerald-600" />
-                      ) : item.icon ? (
-                        <item.icon className="h-4 w-4" />
-                      ) : null}
+              {stats.map((stat, i) => (
+                <div
+                  key={i}
+                  className={`text-left sm:text-center ${
+                    i < stats.length - 1 ? 'sm:border-r sm:border-neutral-200' : ''
+                  }`}
+                >
+                  <p className="text-3xl sm:text-4xl font-extrabold text-black leading-none">{stat.num}</p>
+                  <p className="text-[11px] font-bold text-neutral-500 uppercase tracking-widest mt-2">{stat.label}</p>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Engineering Principles / Mindset */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.55, delay: 0.45 }}
+              className="bg-white border border-neutral-200 p-6 rounded-sm space-y-4"
+            >
+              <p className="text-xs font-bold uppercase tracking-widest text-neutral-400">Engineering Principles</p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {mindset.map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={i} className="flex items-start gap-3">
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm border border-neutral-200 bg-neutral-50 text-black mt-0.5">
+                        <Icon className="h-4 w-4" />
+                      </div>
+                      <div>
+                        <p className="text-xs font-bold text-black uppercase tracking-tight">{item.label}</p>
+                        <p className="text-[12px] text-neutral-500 leading-snug mt-0.5">{item.sub}</p>
+                      </div>
                     </div>
-                    <div className="min-w-0">
-                      <p className="text-[13px] font-bold text-slate-800 leading-tight">{item.label}</p>
-                      <p className="text-[11px] text-slate-500 font-medium mt-0.5">{item.sub}</p>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </motion.div>
 
-            {/* CTA */}
+            {/* See Work CTA */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.65 }}
+              transition={{ duration: 0.5, delay: 0.55 }}
+              className="pt-2"
             >
               <button
                 onClick={() => scrollToSection('projects')}
-                className="group relative inline-flex min-h-11 items-center gap-2 text-[14px] font-bold text-slate-900 hover:text-emerald-600 transition-colors duration-200"
+                className="btn-primary group"
               >
-                See my work
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
-                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-emerald-600 transition-all duration-300 group-hover:w-full" />
+                Explore Selected Work
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
               </button>
             </motion.div>
+
           </div>
 
         </div>
+
       </div>
     </section>
   );

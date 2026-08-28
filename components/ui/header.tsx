@@ -15,7 +15,7 @@ export function Header() {
   const [open, setOpen] = React.useState(false);
   const scrolled = useScroll(10);
   const [activeSection, setActiveSection] = React.useState('hero');
-  const [headerHeight, setHeaderHeight] = React.useState(64);
+  const [headerHeight, setHeaderHeight] = React.useState(60);
   const pathname = usePathname();
   const router = useRouter();
   const headerRef = React.useRef<HTMLElement>(null);
@@ -24,9 +24,10 @@ export function Header() {
   const links = [
     { label: 'Home', href: 'hero', isRoute: false },
     { label: 'About', href: 'about', isRoute: false },
-    { label: 'Projects', href: 'projects', isRoute: false },
+    { label: 'Work', href: 'projects', isRoute: false },
     { label: 'Experience', href: 'experience', isRoute: false },
-    { label: 'Skills', href: 'expertise', isRoute: false },
+    { label: 'Expertise', href: 'expertise', isRoute: false },
+    { label: 'Education', href: 'education', isRoute: false },
     { label: 'Moments', href: '/moments', isRoute: true },
     { label: 'Contact', href: 'contact', isRoute: false },
   ];
@@ -109,21 +110,22 @@ export function Header() {
     <header
       ref={headerRef}
       className={cn(
-        'fixed top-0 inset-x-0 z-50 w-full border-b border-transparent transition-all duration-300 py-3.5 bg-white/80 backdrop-blur-md',
-        scrolled && 'bg-white/95 border-slate-200/70 shadow-md shadow-slate-900/5 py-2.5'
+        'fixed top-0 inset-x-0 z-50 w-full border-b transition-all duration-200 bg-white/95 backdrop-blur-md',
+        scrolled ? 'border-neutral-200 py-3 shadow-[0_1px_3px_rgba(0,0,0,0.03)]' : 'border-neutral-100 py-4'
       )}
       style={{ paddingTop: 'max(0.75rem, env(safe-area-inset-top))' }}
     >
-      <nav className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 max-[360px]:px-4 md:px-8">
+      <nav className="mx-auto flex w-full max-w-[1380px] items-center justify-between px-5 sm:px-8">
+        {/* Brand Name / Logo */}
         <button
           onClick={() => handleLinkClick('hero', false)}
-          className="min-h-11 min-w-0 font-black text-xl sm:text-2xl tracking-tight text-slate-900 flex items-center gap-1.5 cursor-pointer hover:opacity-85 transition-opacity"
+          className="min-h-10 min-w-0 font-bold text-lg tracking-tight text-black flex items-center gap-1 cursor-pointer hover:opacity-75 transition-opacity"
         >
-          <span className="truncate">Hiyan Jong Rai</span><span className="text-emerald-500">.</span>
+          <span className="truncate uppercase font-extrabold tracking-tighter text-base">Hiyan Jong Rai</span>
         </button>
 
-        {/* Center Links */}
-        <div className="hidden items-center gap-7 md:flex">
+        {/* Center Links (Editorial minimalism) */}
+        <div className="hidden items-center gap-6 lg:flex">
           {links.map((link) => {
             const isActive = link.isRoute
               ? pathname === link.href
@@ -133,15 +135,15 @@ export function Header() {
               <button
                 key={link.label}
                 className={cn(
-                  'relative py-1 text-sm font-semibold transition-all duration-200 cursor-pointer px-2 text-slate-500 hover:text-slate-900 flex items-center gap-1',
-                  isActive && 'text-slate-950 font-bold'
+                  'relative py-1 text-[13px] tracking-tight font-medium transition-colors duration-150 cursor-pointer px-1 text-neutral-500 hover:text-black flex items-center gap-1.5',
+                  isActive && 'text-black font-semibold'
                 )}
                 onClick={() => handleLinkClick(link.href, link.isRoute)}
               >
-                {link.isRoute && <Camera className="h-3.5 w-3.5 text-emerald-500" />}
+                {link.isRoute && <Camera className="h-3 w-3 text-neutral-400" />}
                 {link.label}
                 {isActive && (
-                  <span className="absolute -bottom-1 left-2 right-2 h-0.5 rounded-full bg-emerald-500" />
+                  <span className="absolute -bottom-1 left-0 right-0 h-[1.5px] bg-black" />
                 )}
               </button>
             );
@@ -149,39 +151,41 @@ export function Header() {
         </div>
 
         {/* Right CTA Actions */}
-        <div className="hidden items-center gap-4 md:flex">
+        <div className="hidden items-center gap-3 sm:flex">
           <a
             href={personalInfo.resume}
             target="_blank"
             rel="noreferrer"
-            className="group inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-700 shadow-sm hover:bg-slate-50 hover:border-slate-300 transition-all duration-200 active:scale-95"
+            className="inline-flex items-center gap-1.5 rounded-sm border border-neutral-300 bg-transparent px-3.5 py-1.5 text-xs font-semibold text-neutral-800 hover:bg-neutral-100 hover:text-black hover:border-black transition-all duration-150"
           >
-            <FileText className="h-4 w-4 text-slate-500 group-hover:text-slate-700" />
+            <FileText className="h-3.5 w-3.5 text-neutral-500" />
             Resume
           </a>
           <button
             onClick={() => handleLinkClick('contact', false)}
-            className="group inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-5 py-2 text-sm font-bold text-white shadow-md shadow-emerald-600/10 hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-600/20 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 cursor-pointer"
+            className="group inline-flex items-center gap-1.5 rounded-full bg-black px-4 py-1.5 text-xs font-semibold text-white hover:bg-neutral-800 transition-all duration-150 cursor-pointer"
           >
-            Let's Talk
-            <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+            Let&apos;s Talk
+            <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform duration-150" />
           </button>
         </div>
 
+        {/* Mobile Hamburger */}
         <button
           ref={menuButtonRef}
           onClick={() => setOpen(!open)}
-          className="md:hidden flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 hover:bg-slate-50 active:scale-95 transition-all duration-150"
+          className="lg:hidden flex h-10 w-10 shrink-0 items-center justify-center rounded-sm border border-neutral-200 bg-white text-black hover:bg-neutral-50 active:scale-95 transition-all duration-150 cursor-pointer"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}
         >
-          <MenuToggleIcon open={open} className="size-5" duration={300} />
+          <MenuToggleIcon open={open} className="size-4" duration={250} />
         </button>
       </nav>
 
+      {/* Mobile Drawer */}
       <MobileMenu open={open} headerHeight={headerHeight} onClose={() => setOpen(false)} className="flex flex-col justify-between gap-6">
-        <div className="grid gap-y-2 pt-4">
+        <div className="grid gap-y-1 pt-4">
           {links.map((link) => {
             const isActive = link.isRoute
               ? pathname === link.href
@@ -191,34 +195,34 @@ export function Header() {
               <button
                 key={link.label}
                 className={cn(
-                  'justify-start text-left min-h-11 py-2.5 px-4 rounded-xl text-sm font-bold transition-all duration-200 flex items-center gap-2',
-                  isActive ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                  'justify-start text-left py-3 px-3 rounded-sm text-sm font-medium transition-all duration-150 flex items-center gap-2',
+                  isActive ? 'bg-neutral-100 text-black font-bold' : 'text-neutral-600 hover:bg-neutral-50 hover:text-black'
                 )}
                 onClick={() => handleLinkClick(link.href, link.isRoute)}
               >
-                {link.isRoute && <Camera className="h-4 w-4 text-emerald-500" />}
+                {link.isRoute && <Camera className="h-3.5 w-3.5 text-neutral-500" />}
                 {link.label}
               </button>
             );
           })}
         </div>
 
-        <div className="flex flex-col gap-3 pb-6">
+        <div className="flex flex-col gap-2.5 pb-6">
           <a
             href={personalInfo.resume}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white w-full py-3 text-sm font-bold text-slate-700 shadow-sm hover:bg-slate-50 transition"
+            className="inline-flex items-center justify-center gap-2 rounded-sm border border-neutral-300 bg-white w-full py-2.5 text-xs font-semibold text-neutral-800 hover:bg-neutral-50 transition"
           >
-            <FileText className="h-4.5 w-4.5 text-slate-500" />
+            <FileText className="h-4 w-4 text-neutral-500" />
             Resume
           </a>
           <button
             onClick={() => handleLinkClick('contact', false)}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 w-full py-3 text-sm font-bold text-white shadow-md hover:bg-emerald-700 transition"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-black w-full py-2.5 text-xs font-semibold text-white hover:bg-neutral-800 transition"
           >
-            Let's Talk
-            <ArrowRight className="h-4 w-4" />
+            Let&apos;s Talk
+            <ArrowRight className="h-3.5 w-3.5" />
           </button>
         </div>
       </MobileMenu>
@@ -253,7 +257,7 @@ function MobileMenu({
       <button
         type="button"
         aria-label="Close menu"
-        className="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-[2px] md:hidden"
+        className="fixed inset-0 z-40 bg-black/40 backdrop-blur-[2px] lg:hidden"
         style={{ top: headerHeight }}
         onClick={onClose}
       />
@@ -262,7 +266,7 @@ function MobileMenu({
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
-        className="bg-white fixed right-0 bottom-0 left-0 z-50 flex flex-col overflow-y-auto border-t border-slate-100 md:hidden px-5 max-[360px]:px-4"
+        className="bg-white fixed right-0 bottom-0 left-0 z-50 flex flex-col overflow-y-auto border-t border-neutral-200 lg:hidden px-5"
         style={{
           top: headerHeight,
           paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))',
@@ -271,7 +275,7 @@ function MobileMenu({
         <div
           data-slot={open ? 'open' : 'closed'}
           className={cn(
-            'data-[slot=open]:animate-in data-[slot=open]:zoom-in-97 ease-out duration-200',
+            'data-[slot=open]:animate-in data-[slot=open]:zoom-in-97 ease-out duration-150',
             'min-h-full flex flex-col justify-between',
             className
           )}
