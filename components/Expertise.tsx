@@ -84,9 +84,9 @@ export default function Expertise() {
             04 — EXPERTISE &amp; SKILLS
           </motion.div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-black leading-[1.02]">
+          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-black leading-[1.02] whitespace-nowrap">
             <TypingText
-              text="What am I good at? These are the tools I use."
+              text="What am I good at?"
               speed={40}
               delay={200}
               showCursor={true}
@@ -156,6 +156,9 @@ export default function Expertise() {
           className="border-t border-neutral-200 pt-14 space-y-10"
         >
           <div className="space-y-2">
+            <p className="text-xl sm:text-2xl font-extrabold uppercase tracking-tight text-black">
+              These are the tools I use.
+            </p>
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-black uppercase">
               Technology Stack &amp; Tooling
             </h3>

@@ -126,7 +126,7 @@ export default function Education() {
             05 — EDUCATION
           </motion.div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-black leading-[1.02]">
+          <h2 className="text-xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-black leading-[1.02] whitespace-nowrap">
             <TypingText
               text="Where did I learn to build things?"
               speed={45}

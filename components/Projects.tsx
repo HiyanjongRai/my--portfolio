@@ -169,7 +169,7 @@ export default function Projects() {
               02 — MY PROJECTS
             </motion.div>
 
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-black leading-[1.02]">
+            <h2 className="text-2xl sm:text-5xl lg:text-6xl font-extrabold uppercase tracking-tight text-black leading-[1.02] whitespace-nowrap">
               <TypingText
                 text="Want to see my work?"
                 speed={55}
