@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import {
   ArrowRight,
   FileText,
@@ -28,6 +28,8 @@ const techPills = ['Spring Boot', 'Java', 'MySQL', 'PostgreSQL', 'REST APIs', 'R
 
 /* ─── Hero Section ─────────────────────────────────────────────── */
 export function HeroSection() {
+  const shouldReduceMotion = useReducedMotion();
+
   return (
     <section
       id="hero"
@@ -88,16 +90,16 @@ export function HeroSection() {
                 className="btn-primary group"
               >
                 View My Work
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform duration-150" />
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
               </button>
 
               <a
                 href={personalInfo.resume}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-secondary"
+                className="btn-secondary group"
               >
-                <FileText className="h-4 w-4 text-neutral-600" />
+                <FileText className="h-4 w-4 text-neutral-600 group-hover:text-white transition-colors duration-200" />
                 Download CV
               </a>
             </motion.div>
@@ -110,13 +112,16 @@ export function HeroSection() {
               className="flex flex-wrap items-center gap-2 pt-2"
             >
               <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-widest mr-1">Focus:</span>
-              {techPills.map((tech) => (
-                <span
+              {techPills.map((tech, i) => (
+                <motion.span
                   key={tech}
-                  className="inline-block border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-xs font-semibold text-neutral-800 rounded-sm"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: 0.4 + i * 0.05 }}
+                  className="inline-block border border-neutral-200 bg-neutral-50 hover:border-black hover:bg-neutral-100 hover:-translate-y-0.5 px-2.5 py-1 text-xs font-semibold text-neutral-800 rounded-sm transition-all duration-200 cursor-default"
                 >
                   {tech}
-                </span>
+                </motion.span>
               ))}
             </motion.div>
 
@@ -133,7 +138,7 @@ export function HeroSection() {
                     href={social.url}
                     target="_blank"
                     rel="noreferrer"
-                    className="hover:text-black transition-colors"
+                    className="hover:text-black hover:-translate-y-0.5 transition-all duration-150 inline-block"
                   >
                     {social.name}
                   </a>
@@ -146,13 +151,26 @@ export function HeroSection() {
           {/* ── Right: Editorial Grayscale Portrait ─── */}
           <div className="order-1 lg:order-2 w-full flex items-center justify-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              initial={{ opacity: 0, scale: 0.96, y: 15 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                y: [0, -6, 0],
+              }}
+              transition={{
+                opacity: { duration: 0.6, delay: 0.1 },
+                scale: { duration: 0.6, delay: 0.1 },
+                y: {
+                  duration: 6,
+                  repeat: Infinity,
+                  repeatType: 'reverse',
+                  ease: 'easeInOut',
+                },
+              }}
               className="relative w-full max-w-[340px] sm:max-w-[400px] lg:max-w-[440px]"
             >
               {/* Editorial Frame */}
-              <div className="relative aspect-[4/5] w-full overflow-hidden border border-neutral-900 bg-neutral-100 rounded-sm shadow-[0_12px_40px_rgba(0,0,0,0.06)]">
+              <div className="relative aspect-[4/5] w-full overflow-hidden border border-neutral-900 bg-neutral-100 rounded-sm shadow-[0_12px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.12)] transition-shadow duration-500">
                 <Image
                   src={personalInfo.image}
                   alt={personalInfo.name}
@@ -163,7 +181,7 @@ export function HeroSection() {
                   }}
                   sizes="(max-width: 640px) 340px, (max-width: 1024px) 400px, 440px"
                   priority
-                  className="transition-transform duration-700 hover:scale-[1.02]"
+                  className="transition-transform duration-700 hover:scale-[1.03]"
                 />
                 
                 {/* Subtle dark bottom vignette */}
@@ -178,10 +196,22 @@ export function HeroSection() {
 
               {/* Floating Metric 1 */}
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="absolute -bottom-4 -left-4 sm:-bottom-5 sm:-left-6 bg-white border border-neutral-200 p-3 sm:p-4 rounded-sm shadow-md"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{
+                  opacity: 1,
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  opacity: { duration: 0.5, delay: 0.3 },
+                  y: {
+                    duration: 3.8,
+                    repeat: Infinity,
+                    repeatType: 'reverse',
+                    ease: 'easeInOut',
+                    delay: 0.2,
+                  },
+                }}
+                className="absolute -bottom-4 -left-4 sm:-bottom-5 sm:-left-6 bg-white border border-neutral-200 hover:border-black p-3 sm:p-4 rounded-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-default z-10"
               >
                 <p className="text-2xl sm:text-3xl font-black text-black leading-none">02+</p>
                 <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mt-1">Years Experience</p>
@@ -189,10 +219,22 @@ export function HeroSection() {
 
               {/* Floating Metric 2 */}
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="absolute -top-4 -right-4 sm:-top-5 sm:-right-6 bg-white border border-neutral-200 p-3 sm:p-4 rounded-sm shadow-md"
+                initial={{ opacity: 0, y: -15 }}
+                animate={{
+                  opacity: 1,
+                  y: [0, 8, 0],
+                }}
+                transition={{
+                  opacity: { duration: 0.5, delay: 0.4 },
+                  y: {
+                    duration: 4.2,
+                    repeat: Infinity,
+                    repeatType: 'reverse',
+                    ease: 'easeInOut',
+                    delay: 0.6,
+                  },
+                }}
+                className="absolute -top-4 -right-4 sm:-top-5 sm:-right-6 bg-white border border-neutral-200 hover:border-black p-3 sm:p-4 rounded-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-default z-10"
               >
                 <p className="text-2xl sm:text-3xl font-black text-black leading-none">04+</p>
                 <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest mt-1">Projects Built</p>

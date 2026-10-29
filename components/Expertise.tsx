@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import { ArrowRight, Server, Database, Globe, LineChart, Code2, Cloud, Layers } from 'lucide-react';
 import { TypingText } from '@/components/ui/typing-text';
@@ -68,6 +68,7 @@ const skillGroups = [
 export default function Expertise() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section id="expertise" ref={ref} className="relative bg-white py-20 sm:py-28 lg:py-36 px-5 sm:px-8 border-b border-neutral-200">
@@ -114,7 +115,7 @@ export default function Expertise() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.45, delay: 0.15 + i * 0.08 }}
-                className="group relative flex flex-col justify-between border border-neutral-200 bg-white p-7 sm:p-8 rounded-sm transition-all duration-300 hover:bg-black hover:border-black hover:-translate-y-1 cursor-default"
+                className="group relative flex flex-col justify-between border border-neutral-200 bg-white p-7 sm:p-8 rounded-sm transition-all duration-300 hover:bg-black hover:border-black hover:-translate-y-1.5 hover:shadow-[0_16px_36px_rgba(0,0,0,0.08)] cursor-default"
               >
                 <div className="space-y-6">
                   {/* Top Bar: Number and minimal Icon */}
@@ -122,7 +123,7 @@ export default function Expertise() {
                     <span className="text-2xl sm:text-3xl font-extrabold font-mono text-neutral-400 group-hover:text-neutral-500 transition-colors duration-300">
                       {service.num}
                     </span>
-                    <Icon className="h-5 w-5 text-neutral-400 group-hover:text-white transition-colors duration-300" />
+                    <Icon className="h-5 w-5 text-neutral-400 group-hover:text-white group-hover:scale-110 transition-all duration-300" />
                   </div>
 
                   {/* Title & Description */}
@@ -141,7 +142,7 @@ export default function Expertise() {
                   <span className="text-[11px] font-bold uppercase tracking-widest text-neutral-400 group-hover:text-neutral-400 transition-colors duration-300">
                     Specialization
                   </span>
-                  <ArrowRight className="h-4 w-4 text-black group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight className="h-4 w-4 text-black group-hover:text-white group-hover:translate-x-1.5 transition-all duration-300" />
                 </div>
               </motion.div>
             );
@@ -177,7 +178,7 @@ export default function Expertise() {
                   {group.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="border border-neutral-300 bg-white hover:border-black hover:bg-neutral-50 px-3.5 py-1.5 text-xs font-semibold text-neutral-800 rounded-sm transition-colors duration-150 cursor-default"
+                      className="border border-neutral-300 bg-white hover:border-black hover:bg-neutral-100 hover:-translate-y-0.5 hover:shadow-xs px-3.5 py-1.5 text-xs font-semibold text-neutral-800 rounded-sm transition-all duration-150 cursor-default inline-block"
                     >
                       {skill}
                     </span>

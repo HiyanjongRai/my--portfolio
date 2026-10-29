@@ -55,7 +55,7 @@ export default function Footer() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white hover:-translate-y-0.5 transition-all duration-150 inline-block"
                 >
                   {link.label}
                 </Link>
@@ -63,7 +63,7 @@ export default function Footer() {
                 <button
                   key={link.href}
                   onClick={() => scrollToSection(link.href)}
-                  className="hover:text-white transition-colors cursor-pointer"
+                  className="hover:text-white hover:-translate-y-0.5 transition-all duration-150 cursor-pointer inline-block"
                 >
                   {link.label}
                 </button>
@@ -87,7 +87,7 @@ export default function Footer() {
                 href={social.href}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-white transition-colors"
+                className="hover:text-white hover:-translate-y-0.5 transition-all duration-150 inline-block"
               >
                 {social.name}
               </a>
@@ -97,10 +97,10 @@ export default function Footer() {
           {/* Back to Top */}
           <button
             onClick={scrollToTop}
-            className="order-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white transition-colors cursor-pointer"
+            className="group order-3 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-neutral-400 hover:text-white hover:-translate-y-0.5 transition-all duration-150 cursor-pointer"
           >
             Back to Top
-            <ArrowUp className="h-3.5 w-3.5" />
+            <ArrowUp className="h-3.5 w-3.5 group-hover:-translate-y-0.5 transition-transform duration-150" />
           </button>
         </div>
 

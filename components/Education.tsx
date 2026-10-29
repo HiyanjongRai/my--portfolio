@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import {
   Calendar,
@@ -106,6 +106,7 @@ const stats = [
 export default function Education() {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: '-80px' });
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section
@@ -154,12 +155,12 @@ export default function Education() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.45, delay: 0.2 + idx * 0.1 }}
-              className="bg-white border border-neutral-200 p-6 sm:p-8 rounded-sm hover:border-black transition-colors duration-200 space-y-4"
+              className="group bg-white border border-neutral-200 p-6 sm:p-8 rounded-sm hover:border-black hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(0,0,0,0.04)] transition-all duration-300 ease-out space-y-4 cursor-default"
             >
               {/* Header row */}
               <div className="flex flex-wrap items-center justify-between gap-2 border-b border-neutral-100 pb-4">
                 <div className="flex items-center gap-3">
-                  <span className="text-xl sm:text-2xl font-mono font-black text-black">
+                  <span className="text-xl sm:text-2xl font-mono font-black text-black group-hover:scale-105 transition-transform duration-200 inline-block">
                     {item.step}
                   </span>
                   <span className="text-xs font-mono font-bold uppercase tracking-widest text-neutral-500">
@@ -173,7 +174,7 @@ export default function Education() {
 
               {/* Title & Institution */}
               <div>
-                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-black">
+                <h3 className="text-lg sm:text-xl font-bold tracking-tight text-black group-hover:underline underline-offset-4 transition-colors">
                   {item.title}
                 </h3>
                 <p className="text-xs sm:text-sm font-semibold text-neutral-600 mt-0.5">
@@ -191,7 +192,7 @@ export default function Education() {
                 {item.highlights.map((hl, hi) => (
                   <span
                     key={hi}
-                    className="border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-[11px] font-medium text-neutral-700 rounded-xs"
+                    className="border border-neutral-200 bg-neutral-50 hover:border-neutral-400 hover:bg-neutral-100 px-2.5 py-1 text-[11px] font-medium text-neutral-700 rounded-xs transition-colors duration-150 cursor-default"
                   >
                     {hl}
                   </span>
@@ -209,7 +210,7 @@ export default function Education() {
           className="grid grid-cols-2 lg:grid-cols-4 border border-neutral-200 bg-white divide-y sm:divide-y-0 sm:divide-x divide-neutral-200 rounded-sm"
         >
           {stats.map((stat, i) => (
-            <div key={i} className="p-6 sm:p-8 text-center">
+            <div key={i} className="p-6 sm:p-8 text-center hover:bg-neutral-50/70 transition-colors duration-200 cursor-default">
               <p className="text-3xl sm:text-4xl font-extrabold text-black leading-none font-mono">
                 <AnimatedCounter to={stat.value} suffix={stat.suffix} />
               </p>
@@ -223,9 +224,9 @@ export default function Education() {
           initial={{ opacity: 0, y: 16 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="border border-neutral-300 bg-white p-6 sm:p-7 rounded-sm flex items-start gap-4"
+          className="group border border-neutral-300 bg-white hover:border-black hover:shadow-xs p-6 sm:p-7 rounded-sm flex items-start gap-4 transition-all duration-200"
         >
-          <BookMarked className="h-5 w-5 text-black shrink-0 mt-0.5" />
+          <BookMarked className="h-5 w-5 text-black shrink-0 mt-0.5 group-hover:scale-110 transition-transform duration-200" />
           <div className="space-y-1">
             <p className="text-sm font-bold text-black uppercase tracking-tight">Continuous Self-Directed Mastery</p>
             <p className="text-xs sm:text-sm text-[#525252] leading-relaxed">

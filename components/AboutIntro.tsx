@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import Image from 'next/image';
 import { ArrowRight, Download, MapPin, GraduationCap, Briefcase, Code2, Quote, ShieldCheck, Layers, Gauge, Terminal } from 'lucide-react';
@@ -40,6 +40,7 @@ const stats = [
 export default function AboutIntro() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section id="about" ref={ref} className="relative bg-[#FAFAFA] py-20 sm:py-28 lg:py-36 px-5 sm:px-8 border-b border-neutral-200">
@@ -78,7 +79,7 @@ export default function AboutIntro() {
             className="space-y-6 max-w-[420px] mx-auto lg:mx-0 w-full"
           >
             {/* Image Frame */}
-            <div className="relative w-full aspect-[4/5] overflow-hidden rounded-sm border border-neutral-900 bg-neutral-200">
+            <div className="relative w-full aspect-[4/5] overflow-hidden rounded-sm border border-neutral-900 bg-neutral-200 shadow-sm hover:shadow-[0_16px_40px_rgba(0,0,0,0.1)] transition-shadow duration-500">
               <Image
                 src="/images/profile1.jpg"
                 alt={personalInfo.name}
@@ -89,7 +90,7 @@ export default function AboutIntro() {
                 }}
                 sizes="(max-width: 1024px) 100vw, 420px"
                 priority
-                className="transition-transform duration-700 hover:scale-[1.02]"
+                className="transition-transform duration-700 hover:scale-[1.03]"
               />
 
               {/* Status pill overlay */}
@@ -107,13 +108,16 @@ export default function AboutIntro() {
             {/* Quick Facts Grid */}
             <div className="grid grid-cols-2 gap-2.5">
               {quickFacts.map((fact, i) => (
-                <div
+                <motion.div
                   key={i}
-                  className="bg-white border border-neutral-200 p-3.5 rounded-sm"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.4, delay: 0.25 + i * 0.06 }}
+                  className="bg-white border border-neutral-200 hover:border-black hover:-translate-y-0.5 p-3.5 rounded-sm transition-all duration-200 cursor-default"
                 >
                   <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400 leading-none">{fact.label}</p>
                   <p className="text-xs font-bold text-black mt-1.5 truncate">{fact.value}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
 
@@ -122,9 +126,9 @@ export default function AboutIntro() {
               href={personalInfo.resume}
               target="_blank"
               rel="noreferrer"
-              className="btn-secondary w-full"
+              className="btn-secondary w-full group"
             >
-              <Download className="h-4 w-4 text-neutral-600" />
+              <Download className="h-4 w-4 text-neutral-600 group-hover:text-white group-hover:-translate-y-0.5 transition-all duration-150" />
               Download Full Resume (PDF)
             </a>
           </motion.div>
@@ -168,7 +172,7 @@ export default function AboutIntro() {
               {stats.map((stat, i) => (
                 <div
                   key={i}
-                  className={`text-left sm:text-center ${
+                  className={`text-left sm:text-center p-2 rounded-sm hover:bg-neutral-100/60 transition-colors duration-200 cursor-default ${
                     i < stats.length - 1 ? 'sm:border-r sm:border-neutral-200' : ''
                   }`}
                 >
@@ -190,12 +194,15 @@ export default function AboutIntro() {
                 {mindset.map((item, i) => {
                   const Icon = item.icon;
                   return (
-                    <div key={i} className="flex items-start gap-3">
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm border border-neutral-200 bg-neutral-50 text-black mt-0.5">
+                    <div
+                      key={i}
+                      className="group flex items-start gap-3 p-2 -m-2 rounded-sm hover:bg-neutral-50 transition-colors duration-150 cursor-default"
+                    >
+                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-sm border border-neutral-200 bg-neutral-50 text-black mt-0.5 group-hover:border-black group-hover:scale-105 transition-all duration-200">
                         <Icon className="h-4 w-4" />
                       </div>
                       <div>
-                        <p className="text-xs font-bold text-black uppercase tracking-tight">{item.label}</p>
+                        <p className="text-xs font-bold text-black uppercase tracking-tight group-hover:text-black">{item.label}</p>
                         <p className="text-[12px] text-neutral-500 leading-snug mt-0.5">{item.sub}</p>
                       </div>
                     </div>
@@ -216,7 +223,7 @@ export default function AboutIntro() {
                 className="btn-primary group"
               >
                 Explore Selected Work
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
               </button>
             </motion.div>
 

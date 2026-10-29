@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { cn, scrollToSection } from '@/lib/utils';
 import { useScroll } from '@/components/ui/use-scroll';
 import { createPortal } from 'react-dom';
@@ -26,6 +26,7 @@ export function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const menuButtonRef = React.useRef<HTMLButtonElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const links = [
     { label: 'Home', href: 'hero', isRoute: false, num: '01' },
@@ -121,7 +122,7 @@ export function Header() {
             className="group flex items-center gap-3 cursor-pointer select-none text-left"
           >
             {/* Monogram Box */}
-            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-black text-white font-mono text-xs font-black tracking-wider transition-transform duration-200 group-hover:scale-105 shadow-sm">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-black text-white font-mono text-xs font-black tracking-wider transition-all duration-200 group-hover:scale-105 active:scale-95 shadow-sm">
               HJR
             </div>
             
@@ -137,7 +138,7 @@ export function Header() {
             </div>
           </button>
 
-          {/* ── Center Nav Links (Floating Pill Tabs) ── */}
+          {/* ── Center Nav Links (Floating Pill Tabs with Animated Indicator) ── */}
           <div className="hidden lg:flex items-center gap-1 bg-neutral-100/80 border border-neutral-200/70 p-1.5 rounded-full shadow-inner">
             {links.map((link) => {
               const isActive = link.isRoute
@@ -149,12 +150,19 @@ export function Header() {
                   key={link.label}
                   onClick={() => handleLinkClick(link.href, link.isRoute)}
                   className={cn(
-                    'relative px-3.5 py-1.5 text-xs font-semibold tracking-tight transition-all duration-200 rounded-full cursor-pointer flex items-center gap-1.5',
+                    'relative px-3.5 py-1.5 text-xs font-semibold tracking-tight transition-colors duration-200 rounded-full cursor-pointer flex items-center gap-1.5 z-10',
                     isActive
-                      ? 'bg-black text-white shadow-sm font-bold'
+                      ? 'text-white font-bold'
                       : 'text-neutral-600 hover:text-black hover:bg-white/60'
                   )}
                 >
+                  {isActive && (
+                    <motion.span
+                      layoutId="activeNavTab"
+                      className="absolute inset-0 bg-black rounded-full -z-10 shadow-xs"
+                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    />
+                  )}
                   {link.isRoute && <Camera className="h-3 w-3" />}
                   {link.label}
                 </button>
@@ -168,7 +176,7 @@ export function Header() {
               href={personalInfo.resume}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-300 bg-white/80 px-4 py-2 text-xs font-bold text-neutral-800 hover:bg-neutral-100 hover:border-black transition-all duration-150 shadow-xs"
+              className="inline-flex items-center gap-1.5 rounded-full border border-neutral-300 bg-white/80 px-4 py-2 text-xs font-bold text-neutral-800 hover:bg-neutral-100 hover:border-black hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 shadow-xs"
             >
               <FileText className="h-3.5 w-3.5 text-neutral-500" />
               Resume
@@ -176,7 +184,7 @@ export function Header() {
 
             <button
               onClick={() => handleLinkClick('contact', false)}
-              className="group inline-flex items-center gap-1.5 rounded-full bg-black px-4.5 py-2 text-xs font-bold text-white hover:bg-neutral-800 active:scale-95 transition-all duration-150 cursor-pointer shadow-sm"
+              className="group inline-flex items-center gap-1.5 rounded-full bg-black px-4.5 py-2 text-xs font-bold text-white hover:bg-neutral-800 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 cursor-pointer shadow-sm"
             >
               Let&apos;s Talk
               <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform duration-150" />

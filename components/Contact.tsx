@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { 
   Mail, 
@@ -33,6 +33,7 @@ export default function Contact() {
   const ref = useRef(null);
   const formRef = useRef<HTMLFormElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const shouldReduceMotion = useReducedMotion();
   
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -114,7 +115,7 @@ export default function Contact() {
           >
             {/* Quick Channel Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="border border-neutral-800 bg-neutral-950 p-5 rounded-sm space-y-1">
+              <div className="group border border-neutral-800 bg-neutral-950 hover:border-neutral-700 hover:-translate-y-0.5 hover:bg-neutral-900/60 p-5 rounded-sm space-y-1 transition-all duration-200">
                 <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Direct Email</p>
                 <a
                   href={`mailto:${personalInfo.email}`}
@@ -124,7 +125,7 @@ export default function Contact() {
                 </a>
               </div>
 
-              <div className="border border-neutral-800 bg-neutral-950 p-5 rounded-sm space-y-1">
+              <div className="group border border-neutral-800 bg-neutral-950 hover:border-neutral-700 hover:-translate-y-0.5 hover:bg-neutral-900/60 p-5 rounded-sm space-y-1 transition-all duration-200">
                 <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Phone</p>
                 <a
                   href={`tel:${personalInfo.phone}`}
@@ -134,14 +135,14 @@ export default function Contact() {
                 </a>
               </div>
 
-              <div className="border border-neutral-800 bg-neutral-950 p-5 rounded-sm space-y-1">
+              <div className="group border border-neutral-800 bg-neutral-950 hover:border-neutral-700 hover:-translate-y-0.5 hover:bg-neutral-900/60 p-5 rounded-sm space-y-1 transition-all duration-200">
                 <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Location</p>
                 <p className="text-xs sm:text-sm font-bold text-white">
                   {personalInfo.location}
                 </p>
               </div>
 
-              <div className="border border-neutral-800 bg-neutral-950 p-5 rounded-sm space-y-1">
+              <div className="group border border-neutral-800 bg-neutral-950 hover:border-neutral-700 hover:-translate-y-0.5 hover:bg-neutral-900/60 p-5 rounded-sm space-y-1 transition-all duration-200">
                 <p className="text-[10px] font-mono uppercase tracking-widest text-neutral-500">Availability</p>
                 <p className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
                   <span className="h-1.5 w-1.5 rounded-full bg-white animate-pulse" />
@@ -151,7 +152,7 @@ export default function Contact() {
             </div>
 
             {/* Direct Email Outlined CTA */}
-            <div className="border border-neutral-800 p-6 rounded-sm space-y-4">
+            <div className="border border-neutral-800 hover:border-neutral-700 p-6 rounded-sm space-y-4 transition-colors duration-200">
               <h3 className="text-base font-bold uppercase tracking-tight text-white">
                 Start a Conversation
               </h3>
@@ -160,10 +161,10 @@ export default function Contact() {
               </p>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="inline-flex items-center justify-center gap-2 border border-white text-white hover:bg-white hover:text-black transition-all duration-200 px-6 py-3 text-xs font-bold uppercase tracking-wider rounded-sm w-full sm:w-auto"
+                className="group inline-flex items-center justify-center gap-2 border border-white text-white hover:bg-white hover:text-black hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 px-6 py-3 text-xs font-bold uppercase tracking-wider rounded-sm w-full sm:w-auto"
               >
                 Send Direct Email
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" />
               </a>
             </div>
 
@@ -177,7 +178,7 @@ export default function Contact() {
                       href={social.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="hover:text-white transition-colors"
+                      className="hover:text-white hover:-translate-y-0.5 transition-all duration-150 inline-block"
                     >
                       {social.name}
                     </a>
@@ -193,7 +194,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.55, delay: 0.3 }}
-            className="border border-neutral-800 bg-neutral-950 p-6 sm:p-8 rounded-sm space-y-6"
+            className="border border-neutral-800 bg-neutral-950 p-6 sm:p-8 rounded-sm space-y-6 shadow-xl"
           >
             <div className="border-b border-neutral-800 pb-4">
               <h3 className="text-lg font-bold tracking-tight text-white uppercase">
@@ -224,7 +225,7 @@ export default function Contact() {
                     name="from_name"
                     required
                     placeholder="Jane Doe"
-                    className="w-full bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 px-4 py-3 text-sm focus:border-white focus:outline-none rounded-sm transition-colors"
+                    className="w-full bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 px-4 py-3 text-sm focus:border-white focus:ring-1 focus:ring-white/20 focus:outline-none rounded-sm transition-all duration-200"
                   />
                 </div>
 
@@ -238,7 +239,7 @@ export default function Contact() {
                     name="from_email"
                     required
                     placeholder="jane@example.com"
-                    className="w-full bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 px-4 py-3 text-sm focus:border-white focus:outline-none rounded-sm transition-colors"
+                    className="w-full bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 px-4 py-3 text-sm focus:border-white focus:ring-1 focus:ring-white/20 focus:outline-none rounded-sm transition-all duration-200"
                   />
                 </div>
               </div>
@@ -253,7 +254,7 @@ export default function Contact() {
                   name="subject"
                   required
                   placeholder="Backend Project / Contract Role"
-                  className="w-full bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 px-4 py-3 text-sm focus:border-white focus:outline-none rounded-sm transition-colors"
+                  className="w-full bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 px-4 py-3 text-sm focus:border-white focus:ring-1 focus:ring-white/20 focus:outline-none rounded-sm transition-all duration-200"
                 />
               </div>
 
@@ -267,7 +268,7 @@ export default function Contact() {
                   required
                   rows={4}
                   placeholder="Tell me about your goals, timelines, or specifications..."
-                  className="w-full bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 px-4 py-3 text-sm focus:border-white focus:outline-none rounded-sm transition-colors resize-y"
+                  className="w-full bg-neutral-900 border border-neutral-800 text-white placeholder-neutral-600 px-4 py-3 text-sm focus:border-white focus:ring-1 focus:ring-white/20 focus:outline-none rounded-sm transition-all duration-200 resize-y"
                 />
               </div>
 
@@ -275,7 +276,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-white text-black hover:bg-neutral-200 border border-white font-bold text-xs uppercase tracking-wider py-3.5 px-6 rounded-sm transition-all duration-150 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                className="group w-full bg-white text-black hover:bg-neutral-200 hover:-translate-y-0.5 active:translate-y-0 border border-white font-bold text-xs uppercase tracking-wider py-3.5 px-6 rounded-sm transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:hover:translate-y-0 shadow-sm hover:shadow-md"
               >
                 {isSubmitting ? (
                   <>
@@ -284,7 +285,7 @@ export default function Contact() {
                   </>
                 ) : (
                   <>
-                    <Send className="h-3.5 w-3.5" />
+                    <Send className="h-3.5 w-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
                     <span>Send Message</span>
                   </>
                 )}

@@ -1,9 +1,10 @@
 'use client';
 
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence, useReducedMotion } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { ArrowRight, Layers, X, ExternalLink, CheckCircle2, AlertCircle, Shield, Code, ArrowUpRight } from 'lucide-react';
 import { TypingText } from '@/components/ui/typing-text';
+import { cn } from '@/lib/utils';
 
 /* ─── Project Data ──────────────────────────────────────────────── */
 const allProjects = [
@@ -147,6 +148,7 @@ export default function Projects() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [activeCategory, setActiveCategory] = useState('All Projects');
   const [selectedCaseStudy, setSelectedCaseStudy] = useState<typeof allProjects[0] | null>(null);
+  const shouldReduceMotion = useReducedMotion();
 
   const filtered =
     activeCategory === 'All Projects'
@@ -215,19 +217,30 @@ export default function Projects() {
           transition={{ duration: 0.45, delay: 0.3 }}
           className="flex flex-wrap items-center gap-2"
         >
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-all duration-150 cursor-pointer rounded-sm ${
-                activeCategory === cat
-                  ? 'bg-black text-white'
-                  : 'bg-transparent text-neutral-600 border border-neutral-300 hover:border-black hover:text-black'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+          {categories.map((cat) => {
+            const isActive = activeCategory === cat;
+            return (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={cn(
+                  'relative px-4 py-2 text-xs font-semibold uppercase tracking-wider transition-colors duration-150 cursor-pointer rounded-sm z-10',
+                  isActive
+                    ? 'text-white font-bold'
+                    : 'text-neutral-600 border border-neutral-300 hover:border-black hover:text-black'
+                )}
+              >
+                {isActive && (
+                  <motion.span
+                    layoutId="activeCategoryPill"
+                    className="absolute inset-0 bg-black rounded-sm -z-10"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  />
+                )}
+                {cat}
+              </button>
+            );
+          })}
         </motion.div>
 
         {/* ── Asymmetric Editorial Grid (2 columns on desktop) ── */}
@@ -241,7 +254,7 @@ export default function Projects() {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 exit={{ opacity: 0, scale: 0.96 }}
                 transition={{ duration: 0.45, delay: Math.min(index * 0.08, 0.3) }}
-                className="group flex flex-col justify-between border border-neutral-200 bg-white hover:border-black transition-all duration-200 rounded-sm overflow-hidden"
+                className="group flex flex-col justify-between border border-neutral-200 bg-white hover:border-black hover:-translate-y-1.5 hover:shadow-[0_16px_40px_rgba(0,0,0,0.06)] transition-all duration-300 ease-out rounded-sm overflow-hidden"
               >
                 {/* ── Project Preview Graphic ── */}
                 <div className="relative aspect-[16/10] bg-[#111111] flex items-center justify-center p-6 border-b border-neutral-200 overflow-hidden">
@@ -252,7 +265,7 @@ export default function Projects() {
                   </div>
 
                   {/* Mockup Icon Graphic with subtle hover zoom */}
-                  <div className="mt-4 transition-transform duration-300 group-hover:scale-105">
+                  <div className="mt-4 transition-transform duration-500 ease-out group-hover:scale-105">
                     {project.previewIcon}
                   </div>
                 </div>
@@ -260,7 +273,7 @@ export default function Projects() {
                 {/* ── Project Details ── */}
                 <div className="p-6 sm:p-7 space-y-4 flex-1 flex flex-col justify-between">
                   <div className="space-y-2">
-                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-black group-hover:underline underline-offset-4">
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-black group-hover:underline underline-offset-4 transition-colors">
                       {project.title}
                     </h3>
                     <p className="text-sm text-[#525252] leading-relaxed">
@@ -273,7 +286,7 @@ export default function Projects() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="inline-block border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-[11px] font-semibold text-neutral-700 rounded-xs"
+                        className="inline-block border border-neutral-200 bg-neutral-50 hover:border-neutral-400 hover:bg-neutral-100 px-2.5 py-1 text-[11px] font-semibold text-neutral-700 rounded-xs transition-colors duration-150 cursor-default"
                       >
                         {tag}
                       </span>
@@ -284,10 +297,10 @@ export default function Projects() {
                   <div className="flex items-center justify-between border-t border-neutral-100 pt-4 mt-2">
                     <button
                       onClick={() => setSelectedCaseStudy(project)}
-                      className="text-xs font-bold uppercase tracking-wider text-black hover:text-neutral-600 transition-colors cursor-pointer flex items-center gap-1.5"
+                      className="group/btn text-xs font-bold uppercase tracking-wider text-black hover:text-neutral-600 transition-colors cursor-pointer flex items-center gap-1.5"
                     >
                       Case Study
-                      <ArrowRight className="h-3.5 w-3.5" />
+                      <ArrowRight className="h-3.5 w-3.5 group-hover/btn:translate-x-1 transition-transform duration-200" />
                     </button>
 
                     <div className="flex items-center gap-3">
@@ -296,20 +309,20 @@ export default function Projects() {
                           href={project.demo}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 text-xs font-bold text-black hover:underline"
+                          className="group/link inline-flex items-center gap-1 text-xs font-bold text-black hover:underline"
                         >
                           Live Site
-                          <ArrowUpRight className="h-3.5 w-3.5" />
+                          <ArrowUpRight className="h-3.5 w-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-200" />
                         </a>
                       )}
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-bold text-neutral-600 hover:text-black transition-colors"
+                        className="group/link inline-flex items-center gap-1 text-xs font-bold text-neutral-600 hover:text-black transition-colors"
                       >
                         GitHub
-                        <ArrowUpRight className="h-3.5 w-3.5" />
+                        <ArrowUpRight className="h-3.5 w-3.5 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-200" />
                       </a>
                     </div>
                   </div>

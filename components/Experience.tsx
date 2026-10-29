@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import { Calendar, MapPin, ArrowUpRight, CheckCircle2, Shield, Layers, Briefcase, FileCode } from 'lucide-react';
 import { TypingText } from '@/components/ui/typing-text';
@@ -86,6 +86,7 @@ const standards = [
 export default function Experience() {
   const containerRef = useRef(null);
   const isInView = useInView(containerRef, { once: true, margin: '-80px' });
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section
@@ -137,10 +138,10 @@ export default function Experience() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 + idx * 0.12 }}
-                className="relative space-y-4"
+                className="group relative space-y-4"
               >
-                {/* Timeline Marker Dot */}
-                <span className="absolute -left-[31px] sm:-left-[39px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-black bg-white" />
+                {/* Timeline Marker Dot with hover response */}
+                <span className="absolute -left-[31px] sm:-left-[39px] top-1.5 h-3.5 w-3.5 rounded-full border-2 border-black bg-white group-hover:bg-black group-hover:scale-125 transition-all duration-200" />
 
                 {/* Header & Meta */}
                 <div className="space-y-1">
@@ -153,7 +154,7 @@ export default function Experience() {
                     </span>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-black">
+                  <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-black group-hover:underline underline-offset-4 transition-colors">
                     {exp.title}
                   </h3>
 
@@ -170,7 +171,7 @@ export default function Experience() {
                 {/* Key Highlights */}
                 <ul className="space-y-2 pt-1">
                   {exp.highlights.map((item, hIdx) => (
-                    <li key={hIdx} className="flex items-start gap-2.5 text-xs text-neutral-700 leading-relaxed">
+                    <li key={hIdx} className="flex items-start gap-2.5 text-xs text-neutral-700 leading-relaxed group-hover:text-neutral-900 transition-colors">
                       <span className="h-1.5 w-1.5 rounded-full bg-black shrink-0 mt-1.5" />
                       {item}
                     </li>
@@ -182,7 +183,7 @@ export default function Experience() {
                   {exp.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="border border-neutral-300 bg-white px-2.5 py-0.5 text-[11px] font-mono text-neutral-800 rounded-xs"
+                      className="border border-neutral-300 bg-white hover:border-black hover:bg-neutral-100 px-2.5 py-0.5 text-[11px] font-mono text-neutral-800 rounded-xs transition-colors duration-150 cursor-default"
                     >
                       {tag}
                     </span>
@@ -192,10 +193,10 @@ export default function Experience() {
                       href={exp.link}
                       target="_blank"
                       rel="noreferrer"
-                      className="ml-auto inline-flex items-center gap-1 text-xs font-bold text-black hover:underline"
+                      className="group/link ml-auto inline-flex items-center gap-1 text-xs font-bold text-black hover:underline"
                     >
                       Visit Organization
-                      <ArrowUpRight className="h-3 w-3" />
+                      <ArrowUpRight className="h-3 w-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform duration-200" />
                     </a>
                   )}
                 </div>
@@ -210,7 +211,7 @@ export default function Experience() {
             transition={{ duration: 0.55, delay: 0.35 }}
             className="space-y-6 lg:sticky lg:top-28"
           >
-            <div className="bg-white border border-neutral-200 p-6 sm:p-7 rounded-sm space-y-6">
+            <div className="bg-white border border-neutral-200 p-6 sm:p-7 rounded-sm space-y-6 shadow-xs hover:border-black transition-colors duration-200">
               <div className="flex items-center gap-2.5 border-b border-neutral-100 pb-4">
                 <Shield className="h-4 w-4 text-black" />
                 <h4 className="text-xs font-bold uppercase tracking-widest text-black">
@@ -220,7 +221,7 @@ export default function Experience() {
 
               <div className="space-y-5">
                 {standards.map((std, sIdx) => (
-                  <div key={sIdx} className="space-y-1">
+                  <div key={sIdx} className="space-y-1 hover:translate-x-1 transition-transform duration-200 cursor-default">
                     <p className="text-xs font-bold text-black uppercase tracking-tight flex items-center gap-2">
                       <span className="h-1 w-1 bg-black rounded-full" />
                       {std.title}
@@ -240,7 +241,7 @@ export default function Experience() {
             </div>
 
             {/* Availability Box */}
-            <div className="border border-neutral-900 bg-black text-white p-5 rounded-sm space-y-2">
+            <div className="border border-neutral-900 bg-black text-white p-5 rounded-sm space-y-2 hover:shadow-[0_8px_24px_rgba(0,0,0,0.15)] transition-shadow duration-200">
               <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-400">Status</p>
               <p className="text-sm font-bold">Open for Full-time Roles &amp; Technical Contracts</p>
               <p className="text-xs text-neutral-400">Kathmandu, Nepal · Remote &amp; Hybrid Worldwide</p>
